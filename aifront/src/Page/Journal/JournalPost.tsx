@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
-import { useRecoilState, atom } from "recoil";
+import { useRecoilState } from "recoil";
+import { journalState } from "../../Atom";
 import { JournalPostMain, JournalPostSC, ButtonDiv } from "./JournalPostSC";
 
 const JournalPost : React.FC = () => {
@@ -35,10 +36,5 @@ const JournalPost : React.FC = () => {
         </JournalPostMain>
     )
 }
-
-const journalState = atom({
-    key : 'journalState',
-    default : ''
-});
 
 export default JournalPost;
