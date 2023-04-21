@@ -43,8 +43,7 @@ pipeline {
 
         stage('Docker build') {
             steps {
-                sh "cd aifront"
-                sh "docker build -t ${ECR_REPO}:latest ."
+                sh "cd aifront && docker build -t ${ECR_REPO}:latest ."
             }
         }
 
