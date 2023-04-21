@@ -32,7 +32,7 @@ pipeline {
             }
         }
 
-        stage('Append .env file') {
+        stage('Append .env files') {
             steps {
                 withAWS(region: "${AWS_REGION}", credentials: "${AWS_S3_CREDENTIAL_ID}") {
                     // S3로부터 .env 파일 다운로드
