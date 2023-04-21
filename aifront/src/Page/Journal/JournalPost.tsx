@@ -23,12 +23,14 @@ const JournalPost : React.FC = () => {
         <JournalPostMain>
             <h1>EEUM : 하루 일기</h1>
             <JournalPostSC>
-                <input 
-                type = 'text'
+                <textarea
+                autoFocus
                 placeholder = "일기를 적어주세요"
-                onChange={(e : React.ChangeEvent<HTMLInputElement>) => {
+                value = {journal}
+                onChange = {(e : React.ChangeEvent<HTMLTextAreaElement>) =>
                     setJournal(e.target.value)
-                }} />
+                }
+                />
             </JournalPostSC>
             <ButtonDiv>
                 <button onClick = {handleSubmit}>일기 작성</button>
