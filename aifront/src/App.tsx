@@ -1,5 +1,5 @@
 import React from 'react';
-import Main from './pages/Main/Main';
+import Main from './Page/Main/Main';
 // 20230421 이효상 recoil import
 import {
   RecoilRoot,
@@ -9,7 +9,7 @@ import {
   useRecoilValue,
 } from 'recoil';
 
-function App() {
+const App : React.FC = () => {
   return (
     <RecoilRoot>
       <Main/>
