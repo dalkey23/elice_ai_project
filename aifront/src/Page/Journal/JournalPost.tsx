@@ -21,7 +21,7 @@ const JournalPost : React.FC = () => {
     }
     return(
         <JournalPostMain>
-            <h1>EEUM : 하루 일기</h1>
+            <h1>EEUM : 하루, 일기</h1>
             <JournalPostSC>
                 <textarea
                 autoFocus

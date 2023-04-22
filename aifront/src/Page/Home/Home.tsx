@@ -12,7 +12,7 @@ const Home : React.FC = () => {
 
                 {/* 비로그인 상태 서비스 소개 페이지 */}
                 <>
-                    <IntroSC1>소개 페이지 1</IntroSC1>
+                    <IntroSC1><h1>EEUM : 나와 연결된, 야식 한끼</h1></IntroSC1>
                     <IntroSC2>소개 페이지 2</IntroSC2>
                     <IntroSC3>소개 페이지 3</IntroSC3>
                     <IntroSC4>소개 페이지 4</IntroSC4>
