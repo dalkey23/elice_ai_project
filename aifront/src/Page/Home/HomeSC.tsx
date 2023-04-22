@@ -2,7 +2,7 @@ import styled, { keyframes } from "styled-components";
 
 const rotate = keyframes`
   to {
-    transform: rotate(30deg);
+    transform: rotate(360deg);
   }
 `
 
@@ -12,14 +12,26 @@ export const HomeSC = styled.div`
 
 // 소개페이지 styled.div
 export const IntroSC1 = styled.div`
-    padding : 20rem 0;
+    padding : 18rem 0;
     background-Color : #1C0C5B;
     color : white;
     text-align : center;
 
-    & h1 {
-        font-size: 3em;
-        animation: ${rotate} 4s linear infinite;
+    & button {
+        background-color : #C996CC;
+        border-radius : 10px;
+        border : none;
+        padding : 15px;
+        color : #916BBF;
+        font-size: 10em;
+        text-shadow: 8px 3px 3px #3D2C8D;
+        animation: ${rotate} 1.5s linear;
+
+        : hover {
+            text-shadow: 8px 3px 3px #916BBF;
+            background-color : #3D2C8D;
+            color : #C996CC;
+        }
     }
 `
 
