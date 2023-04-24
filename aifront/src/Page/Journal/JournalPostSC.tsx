@@ -13,9 +13,9 @@ export const JournalPostSC = styled.div`
     display : flex;
     justify-Content : center;
 
-    & input {
-        width : 50%;
-        height : 30rem;
+    & textarea {
+        width : 40%;
+        height : 20rem;
         border : 1px solid #3D2C8D;
         border-radius : 10px;
         text-align : center;
