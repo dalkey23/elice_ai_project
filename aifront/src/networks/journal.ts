@@ -5,3 +5,8 @@ export const createJournal = async (body: JournalRequest) => {
     const res = await axios.post<JournalResponse>('/api/journals', body)
     return res
 }
+
+export const getJournals = async () => {
+    const res = await axios.post<JournalResponse[]>('/api/journals')
+    return res
+}
