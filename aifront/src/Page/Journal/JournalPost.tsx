@@ -1,16 +1,8 @@
 import React from "react";
-import axios from "axios";
 import { useRecoilState } from "recoil";
 import { journalState } from "../../Atom";
 import { JournalPostMain, JournalPostSC, ButtonDiv } from "./JournalPostSC";
-import { JournalRequest, JournalResponse } from '../../types/journal'
-
-const createJournal = async (body: JournalRequest) => {
-
-    const res = await axios.post<JournalResponse>('/api/journals', body)
-
-    return res
-}
+import { createJournal } from "../../networks/journal";
 
 const JournalPost : React.FC = () => {
     const [journal, setJournal] = useRecoilState(journalState);
