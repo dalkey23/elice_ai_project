@@ -1,9 +1,11 @@
 import React from "react";
 import { HomeSC } from "./HomeSC";
-import { NavLink } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { IntroSC1, IntroSC2, IntroSC3, IntroSC4 } from "./HomeSC";
 
 const Home : React.FC = () => {
+    const navigate = useNavigate();
+
     return(
         <>
             <HomeSC>
@@ -13,7 +15,9 @@ const Home : React.FC = () => {
 
                 {/* 비로그인 상태 서비스 소개 페이지 */}
                 <>
-                    <IntroSC1><button>EEUM</button></IntroSC1>
+                    <IntroSC1><button onClick = {() => {
+                        navigate('/JournalPost')
+                    }}>EEUM</button></IntroSC1>
                     <IntroSC2><h1>소개 페이지 2</h1></IntroSC2>
                     <IntroSC3>소개 페이지 3</IntroSC3>
                     <IntroSC4>소개 페이지 4</IntroSC4>

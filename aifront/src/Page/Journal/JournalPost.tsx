@@ -11,11 +11,11 @@ const JournalPost : React.FC = () => {
         e.preventDefault();
 
         try {
-            await axios.post('URL', {journal})
-            alert('작성이 완료 되었습니다!')
+            await axios.post('URL', {journal});
+            alert('작성이 완료 되었습니다!');
         } catch(err) {
-            console.log(err)
-            alert('다시 작성해 주세요.')
+            console.log(err);
+            alert('다시 작성해 주세요.');
         }
 
     }

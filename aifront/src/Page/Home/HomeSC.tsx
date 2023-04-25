@@ -12,7 +12,7 @@ export const HomeSC = styled.div`
 
 // 소개페이지 styled.div
 export const IntroSC1 = styled.div`
-    padding : 18rem 0;
+    padding : 15rem 0;
     background-Color : #1C0C5B;
     color : white;
     text-align : center;
