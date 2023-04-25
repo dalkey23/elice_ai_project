@@ -3,18 +3,7 @@ import axios from "axios";
 import { useRecoilState } from "recoil";
 import { journalState } from "../../Atom";
 import { JournalPostMain, JournalPostSC, ButtonDiv } from "./JournalPostSC";
-
-type JournalResponse = {
-    id: number;
-    name: string;
-    description: string;
-    createdAt: string;
-}
-
-type JournalRequest = {
-    name: string;
-    description: string;
-}
+import { JournalRequest, JournalResponse } from '../../types/journal'
 
 const createJournal = async (body: JournalRequest) => {
 
