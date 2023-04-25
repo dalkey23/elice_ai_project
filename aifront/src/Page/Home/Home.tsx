@@ -17,7 +17,8 @@ const Home : React.FC = () => {
                 <>
                     <IntroSC1><button onClick = {() => {
                         navigate('/JournalPost')
-                    }}>EEUM</button></IntroSC1>
+                    }}>EEUM</button>
+                    <h1>나와 연결된, 야식 한끼</h1></IntroSC1>
                     <IntroSC2><h1>소개 페이지 2</h1></IntroSC2>
                     <IntroSC3>소개 페이지 3</IntroSC3>
                     <IntroSC4>소개 페이지 4</IntroSC4>
