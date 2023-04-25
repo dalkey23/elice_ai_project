@@ -2,10 +2,12 @@ import React from "react";
 import { useRecoilState } from "recoil";
 import { journalState } from "../../Atom";
 import { JournalPostMain, JournalPostSC, ButtonDiv } from "./JournalPostSC";
-import { createJournal } from "../../networks/journal";
+import { useCreateJournal } from "../../hooks/journal.hook";
 
 const JournalPost : React.FC = () => {
     const [journal, setJournal] = useRecoilState(journalState);
+    const  { createJournal, isLoading, isError }  = useCreateJournal()
+
 
     const handleSubmit = async (e : React.MouseEvent) => {
         e.preventDefault();
@@ -35,6 +37,8 @@ const JournalPost : React.FC = () => {
             <ButtonDiv>
                 <button onClick = {handleSubmit}>일기 작성</button>
             </ButtonDiv>
+            {isLoading && <p>로딩중...</p>}
+            {isError && <p>에러발생!!</p>}
         </JournalPostMain>
     )
 }
