@@ -4,6 +4,25 @@ import { useRecoilState } from "recoil";
 import { journalState } from "../../Atom";
 import { JournalPostMain, JournalPostSC, ButtonDiv } from "./JournalPostSC";
 
+type JournalResponse = {
+    id: number;
+    name: string;
+    description: string;
+    createdAt: string;
+}
+
+type JournalRequest = {
+    name: string;
+    description: string;
+}
+
+const createJournal = async (body: JournalRequest) => {
+
+    const res = await axios.post<JournalResponse>('/api/journals', body)
+
+    return res
+}
+
 const JournalPost : React.FC = () => {
     const [journal, setJournal] = useRecoilState(journalState);
 
@@ -11,8 +30,8 @@ const JournalPost : React.FC = () => {
         e.preventDefault();
 
         try {
-            await axios.post('URL', {journal});
-            alert('작성이 완료 되었습니다!');
+            const res = await createJournal({name: 'asdf', description: 'asdf'})
+
         } catch(err) {
             console.log(err);
             alert('다시 작성해 주세요.');
