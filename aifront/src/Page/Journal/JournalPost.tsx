@@ -5,7 +5,7 @@ import { JournalPostMain, JournalPostSC, ButtonDiv } from "./JournalPostSC";
 import { useCreateJournal, useJournalList } from "../../hooks/journal.hook";
 
 const JournalPost : React.FC = () => {
-    const [journal, setJournal] = useRecoilState(journalState);
+    const [journal, setJournal] = useRecoilState(journalState); // 컴포넌트 내에서만 input 다루는데 쓰이므로 useState 쓰는거 추천
     const  { createJournal, isLoading, isError }  = useCreateJournal()
     const { journalList } = useJournalList()
 
