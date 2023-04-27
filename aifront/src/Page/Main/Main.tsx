@@ -6,6 +6,7 @@ import Footer from "../../Component/Footer/Footer";
 import { Routes, Route } from "react-router-dom";
 import Home from "../Home/Home";
 import JournalPost from "../Journal/JournalPost";
+import UserJoin from "../User/UserJoin";
 
 const Main : React.FC = () => {
     
@@ -15,6 +16,7 @@ const Main : React.FC = () => {
                 <Routes>
                     <Route path = '/' element = {<Home />} />
                     <Route path = '/JournalPost' element = {<JournalPost />} />
+                    <Route path = '/UserJoin' element = {<UserJoin />} />
                 </Routes>
             <Footer />
         </>
