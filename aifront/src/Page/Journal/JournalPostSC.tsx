@@ -12,7 +12,7 @@ export const JournalPostMain = styled.div`
 export const JournalPostSC = styled.div`
     display : flex;
     justify-Content : center;
-    padding : 5em;
+    padding : 4em;
 
     & textarea {
         width : 40%;

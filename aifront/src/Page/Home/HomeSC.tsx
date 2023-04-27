@@ -13,15 +13,16 @@ export const HomeSC = styled.div`
 
 // 소개페이지 styled.div
 export const IntroSC1 = styled.div`
-    padding : 10rem 0;
+    padding : 8rem 0;
     background-Color : #FFFFFF;
     color : white;
     text-align : center;
 
     & h1 {
-        padding : 4em;
+        padding : 3em;
         color : #916BBF;
         text-shadow: 3px 3px 3px #C996CC;
+        animation: ${rotate} 1s linear;
     }
 
     & button {
