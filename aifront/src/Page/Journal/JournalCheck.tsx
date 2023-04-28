@@ -1,12 +1,13 @@
 import React from "react";
-import axios from "axios";
+import { getJournals } from "../../Component/Api/PostJournal";
+import { useJournalList } from "../../Component/Hook/Journal.hook";
 
 const JournalCheck : React.FC = () => {
     
     const MyJournal = async () => {
     try {
-        await axios.get('URL');
-        console.log('res');
+        const res = await getJournals()
+        console.log(res);
     } catch(err) {
         console.log(err);
     };
@@ -15,7 +16,9 @@ const JournalCheck : React.FC = () => {
     MyJournal();
 
     return(
-        <></>
+        <div>
+            res
+        </div>
     )
 }
 

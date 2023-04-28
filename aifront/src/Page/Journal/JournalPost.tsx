@@ -51,6 +51,7 @@ const JournalPost : React.FC = () => {
                 <textarea
                 placeholder = "일기를 적어주세요"
                 name = "content"
+                maxLength = {100}
                 value = {content}
                 onChange = {(e : React.ChangeEvent<HTMLTextAreaElement>) =>
                     setContent(e.target.value)

@@ -32,6 +32,10 @@ export const JournalPostSC = styled.div`
         border : 1px solid #3D2C8D;
         border-radius : 10px;
         text-align : center;
+        font-size : 1.5em;
+        ::placeholder {
+            padding : 9rem;
+        }
     }
 `
 
