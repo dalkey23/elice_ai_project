@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const JournalPostMain = styled.div`
+export const CommunityListMain = styled.div`
     & h1 {
         display : flex;
         justify-Content : center;
@@ -9,28 +9,15 @@ export const JournalPostMain = styled.div`
     }
 `
 
-export const JournalPostSC = styled.div`
-    display : flex;
-    justify-Content : center;
-    padding : 4em;
-
-    & textarea {
-        width : 40%;
-        height : 20rem;
-        border : 1px solid #3D2C8D;
-        border-radius : 10px;
-        text-align : center;
-    }
-`
-
 export const ButtonDiv = styled.div`
     display : flex;
-    justify-Content : center;
+    justify-Content : right;
+    padding : 1em;
 
     & button {
         margin : 2em;
         padding : 1em;
-        width : 20%;
+        width : 7%;
         color : white;
         background-color : #916BBF;
         border : 1px solid white;

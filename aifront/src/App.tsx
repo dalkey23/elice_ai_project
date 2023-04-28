@@ -1,5 +1,6 @@
 import React from 'react';
 import Main from './Page/Main/Main';
+import { QueryClientProvider, QueryClient} from 'react-query';
 import { BrowserRouter } from 'react-router-dom';
 // 20230421 이효상 recoil import
 import {
@@ -10,14 +11,18 @@ import {
   useRecoilValue,
 } from 'recoil';
 
+const queryClient = new QueryClient();
+
 const App : React.FC = () => {
   return (
     <RecoilRoot>
-      <BrowserRouter>
+      <QueryClientProvider client={queryClient}>
+        <BrowserRouter>
           <Main/>
-      </BrowserRouter>
+        </BrowserRouter>
+      </QueryClientProvider>
     </RecoilRoot>
   );
-}
+};
 
 export default App;
