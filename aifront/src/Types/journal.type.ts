@@ -9,3 +9,7 @@ export type JournalResponse = {
     content : string;
     publishedDate: string;
   };
+
+  export type Test = {
+    name : string;
+  }
