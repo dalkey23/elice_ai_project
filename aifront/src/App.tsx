@@ -11,6 +11,8 @@ import {
   useRecoilValue,
 } from 'recoil';
 
+import './reset.css'
+
 const queryClient = new QueryClient();
 
 const App : React.FC = () => {
