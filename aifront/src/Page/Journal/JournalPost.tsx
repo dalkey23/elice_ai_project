@@ -1,39 +1,36 @@
 import React, { useState } from "react";
-import axios from "axios";
-import { JournalSubmit } from "../../Types/Form.type";
-import { JournalRequest, JournalResponse } from "../../Types/journal.type";
-import { JournalPostMain, JournalPostSC, ButtonDiv } from "./JournalPostSC";
+import { useNavigate } from "react-router-dom";
+import { JournalPostMain, JournalPostSC, ButtonDiv, TitleDateSC } from "./JournalPostSC";
+import { useCreateJournal } from "../../Component/Hook/Journal.hook";
 
 const JournalPost : React.FC = () => {
-    
+    const  { createJournal, isLoading, isError }  = useCreateJournal();
     const [content, setContent] = useState('');
     const [title, setTitle] = useState('');
     const [publishedDate, setPublishedDate] = useState('');
+    const navigate = useNavigate();
 
-    const handleSubmit = async ({ onSubmit } : JournalSubmit) => {
-
-        const form = {
-            content, title, publishedDate
-        }
+    const handleSubmit = async (e : React.MouseEvent) => {
+        e.preventDefault();
 
         try {
-            const res = await axios.post<JournalRequest>('http://localhost:3500/api/diaries', {...form});
+            const res = await createJournal({
+                title : title,
+                content : content,
+                publishedDate: publishedDate})
+            console.log(res);
             alert('작성이 완료 되었습니다!');
-            return res;
+            navigate('/');
         } catch(err) {
             console.log(err);
             alert('다시 작성해 주세요.');
         }
-
-
-    console.log(title);
-    console.log(content);
-
     }
+
     return(
         <JournalPostMain>
             <h1>EEUM : 나와 연결된, 일기</h1>
-            <JournalPostSC>
+            <TitleDateSC>
                 <input
                 autoFocus
                 placeholder = "일기 제목을 적어주세요"
@@ -42,6 +39,15 @@ const JournalPost : React.FC = () => {
                 onChange = {(e : React.ChangeEvent<HTMLInputElement>) =>
                     setTitle(e.target.value)
                 } />
+                <input
+                placeholder = "날짜 : 0000-00-00"
+                name = "publishedDate"
+                value = {publishedDate}
+                onChange = {(e : React.ChangeEvent<HTMLInputElement>) =>
+                    setPublishedDate(e.target.value)
+                } />
+            </TitleDateSC>
+            <JournalPostSC>
                 <textarea
                 placeholder = "일기를 적어주세요"
                 name = "content"
@@ -51,8 +57,10 @@ const JournalPost : React.FC = () => {
                 } />
             </JournalPostSC>
             <ButtonDiv>
-                <button type = "submit">일기 작성</button>
+                <button onClick = {handleSubmit}>일기 작성</button>
             </ButtonDiv>
+            {isLoading && <p>로딩중...</p>}
+            {isError && <p>에러발생!!</p>}
         </JournalPostMain>
     )
 }

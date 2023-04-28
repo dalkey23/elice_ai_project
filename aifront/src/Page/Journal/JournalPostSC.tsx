@@ -1,12 +1,24 @@
 import styled from "styled-components";
 
 export const JournalPostMain = styled.div`
+
     & h1 {
         display : flex;
         justify-Content : center;
         margin : 1em;
         color : #3D2C8D;
     }
+
+    & input {
+        padding : 1em;
+        margin : 1em;
+        width : 20%
+    }
+`
+
+export const TitleDateSC = styled.div`
+    display : flex;
+    justify-Content : center;
 `
 
 export const JournalPostSC = styled.div`
