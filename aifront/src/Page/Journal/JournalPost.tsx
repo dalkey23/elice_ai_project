@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { JournalPostMain, JournalPostSC, ButtonDiv, TitleDateSC } from "./JournalPostSC";
 import { useCreateJournal } from "../../Component/Hook/Journal.hook";
 
+import RichEditor from '../../Component/RichEditor'
+
 const JournalPost : React.FC = () => {
     const  { createJournal, isLoading, isError }  = useCreateJournal();
     const [content, setContent] = useState('');
@@ -27,6 +29,10 @@ const JournalPost : React.FC = () => {
         }
     }
 
+    console.log('content : ', content)
+    console.log('\n\n\n')
+    console.log('text : ', content.replace(/<[^>]+>/g, ''))
+
     return(
         <JournalPostMain>
             <h1>EEUM : 나와 연결된, 일기</h1>
@@ -48,12 +54,15 @@ const JournalPost : React.FC = () => {
                 } />
             </TitleDateSC>
             <JournalPostSC>
-                <textarea
+                {/* <textarea
                 placeholder = "일기를 적어주세요"
                 name = "content"
                 value = {content}
                 onChange = {(e : React.ChangeEvent<HTMLTextAreaElement>) =>
                     setContent(e.target.value)
+                } /> */}
+                <RichEditor value={content} onChange={(content: string) =>
+                    setContent(content)
                 } />
             </JournalPostSC>
             <ButtonDiv>
