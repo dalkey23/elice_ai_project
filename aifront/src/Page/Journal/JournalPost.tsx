@@ -1,39 +1,57 @@
-import React from "react";
+import React, { useState } from "react";
 import axios from "axios";
-import { useRecoilState } from "recoil";
-import { journalState } from "../../Atom";
+import { JournalSubmit } from "../../Types/Form.type";
+import { JournalRequest, JournalResponse } from "../../Types/journal.type";
 import { JournalPostMain, JournalPostSC, ButtonDiv } from "./JournalPostSC";
 
 const JournalPost : React.FC = () => {
-    const [journal, setJournal] = useRecoilState(journalState);
+    
+    const [content, setContent] = useState('');
+    const [title, setTitle] = useState('');
+    const [publishedDate, setPublishedDate] = useState('');
 
-    const handleSubmit = async (e : React.MouseEvent) => {
-        e.preventDefault();
+    const handleSubmit = async ({ onSubmit } : JournalSubmit) => {
+
+        const form = {
+            content, title, publishedDate
+        }
 
         try {
-            await axios.post('URL', {journal});
+            const res = await axios.post<JournalRequest>('http://localhost:3500/api/diaries', {...form});
             alert('작성이 완료 되었습니다!');
+            return res;
         } catch(err) {
             console.log(err);
             alert('다시 작성해 주세요.');
         }
+
+
+    console.log(title);
+    console.log(content);
 
     }
     return(
         <JournalPostMain>
             <h1>EEUM : 나와 연결된, 일기</h1>
             <JournalPostSC>
-                <textarea
+                <input
                 autoFocus
+                placeholder = "일기 제목을 적어주세요"
+                name = "title"
+                value = {title}
+                onChange = {(e : React.ChangeEvent<HTMLInputElement>) =>
+                    setTitle(e.target.value)
+                } />
+                <textarea
                 placeholder = "일기를 적어주세요"
-                value = {journal}
+                name = "content"
+                value = {content}
                 onChange = {(e : React.ChangeEvent<HTMLTextAreaElement>) =>
-                    setJournal(e.target.value)
-                }
-                />
+                    setContent(e.target.value)
+                } />
             </JournalPostSC>
             <ButtonDiv>
-                <button onClick = {handleSubmit}>일기 작성</button>
+                <button type = "submit">일기 작성</button>
             </ButtonDiv>
         </JournalPostMain>
     )
