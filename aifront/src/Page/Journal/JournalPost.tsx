@@ -1,17 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import axios from "axios";
-import { useRecoilState } from "recoil";
-import { journalState } from "../../Atom";
 import { JournalPostMain, JournalPostSC, ButtonDiv } from "./JournalPostSC";
 
 const JournalPost : React.FC = () => {
-    const [journal, setJournal] = useRecoilState(journalState);
+    
+    const [journal, setJournal] = useState({
+        content: "",
+        title: "",
+        publishedDate: ""
+      });
 
     const handleSubmit = async (e : React.MouseEvent) => {
         e.preventDefault();
 
         try {
-            await axios.post('URL', {journal});
+            await axios.post('http://localhost:3500/api/diaries', {journal});
             alert('작성이 완료 되었습니다!');
         } catch(err) {
             console.log(err);
@@ -26,11 +29,10 @@ const JournalPost : React.FC = () => {
                 <textarea
                 autoFocus
                 placeholder = "일기를 적어주세요"
-                value = {journal}
+                value = {journal.content}
                 onChange = {(e : React.ChangeEvent<HTMLTextAreaElement>) =>
                     setJournal(e.target.value)
-                }
-                />
+                } />
             </JournalPostSC>
             <ButtonDiv>
                 <button onClick = {handleSubmit}>일기 작성</button>
