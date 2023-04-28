@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { CommunityListMain, JournalPostSC, ButtonDiv } from "./CommunityListSC";
+import { CommunityListMain, ButtonDiv } from "./CommunityListSC";
 
 const CommunityList : React.FC = () => {
     const [journal, setJournal] = useState('');

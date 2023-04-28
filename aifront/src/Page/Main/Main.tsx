@@ -7,6 +7,7 @@ import { Routes, Route } from "react-router-dom";
 import Home from "../Home/Home";
 import JournalPost from "../Journal/JournalPost";
 import CommunityList from "../Community/CommunityList";
+import UserJoin from "../User/UserJoin";
 
 const Main : React.FC = () => {
     
@@ -17,6 +18,7 @@ const Main : React.FC = () => {
                     <Route path = '/' element = {<Home />} />
                     <Route path = '/JournalPost' element = {<JournalPost />} />
                     <Route path = '/CommunityList' element = {<CommunityList/>} />
+                    <Route path = '/UserJoin' element = {<UserJoin/>} />
                 </Routes>
             <Footer />
         </>
