@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { JournalPostMain, JournalPostSC, ButtonDiv, TitleDateSC } from "./JournalPostSC";
+import * as SC from "./JournalPostSC";
 import { useCreateJournal } from "../../Component/Hook/Journal.hook";
 
 const JournalPost : React.FC = () => {
@@ -28,9 +28,9 @@ const JournalPost : React.FC = () => {
     }
 
     return(
-        <JournalPostMain>
+        <SC.JournalPostMain>
             <h1>EEUM : 나와 연결된, 일기</h1>
-            <TitleDateSC>
+            <SC.TitleDate>
                 <input
                 autoFocus
                 placeholder = "일기 제목을 적어주세요"
@@ -46,8 +46,8 @@ const JournalPost : React.FC = () => {
                 onChange = {(e : React.ChangeEvent<HTMLInputElement>) =>
                     setPublishedDate(e.target.value)
                 } />
-            </TitleDateSC>
-            <JournalPostSC>
+            </SC.TitleDate>
+            <SC.JournalPost>
                 <textarea
                 placeholder = "일기를 적어주세요"
                 name = "content"
@@ -56,13 +56,13 @@ const JournalPost : React.FC = () => {
                 onChange = {(e : React.ChangeEvent<HTMLTextAreaElement>) =>
                     setContent(e.target.value)
                 } />
-            </JournalPostSC>
-            <ButtonDiv>
+            </SC.JournalPost>
+            <SC.ButtonDiv>
                 <button onClick = {handleSubmit}>일기 작성</button>
-            </ButtonDiv>
+            </SC.ButtonDiv>
             {isLoading && <p>로딩중...</p>}
             {isError && <p>에러발생!!</p>}
-        </JournalPostMain>
+        </SC.JournalPostMain>
     )
 }
 

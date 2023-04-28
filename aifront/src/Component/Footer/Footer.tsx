@@ -1,12 +1,12 @@
 import React from "react";
 
-import { FooterSC } from "./FooterSC";
+import * as SC from "./FooterSC";
 
 const Footer : React.FC = () => {
     return(
-        <FooterSC>
+        <SC.Footer>
             This is footer
-        </FooterSC>
+        </SC.Footer>
     )
 }
 

@@ -16,12 +16,12 @@ export const JournalPostMain = styled.div`
     }
 `
 
-export const TitleDateSC = styled.div`
+export const TitleDate = styled.div`
     display : flex;
     justify-Content : center;
 `
 
-export const JournalPostSC = styled.div`
+export const JournalPost = styled.div`
     display : flex;
     justify-Content : center;
     padding : 4em;

@@ -2,6 +2,7 @@ import React from 'react';
 import Main from './Page/Main/Main';
 import { QueryClientProvider, QueryClient} from 'react-query';
 import { BrowserRouter } from 'react-router-dom';
+import './Reset.css'
 // 20230421 이효상 recoil import
 import {
   RecoilRoot,
