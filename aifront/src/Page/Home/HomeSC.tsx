@@ -12,10 +12,13 @@ export const Home = styled.div`
 `
 
 // 소개페이지 styled.div
+// 이미지 안올라감..
 export const Intro1 = styled.div`
-    padding : 8rem 0;
-    background-Color : #FFFFFF;
-    color : white;
+    background-Image : "http://localhost:3000/Img/Main.jpg"
+    background-repeat : no-repeat;
+    background-position : top center;
+    background-size : auto;
+    padding : 15rem 0;
     text-align : center;
 
     & h1 {
@@ -37,7 +40,6 @@ export const Intro1 = styled.div`
         animation: ${rotate} 1s linear;
 
         : hover {
-            font-size: 12em;
             text-shadow: 8px 3px 3px #916BBF;
             background-color : #3D2C8D;
             color : #C996CC;
