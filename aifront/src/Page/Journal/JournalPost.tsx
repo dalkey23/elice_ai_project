@@ -39,6 +39,8 @@ const JournalPost : React.FC = () => {
                 onChange = {(e : React.ChangeEvent<HTMLInputElement>) =>
                     setTitle(e.target.value)
                 } />
+            </SC.TitleDate>
+            <SC.TitleDate>
                 <input
                 placeholder = "날짜 : 0000-00-00"
                 name = "publishedDate"

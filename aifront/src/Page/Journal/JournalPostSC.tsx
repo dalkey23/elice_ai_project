@@ -6,7 +6,12 @@ export const JournalPostMain = styled.div`
         display : flex;
         justify-Content : center;
         margin : 1em;
+        font-size : 2em;
         color : #3D2C8D;
+    }
+
+    & p {
+        text-align : center;
     }
 
     & input {
@@ -24,7 +29,7 @@ export const TitleDate = styled.div`
 export const JournalPost = styled.div`
     display : flex;
     justify-Content : center;
-    padding : 4em;
+    padding : 1em;
 
     & textarea {
         width : 40%;
