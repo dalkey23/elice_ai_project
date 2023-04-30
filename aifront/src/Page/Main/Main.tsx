@@ -8,6 +8,7 @@ import Home from "../Home/Home";
 import JournalPost from "../Journal/JournalPost";
 import CommunityList from "../Community/CommunityList";
 import UserJoin from "../User/UserJoin";
+import JournalCheck from "../Journal/JournalCheck";
 
 const Main : React.FC = () => {
     
@@ -17,6 +18,7 @@ const Main : React.FC = () => {
                 <Routes>
                     <Route path = '/' element = {<Home />} />
                     <Route path = '/JournalPost' element = {<JournalPost />} />
+                    <Route path = '/JournalCheck' element = {<JournalCheck />} />
                     <Route path = '/CommunityList' element = {<CommunityList/>} />
                     <Route path = '/UserJoin' element = {<UserJoin/>} />
                 </Routes>
