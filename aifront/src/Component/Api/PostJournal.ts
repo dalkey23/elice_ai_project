@@ -1,5 +1,5 @@
 import axios from "axios";
-import { JournalRequest, JournalResponse } from "../../Types/Journal.type";
+import { JournalRequest, JournalResponse } from "../../Types/JournalResReq.type";
 
 export const createJournal = async (body: JournalRequest) => {
     const res = await axios.post<JournalRequest>('http://localhost:3500/api/diaries', body);
