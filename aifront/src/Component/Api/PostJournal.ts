@@ -7,6 +7,6 @@ export const createJournal = async (body: JournalRequest) => {
 };
 
 export const getJournals = async () => {
-    const res = await axios.get<JournalResponse[]>('http://localhost:3500/api/diaries');
+    const res = await axios.get<JournalResponse>('http://localhost:3500/api/diaries');
     return res;
 };

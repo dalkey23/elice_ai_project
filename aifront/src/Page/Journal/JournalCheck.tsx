@@ -1,23 +1,27 @@
-import React from "react";
-import { getJournals } from "../../Component/Api/PostJournal";
+import React, { useEffect, useState } from "react";
 import { useJournalList } from "../../Component/Hook/Journal.hook";
+import { getJournals } from "../../Component/Api/PostJournal";
 
 const JournalCheck : React.FC = () => {
-    
-    const MyJournal = async () => {
+    // const [journal, setJournal] = useState();
+
+    const GetJournal = async () => {
     try {
         const res = await getJournals()
+        
         console.log(res);
     } catch(err) {
         console.log(err);
     };
     }
-    
-    MyJournal();
+
+    useEffect(() => {
+        GetJournal();
+    },[]);
 
     return(
         <div>
-            res
+            {/* {journal} */}
         </div>
     )
 }
