@@ -58,7 +58,6 @@ export const Intro3 = styled.div`
 
     & h1 {
         font-size : 6em;
-        text-shadow: 3px 3px 3px black;
     }
 `
 

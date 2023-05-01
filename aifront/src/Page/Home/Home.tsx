@@ -16,9 +16,7 @@ const Home : React.FC = () => {
                     <h1>EEUM</h1>
                     <h2>나와 연결된, 야식 한끼</h2>
                     </SC.Intro1>
-                    <SC.Intro2>오늘 하루는 어떠셨나요?
-                        일기를 통해서 오늘의 감정을 확인하고, 야식을 추천 받아보세요!
-                    </SC.Intro2>
+                    <SC.Intro2></SC.Intro2>
                     <SC.Intro3><h1>나와 연결된, 다른 사람들</h1></SC.Intro3>
                     <SC.Intro4>소개 페이지 4</SC.Intro4>
                 </>
