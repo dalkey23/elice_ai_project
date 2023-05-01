@@ -1,85 +1,133 @@
-import React, { useCallback, useState, ChangeEvent, MouseEvent } from "react";
+import React, { useState, ChangeEvent, MouseEvent } from "react";
 import * as SC from "./UserSC";
+import { Userdata } from "../../Types/Userdata.type";
+import axios from "axios";
+import { useMutation } from "react-query";
+import { useNavigate } from "react-router-dom";
 
-const UserJoin: React.FC = () => {
-    const [email, setEmail] = useState<string>("");
-    const [phoneNumber, setPhoneNumber] = useState<string>("");
-
-    const [lastName, setLastName] = useState<string>("");
-    const [firstName, setFirstName] = useState<string>("");
-
-    const [password, setPassword] = useState<string>("");
-    const [confirmPW, setConfirmPW] = useState<string>("");
-
-    const [nickname, setNickname] = useState<string>("");
-
-    const [gender, setGender] = useState<string>("");
-
-    const [birthYear, setBirthYear] = useState<string>("");
-    const [birthMonth, setBirthMonth] = useState<string>("");
-    const [birthDate, setBirthDate] = useState<string>("");
-
-    const [zipcode, setZipcode] = useState<string>("");
-    const [mainAddress, setMainAddress] = useState<string>("");
-    const [detailAddress, setDetailAddress] = useState<string>("");
+const JoinUser: React.FC = () => {
+    const navigate = useNavigate();
+    const [userdata, setUserdata] = useState<Userdata>({
+        email: "",
+        password: "",
+        firstName: "",
+        lastName: "",
+        nickname: "",
+        phoneNumber: "",
+        gender: "",
+        birthYear: 0,
+        birthMonth: 0,
+        birthDate: 0,
+        profilePhotoUrl: "",
+        zipcode: 0,
+        mainAddress: "",
+        detailAddress: "",
+    });
 
     const checkedEmail = (e: ChangeEvent<HTMLInputElement>) => {
-        setEmail(e.target.value);
-    };
-
-    const checkedPhoneNumber = (e: ChangeEvent<HTMLInputElement>) => {
-        setPhoneNumber(e.target.value);
+        setUserdata((curUserdata) => {
+            return { ...curUserdata, email: e.target.value };
+        });
     };
 
     const checkedLastName = (e: ChangeEvent<HTMLInputElement>) => {
-        setLastName(e.target.value);
+        setUserdata((curUserdata) => {
+            return { ...curUserdata, lastName: e.target.value };
+        });
     };
 
     const checkedFirstName = (e: ChangeEvent<HTMLInputElement>) => {
-        setFirstName(e.target.value);
+        setUserdata((curUserdata) => {
+            return { ...curUserdata, firstName: e.target.value };
+        });
     };
 
     const checkedPassword = (e: ChangeEvent<HTMLInputElement>) => {
-        setPassword(e.target.value);
+        setUserdata((curUserdata) => {
+            return { ...curUserdata, password: e.target.value };
+        });
     };
 
     const checkedConfirmPW = (e: ChangeEvent<HTMLInputElement>) => {
-        setConfirmPW(e.target.value);
+        console.log(
+            `userdata password : ${userdata.password}, target value : ${e.target.value}`
+        );
+    };
+
+    const checkedPhoneNumber = (e: ChangeEvent<HTMLInputElement>) => {
+        setUserdata((curUserdata) => {
+            return { ...curUserdata, phoneNumber: e.target.value };
+        });
     };
 
     const checkedNickname = (e: ChangeEvent<HTMLInputElement>) => {
-        setNickname(e.target.value);
+        setUserdata((curUserdata) => {
+            return { ...curUserdata, nickname: e.target.value };
+        });
     };
 
-    const checkedGender = (e: MouseEvent) => {
-        
+    const checkedGender = (e: ChangeEvent<HTMLInputElement>) => {
+        setUserdata((curUserdata) => {
+            return { ...curUserdata, gender: e.target.value };
+        });
     };
-
 
     const checkedBirthYear = (e: ChangeEvent<HTMLInputElement>) => {
-        setBirthYear(e.target.value);
+        setUserdata((curUserdata) => {
+            return { ...curUserdata, birthYear: Number(e.target.value) };
+        });
     };
     const checkedBirthMonth = (e: ChangeEvent<HTMLInputElement>) => {
-        setBirthMonth(e.target.value);
+        setUserdata((curUserdata) => {
+            return { ...curUserdata, birthMonth: Number(e.target.value) };
+        });
     };
     const checkedBirthDate = (e: ChangeEvent<HTMLInputElement>) => {
-        setBirthDate(e.target.value);
+        setUserdata((curUserdata) => {
+            return { ...curUserdata, birthDate: Number(e.target.value) };
+        });
     };
 
     const checkedZipcode = (e: ChangeEvent<HTMLInputElement>) => {
-        setZipcode(e.target.value);
+        setUserdata((curUserdata) => {
+            return { ...curUserdata, zipcode: Number(e.target.value) };
+        });
     };
     const checkedMainAddress = (e: ChangeEvent<HTMLInputElement>) => {
-        setMainAddress(e.target.value);
+        setUserdata((curUserdata) => {
+            return { ...curUserdata, mainAddress: e.target.value };
+        });
     };
     const checkedDetailAddress = (e: ChangeEvent<HTMLInputElement>) => {
-        setDetailAddress(e.target.value);
+        setUserdata((curUserdata) => {
+            return { ...curUserdata, detailAddress: e.target.value };
+        });
     };
+
+    const checkedProfilePhotoUrl = (e: ChangeEvent<HTMLInputElement>) => {
+        setUserdata((curUserdata) => {
+            return { ...curUserdata, detailAddress: e.target.value };
+        });
+    };
+
+    const createUser = useMutation((userdata: Userdata) =>
+        axios.post(
+            "http://kdt-ai6-team02.elicecoding.com/api/users/sign-up",
+            userdata
+        )
+    );
 
     const submitHandler = (e: MouseEvent) => {
         e.preventDefault();
+        console.log(userdata);
 
-        console.log(`email: ${email}, name : ${lastName} ${firstName}`);
+        try {
+            createUser.mutate(userdata)
+            navigate('/CompletedJoin')
+        } catch (error) {
+            console.log(error)
+        }
+
     };
     return (
         <SC.JoinContainer>
@@ -89,17 +137,7 @@ const UserJoin: React.FC = () => {
                         type="text"
                         name="email"
                         placeholder="gildong@gmail.com"
-                        value={email}
                         onChange={checkedEmail}
-                    />
-                </SC.JoinItem>
-                <SC.JoinItem>
-                    <input
-                        type="text"
-                        name="phoneNumber"
-                        placeholder="010-1234-1234"
-                        value={phoneNumber}
-                        onChange={checkedPhoneNumber}
                     />
                 </SC.JoinItem>
                 <SC.JoinItem>
@@ -107,14 +145,12 @@ const UserJoin: React.FC = () => {
                         type="text"
                         name="lastName"
                         placeholder="홍"
-                        value={lastName}
                         onChange={checkedLastName}
                     />
                     <input
                         type="text"
                         name="firstName"
                         placeholder="길동"
-                        value={firstName}
                         onChange={checkedFirstName}
                     />
                 </SC.JoinItem>
@@ -123,18 +159,23 @@ const UserJoin: React.FC = () => {
                         type="password"
                         name="password"
                         placeholder="비밀번호를 입력해주세요"
-                        value={password}
                         onChange={checkedPassword}
                     />
                     <input
                         type="password"
                         name="confirmPW"
                         placeholder="비밀번호를 확인"
-                        value={confirmPW}
                         onChange={checkedConfirmPW}
                     />
                 </SC.JoinItem>
-                <SC.JoinItem></SC.JoinItem>
+                <SC.JoinItem>
+                    <input
+                        type="text"
+                        name="phoneNumber"
+                        placeholder="010-1234-1234"
+                        onChange={checkedPhoneNumber}
+                    />
+                </SC.JoinItem>
             </SC.JoinDiv>
             <SC.JoinDiv>
                 <SC.JoinItem>
@@ -143,15 +184,24 @@ const UserJoin: React.FC = () => {
                         type="text"
                         name="nickname"
                         placeholder="dong"
-                        value={nickname}
                         onChange={checkedNickname}
                     />
                 </SC.JoinItem>
                 <SC.JoinItem>
                     <label>성별</label>
-                    <input type="radio" name="gender" value="male" onClick={checkedGender} />
+                    <input
+                        type="radio"
+                        name="gender"
+                        value="male"
+                        onChange={checkedGender}
+                    />
                     <label>남자</label>
-                    <input type="radio" name="gender" value="female" />
+                    <input
+                        type="radio"
+                        name="gender"
+                        value="female"
+                        onChange={checkedGender}
+                    />
                     <label>여자</label>
                 </SC.JoinItem>
                 <SC.JoinItem>
@@ -160,21 +210,18 @@ const UserJoin: React.FC = () => {
                         type="text"
                         name="birthYear"
                         placeholder="1900"
-                        value={birthYear}
                         onChange={checkedBirthYear}
                     />
                     <input
                         type="text"
                         name="birthMonth"
                         placeholder="00"
-                        value={birthMonth}
                         onChange={checkedBirthMonth}
                     />
                     <input
                         type="text"
                         name="birthDate"
                         placeholder="00"
-                        value={birthDate}
                         onChange={checkedBirthDate}
                     />
                 </SC.JoinItem>
@@ -184,31 +231,32 @@ const UserJoin: React.FC = () => {
                         type="text"
                         name="zipcode"
                         placeholder="04799"
-                        value={zipcode}
                         onChange={checkedZipcode}
                     />
                     <input
                         type="text"
                         name="mainAddress"
                         placeholder="서울시 성동구 광나루로6길"
-                        value={mainAddress}
                         onChange={checkedMainAddress}
                     />
                     <input
                         type="text"
                         name="detailAddress"
                         placeholder="49"
-                        value={detailAddress}
                         onChange={checkedDetailAddress}
                     />
                 </SC.JoinItem>
                 <SC.JoinItem>
                     <label>프로필 사진</label>
-                    <input type="file" name="profile" />
+                    <input
+                        type="file"
+                        name="profilePhotoUrl"
+                        onChange={checkedProfilePhotoUrl}
+                    />
                 </SC.JoinItem>
             </SC.JoinDiv>
             <SC.ButtonDiv>
-                <SC.CancelButton type="button">취소</SC.CancelButton>
+                <SC.CancelButton type="button" onClick={()=>{navigate("/")}}>취소</SC.CancelButton>
                 <SC.ConfirmButton onClick={submitHandler}>
                     확인
                 </SC.ConfirmButton>
@@ -217,4 +265,4 @@ const UserJoin: React.FC = () => {
     );
 };
 
-export default UserJoin;
+export default JoinUser;
