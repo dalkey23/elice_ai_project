@@ -5,7 +5,7 @@ import * as SC from "./FooterSC";
 const Footer : React.FC = () => {
     return(
         <SC.Footer>
-            This is footer
+            이미지 출처 : Freepik, 작가 pch.vector
         </SC.Footer>
     )
 }

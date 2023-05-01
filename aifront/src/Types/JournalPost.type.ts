@@ -1,3 +1,9 @@
+export type JournalRequest = {
+  title : string;
+  content : string;
+  publishedDate: string;
+};
+
 export type JournalResponse = {
     success : boolean;
     item : object;
@@ -8,10 +14,4 @@ export type JournalResponse = {
     diaries : object[];
     id : string;
     title : string;
-  };
-  
-export type JournalRequest = {
-    title : string;
-    content : string;
-    publishedDate: string;
   };
