@@ -1,21 +1,27 @@
 import React, { useState, ReactNode } from "react";
 import axios from "axios";
 import * as SC from "./CommunityListSC";
+import { Pagination } from "../../Component/Base/Pagination";
 import { BoardModel } from "../../Types/Community.type";
+import { useNavigate } from "react-router-dom";
+
+// import { Route } from "react-router-dom";
 
 const tableHeadData = [
     { id: 0, head: "글머리" },
-    { id: 1, head: "제목" },
+    { id: 1, head: "제목 (댓글 수)" },
     { id: 2, head: "날짜" },
     { id: 3, head: "작성자" },
     { id: 4, head: "조회수" },
 ];
 
+// test 데이터
 const data = [
   {
     "id": 1,
     "category": "맛집",
     "title": "제목",
+    "comments": 5,
     "content": "내용",
     "writer": "가나다",
     "views": 30,
@@ -25,6 +31,97 @@ const data = [
     "id": 2,
     "category": "레시피",
     "title": "제목",
+    "comments": 5,
+    "content": "내용",
+    "writer": "가나다",
+    "views": 30,
+    "createdAt": "2023-04-11T23:11:12:037"
+  },
+  {
+    "id": 3,
+    "category": "레시피",
+    "title": "제목",
+    "comments": 5,
+    "content": "내용",
+    "writer": "가나다",
+    "views": 30,
+    "createdAt": "2023-04-11T23:11:12:037"
+  },
+  {
+    "id": 4,
+    "category": "레시피",
+    "title": "제목",
+    "comments": 5,
+    "content": "내용",
+    "writer": "가나다",
+    "views": 30,
+    "createdAt": "2023-04-11T23:11:12:037"
+  },
+  {
+    "id": 5,
+    "category": "레시피",
+    "title": "제목",
+    "comments": 5,
+    "content": "내용",
+    "writer": "가나다",
+    "views": 30,
+    "createdAt": "2023-04-11T23:11:12:037"
+  },
+  {
+    "id": 6,
+    "category": "레시피",
+    "title": "제목",
+    "comments": 5,
+    "content": "내용",
+    "writer": "가나다",
+    "views": 30,
+    "createdAt": "2023-04-11T23:11:12:037"
+  },
+  {
+    "id": 7,
+    "category": "레시피",
+    "title": "제목",
+    "comments": 5,
+    "content": "내용",
+    "writer": "가나다",
+    "views": 30,
+    "createdAt": "2023-04-11T23:11:12:037"
+  },
+  {
+    "id": 8,
+    "category": "레시피",
+    "title": "제목",
+    "comments": 5,
+    "content": "내용",
+    "writer": "가나다",
+    "views": 30,
+    "createdAt": "2023-04-11T23:11:12:037"
+  },
+  {
+    "id": 9,
+    "category": "레시피",
+    "title": "제목",
+    "comments": 5,
+    "content": "내용",
+    "writer": "가나다",
+    "views": 30,
+    "createdAt": "2023-04-11T23:11:12:037"
+  },
+  {
+    "id": 10,
+    "category": "레시피",
+    "title": "제목",
+    "comments": 5,
+    "content": "내용",
+    "writer": "가나다",
+    "views": 30,
+    "createdAt": "2023-04-11T23:11:12:037"
+  },
+  {
+    "id": 11,
+    "category": "레시피",
+    "title": "제목",
+    "comments": 5,
     "content": "내용",
     "writer": "가나다",
     "views": 30,
@@ -41,9 +138,9 @@ interface TableProps {
     posts: BoardModel[];
 }
 
-const Table = ({ children, tableHeadData, posts }: TableProps) => {
+const CommunityListTable = ({ children, tableHeadData, posts }: TableProps) => {
     return (
-        <SC.StyledTable>
+        <SC.ListTable>
             {tableHeadData && (
                 <SC.TableHead>
                     <tr>
@@ -61,55 +158,63 @@ const Table = ({ children, tableHeadData, posts }: TableProps) => {
                     </tr>
                 )}
             </SC.TableBody>
-        </SC.StyledTable>
+        </SC.ListTable>
     );
 };
 
 const CommunityList: React.FC = () => {
+   const navigate = useNavigate();
    const [posts, setPosts] = useState<BoardModel[]>(data);
+   const [page, setPage] = useState(1);
 
-
-    const handleSubmit = async (e: React.MouseEvent) => {
-        e.preventDefault();
-    };
+//    const pageList: number[] = [];
+//    if (posts?.totalPages) {
+//      for (let i = 1; i <= items!.totalPages; i++) {
+//        pageList.push(i);
+//      }
+//    }
+ 
+//    const paginate = (num: number) => {
+//      setPage(num);
+//    };
 
     return (
         <SC.CommunityListMain>
             <h1>커뮤니티</h1>
-            <SC.CommunityListTable>
-                <tr>
-                    <td>글머리</td>
-                    <td>제목</td>
-                    <td>날짜</td>
-                    <td>작성자</td>
-                    <td>조회수</td>
-                </tr>
-            </SC.CommunityListTable>
-            <Table tableHeadData={tableHeadData} posts={posts!}>
+            <br/>
+            <CommunityListTable tableHeadData={tableHeadData} posts={posts!}>
                 {posts &&
                     posts!.map((item, index) => {
                         return (
                             <tr
                                 key={item.id}
                                 onClick={() => {
-                                    //router.push(`/found/${item.id}`);
+                                    // <Route path = '/posts/${item.id}' element = {<Home />} />
                                 }}
                             >
                                 <td>
-                                    <SC.CategoryBadge text={item.category} />
+                                    <SC.BulletPoint text={item.category} />
                                 </td>
-                                <td width="400">{item.title} (0)</td>
+                                <td>{item.title} ({item.comments})</td>
                                 <td>{item.createdAt}</td>
                                 <td>{item.writer}</td>
                                 <td>{item.views}</td>
                             </tr>
                         );
                     })}
-            </Table>
+            </CommunityListTable>
 
             <SC.ButtonDiv>
-                <button onClick={handleSubmit}>글쓰기</button>
+                <button onClick={() => {
+                    navigate('/PostCommunity')
+                }}>글쓰기</button>
             </SC.ButtonDiv>
+
+            {/* <Pagination totalPages = {Math.ceil(posts.length/10)}
+                        totalPosts = {posts.length}
+                        page: currentPage,
+                        paginate,
+                        pageList> */}
         </SC.CommunityListMain>
     );
 };

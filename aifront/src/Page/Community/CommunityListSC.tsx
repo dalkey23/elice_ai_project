@@ -1,49 +1,27 @@
 import styled from "styled-components";
 
-const colors = {
-    gray1: "#212428",
-    gray1WithOpacity20: "#212428B3",
-    gray2: "#62676c",
-    gray3: "#8b8d90",
-    gray4: "#b1b3b6",
-    gray5: "#e2e2e2",
-    gray6: "#efefef",
-    gray7: "#f9f9f9",
-    white: "#ffffff",
-    primary1: "#fdf301",
-    primary1WithOpacity20: "#fdf30120",
-    primary2: "#ede300",
-    primary3: "#5b5800",
-    systemError: "#e45c49",
-    systemSuccess: "#74d900",
-};
-
-export const StyledTable = styled.table`
+export const ListTable = styled.table`
     width: 100%;
     font-size: 16px;
     margin-bottom: 40px;
 `;
 
 export const TableHead = styled.thead`
-    background-color: ${colors.gray7};
-    border: 1px solid ${colors.gray2};
+    background-color: #916bbf;
+    border: 1px solid #ffffff;
     border-width: 1px 0px;
 
     th {
         padding: 24px 32px;
-        font-weight: 600;
-        color: ${colors.gray2};
+        font-weight: bold;
+        color: #ffffff;
     }
 `;
 
 export const TableBody = styled.tbody`
-    tr:nth-of-type(1) {
-        border-top: 1px solid ${colors.gray5};
-    }
     tr {
-        border-bottom: 1px solid ${colors.gray5};
         font-weight: 400;
-        color: ${colors.gray3};
+        color: #000000;
         cursor: pointer;
 
         td {
@@ -54,31 +32,31 @@ export const TableBody = styled.tbody`
     }
 
     tr:hover {
-        background-color: ${colors.gray7};
-        color: ${colors.gray1};
+        background-color: rgba(145, 107, 191, 0.1);
+        font-color: #000000;
     }
 `;
 
-interface CategoryBadgeProps {
+interface BulletPointProps {
     text: string;
 }
 
-export const CategoryBadge = ({ text }: CategoryBadgeProps) => {
-    return <StyledBadge>{text}</StyledBadge>;
-};
-
-const StyledBadge = styled.div`
-    background-color: ${colors.primary1WithOpacity20};
-    border: 1px solid ${colors.primary1};
-    border-radius: 40px;
-    width: 88px;
+const StyledBulletPoint = styled.div`
+    background-color: #c996cc;
+    border-radius: 20px;
+    width: 50px;
     padding: 11px;
-    font-weight: 600;
+    font-weight: bold;
     font-size: 14px;
     line-height: 18px;
     text-align: center;
-    color: ${colors.primary3};
+    color: #ffffff;
+    margin: auto;
 `;
+
+export const BulletPoint = ({ text }: BulletPointProps) => {
+    return <StyledBulletPoint>{text}</StyledBulletPoint>;
+};
 
 export const CommunityListMain = styled.div`
     padding: 100px;
@@ -87,11 +65,11 @@ export const CommunityListMain = styled.div`
         display: flex;
         justify-content: center;
         margin: 1em;
+        font-size : 2em;
+        font-weight : bold;
         color: #3d2c8d;
     }
 `;
-
-export const CommunityListTable = styled.div``;
 
 export const ButtonDiv = styled.div`
     display: flex;
