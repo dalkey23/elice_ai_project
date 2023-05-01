@@ -50,9 +50,16 @@ export const Intro2 = styled.div`
 
 export const Intro3 = styled.div`
     padding : 20rem 0;
-    background-Color : #916BBF;
+    background-image : url('Img/Community.jpg');
+    background-size : 120%;
+    background-position : center;
     color : white;
     text-align : center;
+
+    & h1 {
+        font-size : 6em;
+        text-shadow: 3px 3px 3px black;
+    }
 `
 
 export const Intro4 = styled.div`
