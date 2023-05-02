@@ -11,10 +11,10 @@ export const useCreateJournal = () => {
 }
 
 export const useJournalList = () => {
-    const {data, ...rest} = useQuery('getJournalList', getJournals)
-  
-    return {
-      journalList: data?.data || [],
-      ...rest
-    }
+    // const {data, ...rest} = useQuery('getJournalList', getJournals)
+
+    // return {
+    //   journalList: data?.data || [],
+    //   ...rest
+    // }
   }
