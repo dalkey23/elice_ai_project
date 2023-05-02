@@ -10,11 +10,20 @@ export const useCreateJournal = () => {
   }
 }
 
-export const useJournalList = () => {
-    // const {data, ...rest} = useQuery('getJournalList', getJournals)
+export const useJournalList = (page: number, elements: number) => {
+    const {data, ...rest} = useQuery(['getJournalList', page, elements], () => {
+      return getJournals(page, elements)
+    }, {
+      staleTime: Infinity,
+      cacheTime: Infinity,
+      refetchOnMount: false,
+      refetchOnReconnect: false,
+      refetchOnWindowFocus: false
+    })
 
-    // return {
-    //   journalList: data?.data || [],
-    //   ...rest
-    // }
+    return {
+      journalList: data?.data.items || [],
+      totalPage: data?.data.totalPages,
+      ...rest
+    }
   }
