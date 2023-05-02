@@ -51,7 +51,7 @@ export const Intro2 = styled.div`
 export const Intro3 = styled.div`
     padding : 20rem 0;
     background-image : url('Img/Community.jpg');
-    background-size : 120%;
+    background-size : 85%;
     background-position : center;
     color : white;
     text-align : center;
