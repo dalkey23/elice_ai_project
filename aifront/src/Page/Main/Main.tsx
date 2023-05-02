@@ -7,7 +7,8 @@ import JournalPost from "../Journal/JournalPost";
 import JournalDone from "../Journal/JournalDone";
 import JournalCheck from "../Journal/JournalCheck";
 import CommunityList from "../Community/CommunityList";
-import UserJoin from "../User/UserJoin";
+import JoinUser from "../User/JoinUser";
+import CompletedJoin from "../User/CompletedJoin";
 import Footer from "../../Component/Footer/Footer";
 
 const Main : React.FC = () => {
@@ -21,7 +22,8 @@ const Main : React.FC = () => {
                     <Route path = '/JournalDone' element = {<JournalDone />} />
                     <Route path = '/JournalCheck' element = {<JournalCheck />} />
                     <Route path = '/CommunityList' element = {<CommunityList/>} />
-                    <Route path = '/UserJoin' element = {<UserJoin/>} />
+                    <Route path = '/UserJoin' element = {<JoinUser/>} />
+                    <Route path = '/CompletedJoin' element = {<CompletedJoin/>} />
                 </Routes>
             <Footer />
         </>
