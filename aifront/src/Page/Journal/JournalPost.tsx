@@ -7,6 +7,7 @@ const JournalPost : React.FC = () => {
     const  { createJournal, isLoading, isError }  = useCreateJournal();
     const [content, setContent] = useState('');
     const [title, setTitle] = useState('');
+    const [data, setData] = useState('');
     const [publishedDate, setPublishedDate] = useState('');
     const navigate = useNavigate();
 
@@ -20,7 +21,7 @@ const JournalPost : React.FC = () => {
                 publishedDate: publishedDate})
             console.log(res);
             alert('작성이 완료 되었습니다!');
-            navigate('/');
+            navigate('/JournalDone');
         } catch(err) {
             console.log(err);
             alert('다시 작성해 주세요.');

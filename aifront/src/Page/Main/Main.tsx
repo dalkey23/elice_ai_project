@@ -1,14 +1,14 @@
 import React from "react";
-import Header from "../../Component/Header/Header";
-import Footer from "../../Component/Footer/Footer";
-
-// 라우터 분리 전 임시로 라우터 사용
 import { Routes, Route } from "react-router-dom";
+
+import Header from "../../Component/Header/Header";
 import Home from "../Home/Home";
 import JournalPost from "../Journal/JournalPost";
+import JournalDone from "../Journal/JournalDone";
+import JournalCheck from "../Journal/JournalCheck";
 import CommunityList from "../Community/CommunityList";
 import UserJoin from "../User/UserJoin";
-import JournalCheck from "../Journal/JournalCheck";
+import Footer from "../../Component/Footer/Footer";
 
 const Main : React.FC = () => {
     
@@ -18,6 +18,7 @@ const Main : React.FC = () => {
                 <Routes>
                     <Route path = '/' element = {<Home />} />
                     <Route path = '/JournalPost' element = {<JournalPost />} />
+                    <Route path = '/JournalDone' element = {<JournalDone />} />
                     <Route path = '/JournalCheck' element = {<JournalCheck />} />
                     <Route path = '/CommunityList' element = {<CommunityList/>} />
                     <Route path = '/UserJoin' element = {<UserJoin/>} />

@@ -2,8 +2,13 @@ import styled, { keyframes } from "styled-components";
 
 const rotate = keyframes`
   {
-    0% { opacity: 0; filter: blur(10px); }
-    100% { opacity: 1; filter: blur(0px); }
+    0% {  color : #C996CC}
+    20% { color : #916BBF}
+    35% { color : #3D2C8D}
+    50% { color : #1C0C5B}
+    65% { color : #3D2C8D}
+    80% { color : #916BBF}
+    100% { color : #C996CC}
   }
 `
 
@@ -14,36 +19,25 @@ export const Home = styled.div`
 // 소개페이지 styled.div
 // 이미지 안올라감..
 export const Intro1 = styled.div`
-    background-Image : "http://localhost:3000/Img/Main.jpg"
-    background-repeat : no-repeat;
-    background-position : top center;
-    background-size : auto;
+    background-image : url('Img/Main.jpg');
+    background-size : 120%;
+    background-position : center;
     padding : 15rem 0;
     text-align : center;
 
     & h1 {
-        margin : 3em;
+        font-size : 12em;
         color : #916BBF;
-        text-shadow: 3px 3px 3px #C996CC;
-        font-size: 2em;
-        animation: ${rotate} 1s linear;
+        text-shadow: 6px 6px 6px black;
+        animation: ${rotate} 5s linear infinite;
     }
 
-    & button {
-        background-color : #FFFFFF;
-        border-radius : 10px;
-        border : none;
-        padding : 15px;
-        color : #916BBF;
-        font-size: 10em;
-        text-shadow: 6px 3px 3px #C996CC;
-        animation: ${rotate} 1s linear;
-
-        : hover {
-            text-shadow: 8px 3px 3px #916BBF;
-            background-color : #3D2C8D;
-            color : #C996CC;
-        }
+    & h2 {
+        margin : 1em;
+        color : white;
+        text-shadow: 3px 3px 3px black;
+        font-size: 2em;
+    }
     }
 `
 
@@ -56,9 +50,15 @@ export const Intro2 = styled.div`
 
 export const Intro3 = styled.div`
     padding : 20rem 0;
-    background-Color : #916BBF;
+    background-image : url('Img/Community.jpg');
+    background-size : 120%;
+    background-position : center;
     color : white;
     text-align : center;
+
+    & h1 {
+        font-size : 6em;
+    }
 `
 
 export const Intro4 = styled.div`
