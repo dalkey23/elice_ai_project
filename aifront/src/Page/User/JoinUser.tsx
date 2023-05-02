@@ -1,13 +1,13 @@
 import React, { useState, ChangeEvent, MouseEvent } from "react";
-import * as SC from "./UserSC";
-import { Userdata } from "../../Types/Userdata.type";
-import axios from "axios";
-import { useMutation } from "react-query";
+import * as SC from "./JoinUserSC";
+import { UserdataRequest } from "../../Types/Userdata.type";
 import { useNavigate } from "react-router-dom";
+import { useJoinUser } from "../../Component/Hook/User.hook";
 
 const JoinUser: React.FC = () => {
     const navigate = useNavigate();
-    const [userdata, setUserdata] = useState<Userdata>({
+    const { createUserdata } = useJoinUser();
+    const [userdata, setUserdata] = useState<UserdataRequest>({
         email: "",
         password: "",
         firstName: "",
@@ -19,7 +19,7 @@ const JoinUser: React.FC = () => {
         birthMonth: 0,
         birthDate: 0,
         profilePhotoUrl: "",
-        zipcode: 0,
+        zipCode: 0,
         mainAddress: "",
         detailAddress: "",
     });
@@ -90,7 +90,7 @@ const JoinUser: React.FC = () => {
 
     const checkedZipcode = (e: ChangeEvent<HTMLInputElement>) => {
         setUserdata((curUserdata) => {
-            return { ...curUserdata, zipcode: Number(e.target.value) };
+            return { ...curUserdata, zipCode: Number(e.target.value) };
         });
     };
     const checkedMainAddress = (e: ChangeEvent<HTMLInputElement>) => {
@@ -110,37 +110,47 @@ const JoinUser: React.FC = () => {
         });
     };
 
-    const createUser = useMutation((userdata: Userdata) =>
-        axios.post(
-            "http://kdt-ai6-team02.elicecoding.com/api/users/sign-up",
-            userdata
-        )
-    );
-
-    const submitHandler = (e: MouseEvent) => {
+    const submitHandler = async (e: MouseEvent) => {
         e.preventDefault();
-        console.log(userdata);
 
         try {
-            createUser.mutate(userdata)
-            navigate('/CompletedJoin')
-        } catch (error) {
-            console.log(error)
+            const res = await createUserdata(userdata);
+            console.log(res);
+            alert("작성이 완료 되었습니다!");
+            navigate("/CompletedJoin");
+        } catch (err) {
+            console.log(err);
+            alert("다시 작성해 주세요.");
         }
-
     };
+
     return (
         <SC.JoinContainer>
-            <SC.JoinDiv>
+            <SC.JoinDiv1>
                 <SC.JoinItem>
+                    <label>이메일</label>
+                    <input type="text" name="email" onChange={checkedEmail} />
+                </SC.JoinItem>
+                <SC.JoinItem>
+                    <label>비밀번호</label>
                     <input
-                        type="text"
-                        name="email"
-                        placeholder="gildong@gmail.com"
-                        onChange={checkedEmail}
+                        type="password"
+                        name="password"
+                        onChange={checkedPassword}
                     />
                 </SC.JoinItem>
                 <SC.JoinItem>
+                    <label>비밀번호 확인</label>
+                    <input
+                        type="password"
+                        name="confirmPW"
+                        onChange={checkedConfirmPW}
+                    />
+                </SC.JoinItem>
+            </SC.JoinDiv1>
+            <SC.JoinDiv2>
+                <SC.JoinItem>
+                    <label>이름</label>
                     <input
                         type="text"
                         name="lastName"
@@ -155,30 +165,6 @@ const JoinUser: React.FC = () => {
                     />
                 </SC.JoinItem>
                 <SC.JoinItem>
-                    <input
-                        type="password"
-                        name="password"
-                        placeholder="비밀번호를 입력해주세요"
-                        onChange={checkedPassword}
-                    />
-                    <input
-                        type="password"
-                        name="confirmPW"
-                        placeholder="비밀번호를 확인"
-                        onChange={checkedConfirmPW}
-                    />
-                </SC.JoinItem>
-                <SC.JoinItem>
-                    <input
-                        type="text"
-                        name="phoneNumber"
-                        placeholder="010-1234-1234"
-                        onChange={checkedPhoneNumber}
-                    />
-                </SC.JoinItem>
-            </SC.JoinDiv>
-            <SC.JoinDiv>
-                <SC.JoinItem>
                     <label>닉네임</label>
                     <input
                         type="text"
@@ -187,49 +173,59 @@ const JoinUser: React.FC = () => {
                         onChange={checkedNickname}
                     />
                 </SC.JoinItem>
+
+                <SC.JoinItem>
+                    <label>생년월일</label>
+                    <input
+                        type="text"
+                        name="birthYear"
+                        placeholder="Year"
+                        onChange={checkedBirthYear}
+                    />
+                    <input
+                        type="text"
+                        name="birthMonth"
+                        placeholder="Month"
+                        onChange={checkedBirthMonth}
+                    />
+                    <input
+                        type="text"
+                        name="birthDate"
+                        placeholder="Date"
+                        onChange={checkedBirthDate}
+                    />
+                </SC.JoinItem>
                 <SC.JoinItem>
                     <label>성별</label>
                     <input
                         type="radio"
                         name="gender"
-                        value="male"
+                        value="MALE"
                         onChange={checkedGender}
                     />
                     <label>남자</label>
                     <input
                         type="radio"
                         name="gender"
-                        value="female"
+                        value="FEMALE"
                         onChange={checkedGender}
                     />
                     <label>여자</label>
                 </SC.JoinItem>
                 <SC.JoinItem>
-                    <label>생년월일</label>
+                    <label>휴대폰 번호</label>
                     <input
                         type="text"
-                        name="birthYear"
-                        placeholder="1900"
-                        onChange={checkedBirthYear}
-                    />
-                    <input
-                        type="text"
-                        name="birthMonth"
-                        placeholder="00"
-                        onChange={checkedBirthMonth}
-                    />
-                    <input
-                        type="text"
-                        name="birthDate"
-                        placeholder="00"
-                        onChange={checkedBirthDate}
+                        name="phoneNumber"
+                        placeholder="010-1234-1234"
+                        onChange={checkedPhoneNumber}
                     />
                 </SC.JoinItem>
                 <SC.JoinItem>
                     <label>주소</label>
                     <input
                         type="text"
-                        name="zipcode"
+                        name="zipCode"
                         placeholder="04799"
                         onChange={checkedZipcode}
                     />
@@ -254,9 +250,15 @@ const JoinUser: React.FC = () => {
                         onChange={checkedProfilePhotoUrl}
                     />
                 </SC.JoinItem>
-            </SC.JoinDiv>
+            </SC.JoinDiv2>
             <SC.ButtonDiv>
-                <SC.CancelButton type="button" onClick={()=>{navigate("/")}}>취소</SC.CancelButton>
+                <SC.CancelButton
+                    type="button"
+                    onClick={() => {
+                        navigate("/");
+                    }}>
+                    취소
+                </SC.CancelButton>
                 <SC.ConfirmButton onClick={submitHandler}>
                     확인
                 </SC.ConfirmButton>
