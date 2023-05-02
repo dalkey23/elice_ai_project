@@ -5,6 +5,14 @@ export const JoinContainer = styled.div`
     margin : 50px;
 `
 
+export const JoinTitle = styled.h1`
+    color : #3D2C8D;
+    font-weight : bold;
+    font-size : 40px;
+    text-align : center;
+    margin : 40px;
+`
+
 export const JoinDiv = styled.div`
 
     width: 932px;
