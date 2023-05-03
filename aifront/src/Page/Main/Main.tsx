@@ -6,6 +6,7 @@ import Home from "../Home/Home";
 import JournalPost from "../Journal/JournalPost";
 import JournalDone from "../Journal/JournalDone";
 import JournalCheck from "../Journal/JournalCheck";
+import JournalDetail from "../Journal/JournalDetail";
 import CommunityList from "../Community/CommunityList";
 import JoinUser from "../User/JoinUser";
 import CompletedJoin from "../User/CompletedJoin";
@@ -20,6 +21,7 @@ const Main : React.FC = () => {
                     <Route path = '/' element = {<Home />} />
                     <Route path = '/JournalPost' element = {<JournalPost />} />
                     <Route path = '/JournalDone' element = {<JournalDone />} />
+                    <Route path = '/JournalDetail/:id' element = {<JournalDetail />} />
                     <Route path = '/JournalCheck' element = {<JournalCheck />} />
                     <Route path = '/CommunityList' element = {<CommunityList/>} />
                     <Route path = '/UserJoin' element = {<JoinUser/>} />

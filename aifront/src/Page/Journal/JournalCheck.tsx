@@ -26,7 +26,7 @@ const JournalCheck : React.FC = () => {
             {journalList.map(j => {
                 return (
                 <SC.Journal>
-                    <Link to={`api/diaries/${j.id}`} key={j.id}>
+                    <Link to={`/JournalDetail/${j.id}`} key={j.id}>
                         <p>id: {j.id}</p>
                         <p>{j.title}</p>
                     </Link>
@@ -35,8 +35,8 @@ const JournalCheck : React.FC = () => {
             })}
         </SC.JournalList>
             <SC.Button>
-                {currentPage !== totalPage && <button onClick={handlePageUp}>다음 페이지</button>}
                 {currentPage > 1 && <button onClick={handlePageDown}>이전 페이지</button>}
+                {currentPage !== totalPage && <button onClick={handlePageUp}>다음 페이지</button>}
             </SC.Button>
         </>
     )
