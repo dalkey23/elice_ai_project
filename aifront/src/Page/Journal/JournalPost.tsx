@@ -7,7 +7,6 @@ const JournalPost : React.FC = () => {
     const  { createJournal, isLoading, isError }  = useCreateJournal();
     const [content, setContent] = useState('');
     const [title, setTitle] = useState('');
-    const [data, setData] = useState('');
     const [publishedDate, setPublishedDate] = useState('');
     const navigate = useNavigate();
 
