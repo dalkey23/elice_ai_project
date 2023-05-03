@@ -1,4 +1,4 @@
-export type Userdata = {
+export type UserdataRequest = {
     email : string;
     password : string;
     firstName : string;
@@ -10,7 +10,11 @@ export type Userdata = {
     birthMonth : number;
     birthDate : number;
     profilePhotoUrl : string;
-    zipcode : number;
+    zipCode : number;
     mainAddress : string;
     detailAddress : string;
+}
+
+export type UserdataResponse = {
+
 }
