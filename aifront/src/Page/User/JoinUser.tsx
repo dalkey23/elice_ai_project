@@ -1,8 +1,9 @@
-import React, { useState, ChangeEvent, MouseEvent } from "react";
+import React, { useState, ChangeEvent, MouseEvent, useCallback } from "react";
 import * as SC from "./JoinUserSC";
 import { UserdataRequest } from "../../Types/Userdata.type";
 import { useNavigate } from "react-router-dom";
 import { useJoinUser } from "../../Component/Hook/User.hook";
+import Modal from "../../Component/Base/Modal";
 
 const JoinUser: React.FC = () => {
     const navigate = useNavigate();
@@ -23,6 +24,8 @@ const JoinUser: React.FC = () => {
         mainAddress: "",
         detailAddress: "",
     });
+
+    
 
     const checkedEmail = (e: ChangeEvent<HTMLInputElement>) => {
         setUserdata((curUserdata) => {
@@ -123,6 +126,14 @@ const JoinUser: React.FC = () => {
             alert("다시 작성해 주세요.");
         }
     };
+
+    //모달창
+    const [ isModal, setIsModal ] = useState<boolean>(false);
+
+    const onClickToggleModal = useCallback(()=>{
+        setIsModal(!isModal)
+        console.log(isModal)
+    },[isModal])
 
     return (
         <SC.JoinContainer>
@@ -229,6 +240,10 @@ const JoinUser: React.FC = () => {
                         placeholder="04799"
                         onChange={checkedZipcode}
                     />
+                    <div>
+                        <button onClick={onClickToggleModal}>우편번호 검색</button>
+                        {isModal && (<Modal onClickToggleModal={onClickToggleModal}></Modal>)}
+                    </div>
                     <input
                         type="text"
                         name="mainAddress"
