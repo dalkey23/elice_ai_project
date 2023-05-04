@@ -31,16 +31,10 @@ export const useJournalList = (page: number, elements: number) => {
 export const useJournalDetail = (id : number) => {
     const {data, ...rest} = useQuery(['getJournalDetail', id], () => {
       return getJournalsDetail(id)
-    }, {
-      staleTime: Infinity,
-      cacheTime: Infinity,
-      refetchOnMount: false,
-      refetchOnReconnect: false,
-      refetchOnWindowFocus: false
     })
 
     return {
-      items : data?.data.items || [],
+      item : data?.data.item || [],
       ...rest
     }
   }
