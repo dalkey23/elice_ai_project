@@ -1,13 +1,15 @@
-FROM continuumio/miniconda3
+FROM python:3.10
 
-COPY environment/environment.yml .
+WORKDIR /app
 
-RUN conda env create -f environment.yml
+COPY requirements.txt .
 
-ENV PATH /opt/conda/envs/myenv/bin:$PATH
+# 패키지 의존성 설치
+RUN pip install --cache-dir=/tmp/pip-cache -r requirements.txt
 
 COPY . .
 
 EXPOSE 8000
 
-CMD ["python", "app.py"]
+# 애플리케이션 실행
+CMD ["gunicorn", "-w", "4", "-b", "0.0.0.0:8000", "app:app"]
