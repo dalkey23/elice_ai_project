@@ -1,7 +1,10 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request
 from flask_sqlalchemy import SQLAlchemy
 from dotenv import load_dotenv
 import os
+
+from diary_emotion.application.dto.request.analyze_request import AnalyzeRequest
+from diary_emotion.application.model.emotion_analyzer import EmotionAnalyzer
 
 app = Flask(__name__)
 
@@ -21,6 +24,12 @@ db: SQLAlchemy = SQLAlchemy(app)
 def main() -> str:
     return 'hello, world!'
 
+@app.route('/predict', methods=['POST'])
+def predict():
+    request_json = request.get_json()
+    analyze_request = AnalyzeRequest.from_request(request_json)
+    emotion_analyzer = EmotionAnalyzer()
+    return emotion_analyzer.analyze_paragragh(analyze_request.sentence)
 
 if __name__ == '__main__':
     app.run(port=8000)
