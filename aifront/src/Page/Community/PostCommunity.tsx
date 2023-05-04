@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import * as SC from "./PostCommunitySC";
 import { useCreateJournal } from "../../Component/Hook/Journal.hook";
 import { usePostCommunity } from "../../Component/Hook/Community.hook";
+import RichEditor from '../../Component/Base/RichEditor';
 
 const PostCommunity: React.FC = () => {
     const  { postCommunity }  = usePostCommunity();
@@ -36,7 +37,7 @@ const PostCommunity: React.FC = () => {
                 <select name = "category"
                         onChange={(e : React.ChangeEvent<HTMLSelectElement>) =>
                             setCategory(e.target.value)}>
-                    <option disabled selected>글머리 선택</option>
+                    <option value = "none">글머리 선택</option>
                     <option value = "restaurant">맛집</option>
                     <option value = "recipe">레시피</option>
                 </select>
@@ -50,13 +51,10 @@ const PostCommunity: React.FC = () => {
                 } />
             </SC.TitleDate>
             <SC.PostCommunity>
-                <textarea
-                name = "content"
-                maxLength = {100}
-                value = {content}
-                onChange = {(e : React.ChangeEvent<HTMLTextAreaElement>) =>
-                    setContent(e.target.value)
+                <RichEditor value={content} onChange={(content: string) =>
+                    setContent(content)
                 } />
+
             </SC.PostCommunity>
             <SC.ButtonDiv>
                 <button onClick = {handleSubmit}>커뮤니티 글 작성</button>
