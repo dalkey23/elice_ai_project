@@ -15,5 +15,6 @@ export const getJournals = async (page: number, elements: number,) => {
 
 export const getJournalsDetail = async (id : number) => {
     const res = await axios.get<JournalDetailResponse>(`http://kdt-ai6-team02.elicecoding.com/api/diaries/${id}`);
+    console.log(res)
     return res;
 };
