@@ -15,6 +15,7 @@ export type UserdataRequest = {
     detailAddress : string;
 }
 
-export type UserdataResponse = {
-
+export type LoginUser = {
+    email : string;
+    password : string;
 }
