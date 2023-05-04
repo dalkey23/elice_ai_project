@@ -9,6 +9,7 @@ const Header : React.FC = () => {
                 <NavLink to = '/JournalPost'>일기쓰기</NavLink>
                 <NavLink to = '/JournalCheck'>일기조회</NavLink>
                 <NavLink to = '/CommunityList'>커뮤니티</NavLink>
+                <NavLink to = '/Login'>로그인</NavLink>
                 <NavLink to = '/UserJoin'>회원가입</NavLink>
         </SC.Header>
     )

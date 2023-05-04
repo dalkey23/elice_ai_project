@@ -4,7 +4,6 @@ import { UserdataRequest } from "../../Types/Userdata.type";
 import { useNavigate } from "react-router-dom";
 import { useJoinUser } from "../../Component/Hook/User.hook";
 import Modal from "../../Component/Base/Modal";
-
 const JoinUser: React.FC = () => {
     const navigate = useNavigate();
     const { createUserdata } = useJoinUser();
