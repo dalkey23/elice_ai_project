@@ -8,7 +8,6 @@ const JournalDetail : React.FC = () => {
     
     return (
         <div>
-            {item.}
         </div>
     )
 }
