@@ -18,7 +18,8 @@ class DiaryEmotionsService:
             summarized_result: dict[str, float] = self.emotion_analyzer.get_summarized_result(analyze_request.paragraph)
 
             for emotion, score in summarized_result.items():
-                diary_emotion = DiaryEmotion(diary_id=analyze_request.diary_id, emotion=emotion, emotion_score=score)
+                diary_emotion: DiaryEmotion = DiaryEmotion(diary_id=analyze_request.diary_id, emotion=emotion,
+                                                           emotion_score=score)
                 self.diary_emotion_dao.create(diary_emotion)
 
             self.db.session.commit()
