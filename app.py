@@ -29,7 +29,7 @@ def predict():
     request_json = request.get_json()
     analyze_request = AnalyzeRequest.from_request(request_json)
     emotion_analyzer = EmotionAnalyzer()
-    return emotion_analyzer.predict(analyze_request.sentence)
+    return emotion_analyzer.analyze_paragragh(analyze_request.sentence)
 
 if __name__ == '__main__':
     app.run(port=8000)
