@@ -18,11 +18,3 @@ export const getJournalsDetail = async (id : number) => {
     console.log(res)
     return res;
 };
-
-export const test = () => {
-    test
-}
-
-export const test2 = () => {
-    test2
-}
