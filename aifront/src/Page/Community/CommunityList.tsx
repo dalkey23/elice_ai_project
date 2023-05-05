@@ -196,7 +196,7 @@ const CommunityList: React.FC = () => {
                                 <SC.BulletPoint text={item.category} />
                             </td>
                             <td>
-                                <Link to = {`/`}>{item.title} ({item.comments})</Link></td>
+                                <Link to = {`/CommunityDetail/${item.id}`}>{item.title} ({item.comments})</Link></td>
                             <td>{item.createdAt}</td>
                             <td>{item.writer}</td>
                             <td>{item.views}</td>

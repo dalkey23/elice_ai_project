@@ -33,7 +33,7 @@ const PostCommunity: React.FC = () => {
         <SC.PostCommunityMain>
             <h1>커뮤니티</h1>
             <br/>
-            <SC.TitleDate>
+            <SC.Title>
                 <select name = "category"
                         onChange={(e : React.ChangeEvent<HTMLSelectElement>) =>
                             setCategory(e.target.value)}>
@@ -49,7 +49,7 @@ const PostCommunity: React.FC = () => {
                 onChange = {(e : React.ChangeEvent<HTMLInputElement>) =>
                     setTitle(e.target.value)
                 } />
-            </SC.TitleDate>
+            </SC.Title>
             <SC.PostCommunity>
                 <RichEditor value={content} onChange={(content: string) =>
                     setContent(content)
