@@ -18,3 +18,7 @@ export const getJournalsDetail = async (id : number) => {
     console.log(res)
     return res;
 };
+
+export const test = () => {
+    test
+}
