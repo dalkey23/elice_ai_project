@@ -3,6 +3,8 @@ import { JournalRequest, JournalResponse } from "../../Types/JournalPost.type";
 import { JournalListResponse } from "../../Types/GetJournal.type";
 import { JournalDetailResponse } from "../../Types/GetJournalDetail.type";
 
+// const baseURL : string = process.env.URL
+
 export const createJournal = async (body: JournalRequest) => {
     const res = await axios.post<JournalResponse>('http://kdt-ai6-team02.elicecoding.com/api/diaries', body);
     return res;
