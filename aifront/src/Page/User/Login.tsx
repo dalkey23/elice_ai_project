@@ -24,7 +24,7 @@ const Login = () => {
             { email, password },
             {
                 onSuccess(res) {
-                    console.log(res.data.item);
+                    console.log(res.data.item.jwtToken);
                     alert("로그인 성공");
                     navigate("/");
                 },

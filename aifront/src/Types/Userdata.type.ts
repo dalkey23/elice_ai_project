@@ -21,6 +21,7 @@ export type LoginUser = {
 }
 
 export type LoginInfo = {
-    item : object;
+    // 타입지정을 명확히 해줘야 타입 에러가 발생하지 않음
+    item : {jwtToken:string};
     success : string;
 }
