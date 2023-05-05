@@ -3,7 +3,7 @@ import axios from "axios";
 import * as SC from "./CommunityListSC";
 import { Pagination } from "../../Component/Base/Pagination";
 import { BoardModel } from "../../Types/Community.type";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link, useSearchParams } from "react-router-dom";
 
 // import { Route } from "react-router-dom";
 
@@ -14,6 +14,8 @@ const tableHeadData = [
     { id: 3, head: "작성자" },
     { id: 4, head: "조회수" },
 ];
+
+const totalPosts = 10;
 
 // test 데이터
 const data = [
@@ -167,16 +169,19 @@ const CommunityList: React.FC = () => {
    const [posts, setPosts] = useState<BoardModel[]>(data);
    const [page, setPage] = useState(1);
 
-//    const pageList: number[] = [];
-//    if (posts?.totalPages) {
-//      for (let i = 1; i <= items!.totalPages; i++) {
-//        pageList.push(i);
-//      }
-//    }
- 
-//    const paginate = (num: number) => {
-//      setPage(num);
-//    };
+   const [searchParams, setSearchParams] = useSearchParams();
+
+   const currentPage = parseInt(searchParams.get('page') as string) || 1
+
+//    const { communityList, totalPage } = useCommunityList(currentPage, totalPosts)
+
+   const handlePageUp = () => {
+    setSearchParams({ pages: `${currentPage + 1}`})
+   }
+
+   const handlePageDown = () => {
+    setSearchParams({ page: `${currentPage - 1}`})
+   }
 
     return (
         <SC.CommunityListMain>
@@ -186,20 +191,17 @@ const CommunityList: React.FC = () => {
                 {posts &&
                     posts!.map((item, index) => {
                         return (
-                            <tr
-                                key={item.id}
-                                onClick={() => {
-                                    // <Route path = '/posts/${item.id}' element = {<Home />} />
-                                }}
-                            >
-                                <td>
-                                    <SC.BulletPoint text={item.category} />
-                                </td>
-                                <td>{item.title} ({item.comments})</td>
-                                <td>{item.createdAt}</td>
-                                <td>{item.writer}</td>
-                                <td>{item.views}</td>
+                            <tr key={item.id}>
+                            <td>
+                                <SC.BulletPoint text={item.category} />
+                            </td>
+                            <td>
+                                <Link to = {`/CommunityDetail/${item.id}`}>{item.title} ({item.comments})</Link></td>
+                            <td>{item.createdAt}</td>
+                            <td>{item.writer}</td>
+                            <td>{item.views}</td>
                             </tr>
+                            
                         );
                     })}
             </CommunityListTable>
@@ -209,12 +211,6 @@ const CommunityList: React.FC = () => {
                     navigate('/PostCommunity')
                 }}>글쓰기</button>
             </SC.ButtonDiv>
-
-            {/* <Pagination totalPages = {Math.ceil(posts.length/10)}
-                        totalPosts = {posts.length}
-                        page: currentPage,
-                        paginate,
-                        pageList> */}
         </SC.CommunityListMain>
     );
 };
