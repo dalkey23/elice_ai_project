@@ -11,6 +11,8 @@ import CommunityList from "../Community/CommunityList";
 import JoinUser from "../User/JoinUser";
 import CompletedJoin from "../User/CompletedJoin";
 import Footer from "../../Component/Footer/Footer";
+import PostCommunity from "../Community/PostCommunity";
+import Login from "../User/Login";
 
 const Main : React.FC = () => {
     
@@ -19,6 +21,8 @@ const Main : React.FC = () => {
             <Header />
                 <Routes>
                     <Route path = '/' element = {<Home />} />
+                    <Route path = '/PostCommunity' element = {<PostCommunity/>} />
+                    <Route path = '/Login' element = {<Login/>} />
                     <Route path = '/JournalPost' element = {<JournalPost />} />
                     <Route path = '/JournalDone' element = {<JournalDone />} />
                     <Route path = '/JournalDetail/:id' element = {<JournalDetail />} />
