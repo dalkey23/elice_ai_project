@@ -13,9 +13,10 @@ import CompletedJoin from "../User/CompletedJoin";
 import Footer from "../../Component/Footer/Footer";
 import PostCommunity from "../Community/PostCommunity";
 import Login from "../User/Login";
+import Slider from "../Slider";
 
 const Main : React.FC = () => {
-    
+
     return(
         <>
             <Header />
@@ -30,6 +31,7 @@ const Main : React.FC = () => {
                     <Route path = '/CommunityList' element = {<CommunityList/>} />
                     <Route path = '/UserJoin' element = {<JoinUser/>} />
                     <Route path = '/CompletedJoin' element = {<CompletedJoin/>} />
+                    <Route path = '/slider' element = {<Slider/>} />
                 </Routes>
             <Footer />
         </>
