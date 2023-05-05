@@ -4,139 +4,17 @@ import * as SC from "./CommunityListSC";
 import { Pagination } from "../../Component/Base/Pagination";
 import { BoardModel } from "../../Types/Community.type";
 import { useNavigate, Link, useSearchParams } from "react-router-dom";
-//import { useCommunityList } from "../../Component/Hook/Community.hook";
 
-// test data
-const data = [
-    {
-      "id": 1,
-      "category": "맛집",
-      "title": "제목",
-      "comments": 5,
-      "content": "내용",
-      "writer": "가나다",
-      "views": 30,
-      "createdAt": "2023-04-11T23:11:12:037"
-    },
-    {
-      "id": 2,
-      "category": "레시피",
-      "title": "제목",
-      "comments": 5,
-      "content": "내용",
-      "writer": "가나다",
-      "views": 30,
-      "createdAt": "2023-04-11T23:11:12:037"
-    },
-    {
-      "id": 3,
-      "category": "레시피",
-      "title": "제목",
-      "comments": 5,
-      "content": "내용",
-      "writer": "가나다",
-      "views": 30,
-      "createdAt": "2023-04-11T23:11:12:037"
-    },
-    {
-      "id": 4,
-      "category": "레시피",
-      "title": "제목",
-      "comments": 5,
-      "content": "내용",
-      "writer": "가나다",
-      "views": 30,
-      "createdAt": "2023-04-11T23:11:12:037"
-    },
-    {
-      "id": 5,
-      "category": "레시피",
-      "title": "제목",
-      "comments": 5,
-      "content": "내용",
-      "writer": "가나다",
-      "views": 30,
-      "createdAt": "2023-04-11T23:11:12:037"
-    },
-    {
-      "id": 6,
-      "category": "레시피",
-      "title": "제목",
-      "comments": 5,
-      "content": "내용",
-      "writer": "가나다",
-      "views": 30,
-      "createdAt": "2023-04-11T23:11:12:037"
-    },
-    {
-      "id": 7,
-      "category": "레시피",
-      "title": "제목",
-      "comments": 5,
-      "content": "내용",
-      "writer": "가나다",
-      "views": 30,
-      "createdAt": "2023-04-11T23:11:12:037"
-    },
-    {
-      "id": 8,
-      "category": "레시피",
-      "title": "제목",
-      "comments": 5,
-      "content": "내용",
-      "writer": "가나다",
-      "views": 30,
-      "createdAt": "2023-04-11T23:11:12:037"
-    },
-    {
-      "id": 9,
-      "category": "레시피",
-      "title": "제목",
-      "comments": 5,
-      "content": "내용",
-      "writer": "가나다",
-      "views": 30,
-      "createdAt": "2023-04-11T23:11:12:037"
-    },
-    {
-      "id": 10,
-      "category": "레시피",
-      "title": "제목",
-      "comments": 5,
-      "content": "내용",
-      "writer": "가나다",
-      "views": 30,
-      "createdAt": "2023-04-11T23:11:12:037"
-    },
-    {
-      "id": 11,
-      "category": "레시피",
-      "title": "제목",
-      "comments": 5,
-      "content": "내용",
-      "writer": "가나다",
-      "views": 30,
-      "createdAt": "2023-04-11T23:11:12:037"
-    },
-  ];  
+// import { Route } from "react-router-dom";
 
 const tableHeadData = [
-  { id: 0, head: "글머리" },
-  { id: 1, head: "제목 (댓글 수)" },
-  { id: 2, head: "날짜" },
-  { id: 3, head: "작성자" },
-  { id: 4, head: "조회수" },
+    { id: 0, head: "글머리" },
+    { id: 1, head: "제목 (댓글 수)" },
+    { id: 2, head: "날짜" },
+    { id: 3, head: "작성자" },
+    { id: 4, head: "조회수" },
 ];
 
-const tableHeadData = [
-  { id: 0, head: "글머리" },
-  { id: 1, head: "제목 (댓글 수)" },
-  { id: 2, head: "날짜" },
-  { id: 3, head: "작성자" },
-  { id: 4, head: "조회수" },
-];
-
-<<<<<<< HEAD
 const totalPosts = 10;
 
 // test 데이터
@@ -253,8 +131,6 @@ const data = [
   },
 ]
 
-=======
->>>>>>> feature/community
 interface TableProps {
     children: ReactNode;
     tableHeadData?: {
@@ -288,8 +164,6 @@ const CommunityListTable = ({ children, tableHeadData, posts }: TableProps) => {
     );
 };
 
-const elementsSize = 10;
-
 const CommunityList: React.FC = () => {
    const navigate = useNavigate();
    const [posts, setPosts] = useState<BoardModel[]>(data);
@@ -297,9 +171,9 @@ const CommunityList: React.FC = () => {
 
    const [searchParams, setSearchParams] = useSearchParams();
 
-   const currentPage = parseInt(searchParams.get('page') as string) || 1;
+   const currentPage = parseInt(searchParams.get('page') as string) || 1
 
-   // const { communityList, totalPage } = useCommunityList(currentPage, elementsSize);
+//    const { communityList, totalPage } = useCommunityList(currentPage, totalPosts)
 
    const handlePageUp = () => {
     setSearchParams({ pages: `${currentPage + 1}`})
@@ -308,8 +182,6 @@ const CommunityList: React.FC = () => {
    const handlePageDown = () => {
     setSearchParams({ page: `${currentPage - 1}`})
    }
-
-   console.log(posts);
 
     return (
         <SC.CommunityListMain>
@@ -333,6 +205,7 @@ const CommunityList: React.FC = () => {
                         );
                     })}
             </CommunityListTable>
+
             <SC.ButtonDiv>
                 <button onClick={() => {
                     navigate('/PostCommunity')
