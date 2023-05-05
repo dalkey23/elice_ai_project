@@ -1,13 +1,19 @@
 export type BoardModel = {
-    id: number;
-    category: string;
-    title: string;
-    comments: number;
-    content: string;
-    writer: string;
-    views: number;
-    createdAt: string;
-    item?: any;
+    // success: boolean,
+    // totalPages : number,
+    // totalElements : number,
+    // page : number,
+    // numOfItems : number,
+    // items : { 
+        id: number;
+        category: string;
+        title: string;
+        comments: number;
+        content: string;
+        writer: string;
+        views: number;
+        createdAt: string;
+    // }
 }
 
 export type PostBoard = {

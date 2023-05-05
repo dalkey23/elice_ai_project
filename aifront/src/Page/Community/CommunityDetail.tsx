@@ -6,6 +6,10 @@ const CommunityDetail: React.FC = () => {
     const { id } = useParams();
     const { item } = useCommunityDetail(Number(id));
 
+    if (!item) {
+        return <></>
+    }
+
     return (
         <SC.CommunityDetailMain>
             <h1>커뮤니티</h1>
@@ -13,7 +17,7 @@ const CommunityDetail: React.FC = () => {
             <SC.CommunityDetailTitle>
                 {item.category}
                 {item.title}
-                {item.userID}
+                {item.writer}
                 {item.createdAt} {/* TODO : substr */}
                 {item.views}
             </SC.CommunityDetailTitle>
