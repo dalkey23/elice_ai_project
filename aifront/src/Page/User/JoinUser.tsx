@@ -1,12 +1,12 @@
-import React, { useState, ChangeEvent, MouseEvent } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import * as SC from "./JoinUserSC";
 import { UserdataRequest } from "../../Types/Userdata.type";
 import { useNavigate } from "react-router-dom";
 import { useJoinUser } from "../../Component/Hook/User.hook";
-
+import Modal from "../../Component/Base/Modal";
 const JoinUser: React.FC = () => {
     const navigate = useNavigate();
-    const { createUserdata } = useJoinUser();
+    const { createUserdata, isError: isJoinUserError } = useJoinUser();
     const [userdata, setUserdata] = useState<UserdataRequest>({
         email: "",
         password: "",
@@ -24,105 +24,115 @@ const JoinUser: React.FC = () => {
         detailAddress: "",
     });
 
-    const checkedEmail = (e: ChangeEvent<HTMLInputElement>) => {
+    const checkedEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
         setUserdata((curUserdata) => {
             return { ...curUserdata, email: e.target.value };
         });
     };
 
-    const checkedLastName = (e: ChangeEvent<HTMLInputElement>) => {
+    const checkedLastName = (e: React.ChangeEvent<HTMLInputElement>) => {
         setUserdata((curUserdata) => {
             return { ...curUserdata, lastName: e.target.value };
         });
     };
 
-    const checkedFirstName = (e: ChangeEvent<HTMLInputElement>) => {
+    const checkedFirstName = (e: React.ChangeEvent<HTMLInputElement>) => {
         setUserdata((curUserdata) => {
             return { ...curUserdata, firstName: e.target.value };
         });
     };
 
-    const checkedPassword = (e: ChangeEvent<HTMLInputElement>) => {
+    const checkedPassword = (e: React.ChangeEvent<HTMLInputElement>) => {
         setUserdata((curUserdata) => {
             return { ...curUserdata, password: e.target.value };
         });
     };
 
-    const checkedConfirmPW = (e: ChangeEvent<HTMLInputElement>) => {
+    const checkedConfirmPW = (e: React.ChangeEvent<HTMLInputElement>) => {
         console.log(
             `userdata password : ${userdata.password}, target value : ${e.target.value}`
         );
     };
 
-    const checkedPhoneNumber = (e: ChangeEvent<HTMLInputElement>) => {
+    const checkedPhoneNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
         setUserdata((curUserdata) => {
             return { ...curUserdata, phoneNumber: e.target.value };
         });
     };
 
-    const checkedNickname = (e: ChangeEvent<HTMLInputElement>) => {
+    const checkedNickname = (e: React.ChangeEvent<HTMLInputElement>) => {
         setUserdata((curUserdata) => {
             return { ...curUserdata, nickname: e.target.value };
         });
     };
 
-    const checkedGender = (e: ChangeEvent<HTMLInputElement>) => {
+    const checkedGender = (e: React.ChangeEvent<HTMLInputElement>) => {
         setUserdata((curUserdata) => {
             return { ...curUserdata, gender: e.target.value };
         });
     };
 
-    const checkedBirthYear = (e: ChangeEvent<HTMLInputElement>) => {
+    const checkedBirthYear = (e: React.ChangeEvent<HTMLInputElement>) => {
         setUserdata((curUserdata) => {
             return { ...curUserdata, birthYear: Number(e.target.value) };
         });
     };
-    const checkedBirthMonth = (e: ChangeEvent<HTMLInputElement>) => {
+    const checkedBirthMonth = (e: React.ChangeEvent<HTMLInputElement>) => {
         setUserdata((curUserdata) => {
             return { ...curUserdata, birthMonth: Number(e.target.value) };
         });
     };
-    const checkedBirthDate = (e: ChangeEvent<HTMLInputElement>) => {
+    const checkedBirthDate = (e: React.ChangeEvent<HTMLInputElement>) => {
         setUserdata((curUserdata) => {
             return { ...curUserdata, birthDate: Number(e.target.value) };
         });
     };
 
-    const checkedZipcode = (e: ChangeEvent<HTMLInputElement>) => {
+    const checkedZipcode = (e: React.ChangeEvent<HTMLInputElement>) => {
         setUserdata((curUserdata) => {
             return { ...curUserdata, zipCode: Number(e.target.value) };
         });
     };
-    const checkedMainAddress = (e: ChangeEvent<HTMLInputElement>) => {
+    const checkedMainAddress = (e: React.ChangeEvent<HTMLInputElement>) => {
         setUserdata((curUserdata) => {
             return { ...curUserdata, mainAddress: e.target.value };
         });
     };
-    const checkedDetailAddress = (e: ChangeEvent<HTMLInputElement>) => {
+    const checkedDetailAddress = (e: React.ChangeEvent<HTMLInputElement>) => {
         setUserdata((curUserdata) => {
             return { ...curUserdata, detailAddress: e.target.value };
         });
     };
 
-    const checkedProfilePhotoUrl = (e: ChangeEvent<HTMLInputElement>) => {
+    const checkedProfilePhotoUrl = (e: React.ChangeEvent<HTMLInputElement>) => {
         setUserdata((curUserdata) => {
             return { ...curUserdata, detailAddress: e.target.value };
         });
     };
 
-    const submitHandler = async (e: MouseEvent) => {
+    const submitHandler = async (e: React.MouseEvent) => {
         e.preventDefault();
 
-        try {
-            const res = await createUserdata(userdata);
-            console.log(res);
-            alert("작성이 완료 되었습니다!");
-            navigate("/CompletedJoin");
-        } catch (err) {
-            console.log(err);
-            alert("다시 작성해 주세요.");
-        }
+        await createUserdata(userdata, {
+            onSuccess(res) {
+                console.log(res);
+                alert("작성이 완료 되었습니다!");
+                navigate("/CompletedJoin");
+            },
+            onError(err) {
+                console.log(err);
+                alert("다시 작성해 주세요.");
+            },
+        });
     };
+
+    //모달창
+    const [isModal, setIsModal] = useState<boolean>(false);
+
+    const onClickToggleModal = useCallback(() => {
+        setIsModal(!isModal);
+        console.log(isModal);
+    }, [isModal]);
 
     return (
         <SC.JoinContainer>
@@ -229,6 +239,15 @@ const JoinUser: React.FC = () => {
                         placeholder="04799"
                         onChange={checkedZipcode}
                     />
+                    <div>
+                        <button onClick={onClickToggleModal}>
+                            우편번호 검색
+                        </button>
+                        {isModal && (
+                            <Modal
+                                onClickToggleModal={onClickToggleModal}></Modal>
+                        )}
+                    </div>
                     <input
                         type="text"
                         name="mainAddress"
