@@ -2,15 +2,18 @@ import { useMutation, useQuery } from "react-query";
 import { createUserdata, loginUser } from "../Api/User";
 
 export const useJoinUser = () => {
-    const { mutate } = useMutation(createUserdata)
+    const { mutate, isError } = useMutation(createUserdata)
     return {
-        createUserdata : mutate
+        createUserdata : mutate,
+        isError
     }
 }
 
 export const useLoginUser = () => {
-    const { mutate } = useMutation(loginUser)
+    const { mutate, isError, data } = useMutation(loginUser)
     return {
-        loginUser : mutate
+        loginUser : mutate,
+        isError,
+        data
     }
 }

@@ -19,3 +19,8 @@ export type LoginUser = {
     email : string;
     password : string;
 }
+
+export type LoginInfo = {
+    item : object;
+    success : string;
+}

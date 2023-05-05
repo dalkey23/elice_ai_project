@@ -1,5 +1,5 @@
 import axios from "axios";
-import { LoginUser, UserdataRequest } from "../../Types/Userdata.type";
+import { LoginInfo, LoginUser, UserdataRequest } from "../../Types/Userdata.type";
 
 export const createUserdata = async (body: UserdataRequest) => {
     const res = await axios.post<UserdataRequest>(
@@ -10,10 +10,9 @@ export const createUserdata = async (body: UserdataRequest) => {
 };
 
 export const loginUser = async (body: LoginUser) => {
-    const res = await axios.post<LoginUser>(
+    const res = await axios.post<LoginInfo>(
         "http://localhost:3500/api/users/login",
         body
     );
-    console.log(res)
     return res;
 };
