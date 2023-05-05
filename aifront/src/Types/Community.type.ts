@@ -7,6 +7,7 @@ export type BoardModel = {
     writer: string;
     views: number;
     createdAt: string;
+    item?: any;
 }
 
 export type PostBoard = {

@@ -11,40 +11,33 @@ export const PostCommunityMain = styled.div`
         font-weight : bold;
         color: #3d2c8d;
     }
+`
 
-    & p {
-        text-align : center;
+export const Title = styled.div`
+    width : 100%;
+    padding : 25px 100px;
+    display : flex;
+    // justify-Content : space-between;
+    
+    & select {
+        // text-align : center;
+        padding : 1em;
+        margin : 1em;
+        margin-right : 50px;
+        width : 10%;
     }
 
     & input {
         padding : 1em;
         margin : 1em;
-        width : 20%
+        width : 65%;
     }
-`
-
-export const TitleDate = styled.div`
-    width : 100%;
-    // display : flex;
-    // justify-Content : center;
 `
 
 export const PostCommunity = styled.div`
     // display : flex;
     // justify-Content : center;
-    padding : 100px;
-
-    & textarea {
-        width : 100%;
-        height : 20rem;
-        border : 1px solid #3D2C8D;
-        border-radius : 10px;
-        text-align : center;
-        font-size : 1.5em;
-        ::placeholder {
-            padding : 9rem;
-        }
-    }
+    padding : 25px 100px;
 `
 
 export const ButtonDiv = styled.div`
