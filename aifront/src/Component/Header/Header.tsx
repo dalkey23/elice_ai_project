@@ -11,6 +11,7 @@ const Header : React.FC = () => {
                 <NavLink to = '/CommunityList'>커뮤니티</NavLink>
                 <NavLink to = '/Login'>로그인</NavLink>
                 <NavLink to = '/UserJoin'>회원가입</NavLink>
+                <NavLink to = '/Mypage'>마이페이지</NavLink>
         </SC.Header>
     )
 }
