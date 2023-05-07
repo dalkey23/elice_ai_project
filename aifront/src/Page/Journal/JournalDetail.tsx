@@ -10,6 +10,7 @@ const JournalDetail : React.FC = () => {
     return (
         <div>
             {item.id}
+            {item.content}
         </div>
     )
 }

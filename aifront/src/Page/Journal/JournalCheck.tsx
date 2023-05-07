@@ -27,8 +27,12 @@ const JournalCheck : React.FC = () => {
                 return (
                 <SC.Journal>
                     <Link to={`/JournalDetail/${j.id}`} key={j.id}>
-                        <p>id: {j.id}</p>
-                        <p>{j.title}</p>
+                        <div>
+                            <p>{j.publishedDate}</p>
+                            <p>{j.diaryEmotion}</p>
+                            <h1>{j.title}</h1>
+                        </div>
+                            <h1>{j.recommendedFood}</h1>
                     </Link>
                 </SC.Journal>
                 )

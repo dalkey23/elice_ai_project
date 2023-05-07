@@ -10,7 +10,21 @@ export const Journal = styled.div`
     border : 1px solid black;
     margin : 1em;
     width : 35%;
-    height : 300px;
+    height : 400px;
+
+    & a {
+        text-decoration : none;
+        color : black;
+        & div {
+            padding : 1em;
+            text-align : center;
+            border-bottom : 1px solid black;
+            & h1 {
+                font-size : 2em;
+                margin : 0.5em;
+            }
+        }
+    }
 `
 
 export const Button = styled.div`
