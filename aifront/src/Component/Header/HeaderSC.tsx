@@ -1,13 +1,15 @@
 import styled from "styled-components";
 
-export const HeaderSC = styled.header`
+export const Header = styled.header`
     padding : 3em;
-    background-Color : #1C0C5B;
+    font-size : 20px;
+    background-Color : #FFFFFF;
     color : white;
+    border-radius : 8px;
 
     & a {
         padding : 1em;
         text-Decoration : none;
-        color : white;
+        color : black;
     }
 `

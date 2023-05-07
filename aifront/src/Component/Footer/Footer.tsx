@@ -1,12 +1,12 @@
 import React from "react";
 
-import { FooterSC } from "./FooterSC";
+import * as SC from "./FooterSC";
 
 const Footer : React.FC = () => {
     return(
-        <FooterSC>
-            This is footer
-        </FooterSC>
+        <SC.Footer>
+            이미지 출처 : Freepik, 작가 pch.vector
+        </SC.Footer>
     )
 }
 

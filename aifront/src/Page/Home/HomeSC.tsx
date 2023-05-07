@@ -1,30 +1,47 @@
 import styled from "styled-components";
 
-export const HomeSC = styled.div`
+export const Home = styled.div`
     border : 1px solid white;
 `
 
 // 소개페이지 styled.div
-export const IntroSC1 = styled.div`
-    padding : 8em;
-    background-Color : #1C0C5B;
-    color : white;
+// 이미지 안올라감..
+export const Intro1 = styled.div`
+    background-image : url('Img/Main.jpg');
+    background-size : 120%;
+    background-position : center;
+    padding : 20rem;
+    }
 `
 
-export const IntroSC2 = styled.div`
-    padding : 8em;
+export const Intro2 = styled.div`
+    padding : 15rem 0;
     background-Color : #3D2C8D;
     color : white;
+    text-align : center;
+
+    & h1 {
+        font-size : 6em;
+        margin : 1em;
+    }
 `
 
-export const IntroSC3 = styled.div`
-    padding : 8em;
-    background-Color : #916BBF;
+export const Intro3 = styled.div`
+    padding : 20rem 0;
+    background-image : url('Img/Community.jpg');
+    background-size : 85%;
+    background-position : center;
     color : white;
+    text-align : center;
+
+    & h1 {
+        font-size : 6em;
+    }
 `
 
-export const IntroSC4 = styled.div`
-    padding : 8em;
+export const Intro4 = styled.div`
+    padding : 20rem 0;
     background-Color : #C996CC;
     color : white;
+    text-align : center;
 `

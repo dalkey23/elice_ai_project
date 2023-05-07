@@ -1,47 +1,43 @@
 import styled from "styled-components";
 
-export const JournalPostMain = styled.div`
+export const PostCommunityMain = styled.div`
+    padding: 100px;
 
     & h1 {
         display : flex;
         justify-Content : center;
         margin : 1em;
         font-size : 2em;
-        color : #3D2C8D;
+        font-weight : bold;
+        color: #3d2c8d;
     }
+`
 
-    & p {
-        text-align : center;
+export const Title = styled.div`
+    width : 100%;
+    padding : 25px 100px;
+    display : flex;
+    // justify-Content : space-between;
+    
+    & select {
+        // text-align : center;
+        padding : 1em;
+        margin : 1em;
+        margin-right : 50px;
+        width : 10%;
     }
 
     & input {
         padding : 1em;
         margin : 1em;
-        width : 20%
+        width : 65%;
     }
 `
 
-export const TitleDate = styled.div`
-    display : flex;
-    justify-Content : center;
-`
-
-export const JournalPost = styled.div`
-    display : flex;
-    justify-Content : center;
-    padding : 1em;
-
-    & textarea {
-        width : 40%;
-        height : 20rem;
-        border : 1px solid #3D2C8D;
-        border-radius : 10px;
-        text-align : center;
-        font-size : 1.5em;
-        ::placeholder {
-            padding : 9rem;
-        }
-    }
+export const PostCommunity = styled.div`
+    // display : flex;
+    // justify-Content : center;
+    padding : 25px 100px;
 `
 
 export const ButtonDiv = styled.div`
