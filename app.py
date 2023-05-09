@@ -57,7 +57,7 @@ diary_consumer: DiaryConsumer = DiaryConsumer(diary_service, diary_emotion_servi
 diary_controller: DiaryController = DiaryController(diary_service, diary_consumer)
 
 # app route 설정
-app.register_blueprint(diary_controller.bp, url_prefix='/diaries')
+app.register_blueprint(diary_controller.bp, url_prefix='/api/analysis/diaries')
 
 
 @app.route('/health')
