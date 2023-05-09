@@ -1,10 +1,10 @@
 export type BoardModel = {
-    // success: boolean,
-    // totalPages : number,
-    // totalElements : number,
-    // page : number,
-    // numOfItems : number,
-    // items : { 
+    success: boolean,
+    totalPages : number,
+    totalElements : number,
+    page : number,
+    numOfItems : number,
+    items : { 
         id: number;
         category: string;
         title: string;
@@ -13,7 +13,7 @@ export type BoardModel = {
         writer: string;
         views: number;
         createdAt: string;
-    // }
+    }
 }
 
 export type PostBoard = {

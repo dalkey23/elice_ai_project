@@ -1,124 +1,10 @@
-import React, { useState, ReactNode } from "react";
+import React, { useState, ReactNode, useEffect } from "react";
 import axios from "axios";
 import * as SC from "./CommunityListSC";
 import { Pagination } from "../../Component/Base/Pagination";
 import { BoardModel } from "../../Types/Community.type";
 import { useNavigate, Link, useSearchParams } from "react-router-dom";
-//import { useCommunityList } from "../../Component/Hook/Community.hook";
-
-// test data
-const data = [
-    {
-      "id": 1,
-      "category": "맛집",
-      "title": "제목",
-      "comments": 5,
-      "content": "내용",
-      "writer": "가나다",
-      "views": 30,
-      "createdAt": "2023-04-11T23:11:12:037"
-    },
-    {
-      "id": 2,
-      "category": "레시피",
-      "title": "제목",
-      "comments": 5,
-      "content": "내용",
-      "writer": "가나다",
-      "views": 30,
-      "createdAt": "2023-04-11T23:11:12:037"
-    },
-    {
-      "id": 3,
-      "category": "레시피",
-      "title": "제목",
-      "comments": 5,
-      "content": "내용",
-      "writer": "가나다",
-      "views": 30,
-      "createdAt": "2023-04-11T23:11:12:037"
-    },
-    {
-      "id": 4,
-      "category": "레시피",
-      "title": "제목",
-      "comments": 5,
-      "content": "내용",
-      "writer": "가나다",
-      "views": 30,
-      "createdAt": "2023-04-11T23:11:12:037"
-    },
-    {
-      "id": 5,
-      "category": "레시피",
-      "title": "제목",
-      "comments": 5,
-      "content": "내용",
-      "writer": "가나다",
-      "views": 30,
-      "createdAt": "2023-04-11T23:11:12:037"
-    },
-    {
-      "id": 6,
-      "category": "레시피",
-      "title": "제목",
-      "comments": 5,
-      "content": "내용",
-      "writer": "가나다",
-      "views": 30,
-      "createdAt": "2023-04-11T23:11:12:037"
-    },
-    {
-      "id": 7,
-      "category": "레시피",
-      "title": "제목",
-      "comments": 5,
-      "content": "내용",
-      "writer": "가나다",
-      "views": 30,
-      "createdAt": "2023-04-11T23:11:12:037"
-    },
-    {
-      "id": 8,
-      "category": "레시피",
-      "title": "제목",
-      "comments": 5,
-      "content": "내용",
-      "writer": "가나다",
-      "views": 30,
-      "createdAt": "2023-04-11T23:11:12:037"
-    },
-    {
-      "id": 9,
-      "category": "레시피",
-      "title": "제목",
-      "comments": 5,
-      "content": "내용",
-      "writer": "가나다",
-      "views": 30,
-      "createdAt": "2023-04-11T23:11:12:037"
-    },
-    {
-      "id": 10,
-      "category": "레시피",
-      "title": "제목",
-      "comments": 5,
-      "content": "내용",
-      "writer": "가나다",
-      "views": 30,
-      "createdAt": "2023-04-11T23:11:12:037"
-    },
-    {
-      "id": 11,
-      "category": "레시피",
-      "title": "제목",
-      "comments": 5,
-      "content": "내용",
-      "writer": "가나다",
-      "views": 30,
-      "createdAt": "2023-04-11T23:11:12:037"
-    },
-  ];  
+import { useCommunityList } from "../../Component/Hook/Community.hook";
 
 const tableHeadData = [
   { id: 0, head: "글머리" },
@@ -134,7 +20,7 @@ interface TableProps {
         id: number;
         head: string;
     }[];
-    posts: BoardModel[];
+    posts: BoardModel["items"][];
 }
 
 const CommunityListTable = ({ children, tableHeadData, posts }: TableProps) => {
@@ -165,14 +51,18 @@ const elementsSize = 10;
 
 const CommunityList: React.FC = () => {
    const navigate = useNavigate();
-   const [posts, setPosts] = useState<BoardModel[]>(data);
-   const [page, setPage] = useState(1);
-
+   const [posts, setPosts] = useState<BoardModel["items"][]>();
    const [searchParams, setSearchParams] = useSearchParams();
 
    const currentPage = parseInt(searchParams.get('page') as string) || 1;
-
-   // const { communityList, totalPage } = useCommunityList(currentPage, elementsSize);
+   const { communityList, totalPage } = useCommunityList(currentPage, elementsSize);
+   for (const value of Object.values(communityList)) {
+    console.log(value)
+   }
+   
+//    useEffect(() => {
+//     setPosts(communityList)
+//    }, [])
 
    const handlePageUp = () => {
     setSearchParams({ pages: `${currentPage + 1}`})
@@ -182,15 +72,13 @@ const CommunityList: React.FC = () => {
     setSearchParams({ page: `${currentPage - 1}`})
    }
 
-   console.log(posts);
-
     return (
         <SC.CommunityListMain>
             <h1>커뮤니티</h1>
             <br/>
-            <CommunityListTable tableHeadData={tableHeadData} posts={posts!}>
+            <CommunityListTable tableHeadData={tableHeadData} posts = {posts!}>
                 {posts &&
-                    posts!.map((item, index) => {
+                    posts!.map((item) => {
                         return (
                             <tr key={item.id}>
                             <td>
