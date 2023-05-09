@@ -18,7 +18,7 @@ class DiaryConsumer:
         self.sqs: BaseClient = sqs
 
     def consume_created_message(self) -> str:
-        messages = self.sqs.receive_message(QueueUrl=self.create_diary_mq_url, MaxNumberOfMessages=1)
+        messages = self.sqs.receive_message(QueueUrl=self.create_diary_mq_url, MaxNumberOfMessages=100)
 
         if 'Messages' in messages:
             for message in messages['Messages']:
