@@ -2,7 +2,7 @@ import React, { useState, ReactNode, useEffect } from "react";
 import axios from "axios";
 import * as SC from "./CommunityListSC";
 import { Pagination } from "../../Component/Base/Pagination";
-import { BoardModel } from "../../Types/Community.type";
+import { Board } from "../../Types/Community.type";
 import { useNavigate, Link, useSearchParams } from "react-router-dom";
 import { useCommunityList } from "../../Component/Hook/Community.hook";
 
@@ -20,7 +20,7 @@ interface TableProps {
         id: number;
         head: string;
     }[];
-    posts: BoardModel["items"][];
+    posts: Board[];
 }
 
 const CommunityListTable = ({ children, tableHeadData, posts }: TableProps) => {
@@ -51,21 +51,13 @@ const elementsSize = 10;
 
 const CommunityList: React.FC = () => {
    const navigate = useNavigate();
-   const [posts, setPosts] = useState<BoardModel["items"][]>();
    const [searchParams, setSearchParams] = useSearchParams();
 
    const currentPage = parseInt(searchParams.get('page') as string) || 1;
    const { communityList, totalPage } = useCommunityList(currentPage, elementsSize);
-   for (const value of Object.values(communityList)) {
-    console.log(value)
-   }
-   
-//    useEffect(() => {
-//     setPosts(communityList)
-//    }, [])
 
    const handlePageUp = () => {
-    setSearchParams({ pages: `${currentPage + 1}`})
+    setSearchParams({ page: `${currentPage + 1}`})
    }
 
    const handlePageDown = () => {
@@ -76,29 +68,33 @@ const CommunityList: React.FC = () => {
         <SC.CommunityListMain>
             <h1>커뮤니티</h1>
             <br/>
-            <CommunityListTable tableHeadData={tableHeadData} posts = {posts!}>
-                {posts &&
-                    posts!.map((item) => {
+            <SC.ButtonDiv>
+                <button onClick={() => {
+                    navigate('/PostCommunity')
+                }}>글쓰기</button>
+            </SC.ButtonDiv>
+            <CommunityListTable tableHeadData={tableHeadData} posts = {communityList}>
+                {communityList &&
+                    communityList!.map((item) => {
                         return (
                             <tr key={item.id}>
                             <td>
                                 <SC.BulletPoint text={item.category} />
                             </td>
                             <td>
-                                <Link to = {`/CommunityDetail/${item.id}`}>{item.title} ({item.comments})</Link></td>
-                            <td>{item.createdAt}</td>
-                            <td>{item.writer}</td>
+                                <Link to = {`/CommunityDetail/${item.id}`}>{item.title} ({item.commentCount})</Link></td>
+                            <td>{item.createdAt.slice(0, 10)} {item.createdAt.slice(11, 19)}</td>
+                            <td>{item.authorName}</td>
                             <td>{item.views}</td>
                             </tr>
                             
                         );
                     })}
             </CommunityListTable>
-            <SC.ButtonDiv>
-                <button onClick={() => {
-                    navigate('/PostCommunity')
-                }}>글쓰기</button>
-            </SC.ButtonDiv>
+            <SC.Button>
+                {currentPage > 1 && <button onClick={handlePageDown}>이전 페이지</button>}
+                {currentPage !== totalPage && <button onClick={handlePageUp}>다음 페이지</button>}
+            </SC.Button>
         </SC.CommunityListMain>
     );
 };

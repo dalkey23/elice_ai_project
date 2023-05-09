@@ -21,10 +21,10 @@ export const useCommunityList = (page: number, elements: number) => {
 };
 
 export const usePostCommunity = () => {
-  const { mutate } = useMutation(postCommunity)
+  const { mutate, isError } = useMutation(postCommunity)
 
   return {
-    postCommunity: mutate
+    postCommunity: mutate, isError
   }
 }
 
@@ -34,8 +34,7 @@ export const useCommunityDetail = (id : number) => {
   })
 
   return {
-    item : data?.data.items,
-    // item : data?.data,
+    item : data?.data.item,
     ...rest
   }
 }
