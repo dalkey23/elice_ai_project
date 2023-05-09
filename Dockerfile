@@ -5,7 +5,7 @@ WORKDIR /app
 COPY requirements.txt .
 
 # 패키지 의존성 설치
-RUN pip install --cache-dir=/tmp/pip-cache -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt && rm -rf /tmp/pip-cache
 
 COPY . .
 
