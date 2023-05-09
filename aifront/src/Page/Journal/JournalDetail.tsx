@@ -1,6 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom"
 import { useJournalDetail } from "../../Component/Hook/Journal.hook";
+import * as SC from "./JournalDetailSC"
 
 const JournalDetail : React.FC = () => {
     const { id } = useParams();
@@ -8,10 +9,10 @@ const JournalDetail : React.FC = () => {
     console.log(item.id)
     
     return (
-        <div>
+        <SC.JournalDetail>
             {item.id}
             {item.content}
-        </div>
+        </SC.JournalDetail>
     )
 }
 

@@ -8,6 +8,7 @@ export const JournalList = styled.div`
 
 export const Journal = styled.div`
     border : 1px solid black;
+    border-radius : 8px;
     margin : 1em;
     width : 35%;
     height : 400px;
