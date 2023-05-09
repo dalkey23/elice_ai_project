@@ -1,4 +1,5 @@
 export type JournalDetail = {
+  diary : {
     id : number;
     userid : number;
     recommendedFood : null;
@@ -8,8 +9,7 @@ export type JournalDetail = {
     weather : null;
     publishedDate : string;
     createdAt : string;
-    // diary 타입 issue 등록 예정
-    diary : any;
+  }
   }
 
   export type JournalDetailResponse = {

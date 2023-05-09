@@ -21,6 +21,9 @@ export const Journal = styled.div`
             text-align : center;
             border-bottom : 1px solid black;
             & h1 {
+                margin : 1em;
+            }
+            & h2 {
                 font-size : 2em;
                 margin : 0.5em;
             }

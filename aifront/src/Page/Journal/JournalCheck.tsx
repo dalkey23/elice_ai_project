@@ -28,9 +28,10 @@ const JournalCheck : React.FC = () => {
                 <SC.Journal>
                     <Link to={`/JournalDetail/${j.id}`} key={j.id}>
                         <div>
+                            <h1>{j.id}번째 일기</h1>
                             <p>{j.publishedDate}</p>
                             <p>{j.diaryEmotion}</p>
-                            <h1>{j.title}</h1>
+                            <h2>{j.title}</h2>
                         </div>
                             <h1>{j.recommendedFood}</h1>
                     </Link>
