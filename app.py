@@ -1,22 +1,20 @@
 from typing import Optional
 
-from flask import Flask, request
+import boto3
+from botocore.client import BaseClient
+from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from dotenv import load_dotenv
 import os
 import logging
 
-from sqlalchemy import BigInteger
-
-from diary.application.dto.response.read_diary_response import ReadDiaryResponse
 from diary.application.service.diary_service import DiaryService
 from diary.domain.diary_dao import DiaryDao
-from diary_emotion.application.dto.request.analyze_request import AnalyzeRequest
+from diary.presentation.consumer.diary_consumer import DiaryConsumer
+from diary.presentation.controller.diary_controller import DiaryController
 from diary_emotion.application.model.emotion_analyzer import EmotionAnalyzer
 from diary_emotion.application.service.diary_emotion_service import DiaryEmotionsService
 from diary_emotion.domain.diary_emotion_dao import DiaryEmotionDao
-
-from dataclasses import asdict
 
 app = Flask(__name__)
 
@@ -29,40 +27,44 @@ MYSQL_HOST = os.getenv('MYSQL_HOST')
 MYSQL_DATABASE = os.getenv('MYSQL_DATABASE')
 
 app.config['SQLALCHEMY_DATABASE_URI'] = f"mysql+pymysql://{MYSQL_USER}:{MYSQL_PASSWORD}@{MYSQL_HOST}/{MYSQL_DATABASE}"
-app.config['SQLALCHEMY_ECHO'] = True  # SQLAlchemy 로그를 출력합니다.
+app.config['SQLALCHEMY_ECHO'] = True
 app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
+
+# AWS SQS 설정
+aws_access_key_id = os.getenv('AWS_SQS_ACCESS_KEY_ID')
+aws_secret_access_key = os.getenv('AWS_SQS_SECRET_KEY_ID')
+region_name = os.getenv('AWS_REGION')
+
+sqs: BaseClient = boto3.client('sqs', aws_access_key_id=aws_access_key_id, aws_secret_access_key=aws_secret_access_key,
+                               region_name=region_name)
 
 # 로깅 설정
 logging.basicConfig()
 logging.getLogger('sqlalchemy.engine').setLevel(logging.INFO)
 
+# App 설정
 db: SQLAlchemy = SQLAlchemy(app)
 
+# diary_emotion
 emotion_analyzer = EmotionAnalyzer()
-
 diary_emotion_dao = DiaryEmotionDao(db)
 diary_emotion_service = DiaryEmotionsService(diary_emotion_dao, emotion_analyzer)
 
-diary_dao = DiaryDao(db)
-diary_service = DiaryService(diary_dao)
+# diary
+diary_dao: DiaryDao = DiaryDao(db)
+diary_service: DiaryService = DiaryService(diary_dao)
+diary_consumer: DiaryConsumer = DiaryConsumer(diary_service, diary_emotion_service, sqs)
+diary_controller: DiaryController = DiaryController(diary_service, diary_consumer)
+
+# app route 설정
+app.register_blueprint(diary_controller.bp, url_prefix='/diaries')
 
 
-@app.route('/')
+@app.route('/health')
 def main() -> str:
-    return 'hello, world!'
-
-@app.route('/predict', methods=['POST'])
-def predict():
-    request_json = request.get_json()
-    analyze_request = AnalyzeRequest.from_request(request_json)
-    result = diary_emotion_service.create_analysis(analyze_request)
-    return result
-
-@app.route('/diaries/<int:diary_id>', methods=['GET'])
-def get_diary(diary_id: int):
-    found_diary: Optional[ReadDiaryResponse] = diary_service.find_by_id(diary_id)
-    return found_diary.to_json() if found_diary is not None else ''
+    return 'Healthy'
 
 
+# Run
 if __name__ == '__main__':
     app.run(port=8000)

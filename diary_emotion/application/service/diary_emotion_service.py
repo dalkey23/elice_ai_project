@@ -18,9 +18,17 @@ class DiaryEmotionsService:
     def create_analysis(self, analyze_request: AnalyzeRequest):
         summarized_result: dict[str, float] = self.emotion_analyzer.get_summarized_result(analyze_request.paragraph)
 
-        for emotion, score in summarized_result.items():
-            diary_emotion: DiaryEmotion = DiaryEmotion(diary_id=analyze_request.diary_id, emotion=emotion,
-                                                       emotion_score=score)
-            self.diary_emotion_dao.create(diary_emotion)
+        diary_emotion = self._extract_entity_from_analysis_result(analyze_request.diary_id, summarized_result)
+
+        self.diary_emotion_dao.create(diary_emotion)
 
         return summarized_result
+
+    # 감정 분석 결과로부터 DiaryEmotion 엔티티를 생성하는 메소드
+    def _extract_entity_from_analysis_result(self, diary_id: int, summarized_result: dict[str, float]) -> DiaryEmotion:
+        return DiaryEmotion(diary_id=diary_id, worry_score=summarized_result['걱정'],
+                            angry_score=summarized_result['분노'],
+                            happy_score=summarized_result['행복'],
+                            excited_score=summarized_result['설렘'],
+                            sad_score=summarized_result['슬픔']
+                            )

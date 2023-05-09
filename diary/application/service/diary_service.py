@@ -1,11 +1,5 @@
 from typing import Optional
 
-from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import BigInteger
-from sqlalchemy.exc import SQLAlchemyError
-
-import traceback
-
 from diary.application.dto.response.read_diary_response import ReadDiaryResponse
 from diary.domain.diary import Diary
 from diary.domain.diary_dao import DiaryDao

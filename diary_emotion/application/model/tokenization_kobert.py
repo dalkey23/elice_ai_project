@@ -14,14 +14,12 @@
 # limitations under the License.
 """ Tokenization classes for KoBert model."""
 
-
 import logging
 import os
 import unicodedata
 from shutil import copyfile
 
 from transformers import PreTrainedTokenizer
-
 
 logger = logging.getLogger(__name__)
 
@@ -100,8 +98,9 @@ class KoBertTokenizer(PreTrainedTokenizer):
         try:
             import sentencepiece as spm
         except ImportError:
-            logger.warning("You need to install SentencePiece to use KoBertTokenizer: https://github.com/google/sentencepiece"
-                           "pip install sentencepiece")
+            logger.warning(
+                "You need to install SentencePiece to use KoBertTokenizer: https://github.com/google/sentencepiece"
+                "pip install sentencepiece")
 
         self.do_lower_case = do_lower_case
         self.remove_space = remove_space
@@ -129,8 +128,9 @@ class KoBertTokenizer(PreTrainedTokenizer):
         try:
             import sentencepiece as spm
         except ImportError:
-            logger.warning("You need to install SentencePiece to use KoBertTokenizer: https://github.com/google/sentencepiece"
-                           "pip install sentencepiece")
+            logger.warning(
+                "You need to install SentencePiece to use KoBertTokenizer: https://github.com/google/sentencepiece"
+                "pip install sentencepiece")
         self.sp_model = spm.SentencePieceProcessor()
         self.sp_model.Load(self.vocab_file)
 
