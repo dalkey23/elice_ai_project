@@ -55,12 +55,10 @@ const CommunityListTable = ({ children, tableHeadData, posts }: TableProps) => {
     );
 };
 
-const elementsSize = 10;
-
 const CommunityList: React.FC = () => {
    const navigate = useNavigate();
    const [searchParams, setSearchParams] = useSearchParams();
-
+   const elementsSize = 10;
    const currentPage = parseInt(searchParams.get('page') as string) || 1;
    const { communityList, totalPage } = useCommunityList(currentPage, elementsSize);
 
