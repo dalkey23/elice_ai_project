@@ -1,29 +1,30 @@
 import { useMutation, useQuery } from 'react-query'
-import { postCommunity, getCommunityDetail } from '../Api/Community'
+import { getCommunityList, postCommunity, getCommunityDetail } from '../Api/Community'
+import { BoardModel } from '../../Types/Community.type'
 
-{/*export const useCommunityList = (page: number, limit: number) => {
-  const {data, ...rest} = useQuery(['getCommunityList', page, limit], () => {
-    return getCommunityList(page, limit)
-  }, {
+export const useCommunityList = (page: number, elements: number) => {
+  const {data, ...rest} = useQuery(['getCommunityList', page, elements], () => {
+    return getCommunityList(page, elements)
+  },{
     staleTime: Infinity,
     cacheTime: Infinity,
     refetchOnMount: false,
     refetchOnReconnect: false,
     refetchOnWindowFocus: false
-  })
-
+  }
+  );
   return {
     communityList: data?.data.items || [],
-    totalPage: data?.data.totalPages,
-    ...rest
+    totalPage: data?.data.totalPages || 0,
+    ...rest,
   }
-}*/}
+};
 
 export const usePostCommunity = () => {
-  const { mutate } = useMutation(postCommunity)
+  const { mutate, isError } = useMutation(postCommunity)
 
   return {
-    postCommunity: mutate
+    postCommunity: mutate, isError
   }
 }
 
@@ -33,8 +34,7 @@ export const useCommunityDetail = (id : number) => {
   })
 
   return {
-    // item : data?.data.items,
-    item : data?.data,
+    item : data?.data.item,
     ...rest
   }
 }

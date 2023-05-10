@@ -37,11 +37,7 @@ export const TableBody = styled.tbody`
     }
 `;
 
-interface BulletPointProps {
-    text: string;
-}
-
-const StyledBulletPoint = styled.div`
+export const StyledBulletPoint = styled.div`
     background-color: #c996cc;
     border-radius: 20px;
     width: 50px;
@@ -53,10 +49,6 @@ const StyledBulletPoint = styled.div`
     color: #ffffff;
     margin: auto;
 `;
-
-export const BulletPoint = ({ text }: BulletPointProps) => {
-    return <StyledBulletPoint>{text}</StyledBulletPoint>;
-};
 
 export const CommunityListMain = styled.div`
     padding: 100px;
@@ -89,3 +81,21 @@ export const ButtonDiv = styled.div`
         }
     }
 `;
+
+export const Button = styled.div`
+    display : flex;
+    justify-content : center;
+    padding : 2em;
+
+    & button {
+        background-color : #C996CC;
+        border : none;
+        padding : 1.5em;
+        margin : 1em;
+        border-radius : 8px;
+        : hover {
+            color : white;
+            background-color : #916BBF;
+        }
+    }
+`
