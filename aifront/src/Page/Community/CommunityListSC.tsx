@@ -37,11 +37,7 @@ export const TableBody = styled.tbody`
     }
 `;
 
-interface BulletPointProps {
-    text: string;
-}
-
-const StyledBulletPoint = styled.div`
+export const StyledBulletPoint = styled.div`
     background-color: #c996cc;
     border-radius: 20px;
     width: 50px;
@@ -53,10 +49,6 @@ const StyledBulletPoint = styled.div`
     color: #ffffff;
     margin: auto;
 `;
-
-export const BulletPoint = ({ text }: BulletPointProps) => {
-    return <StyledBulletPoint>{text}</StyledBulletPoint>;
-};
 
 export const CommunityListMain = styled.div`
     padding: 100px;

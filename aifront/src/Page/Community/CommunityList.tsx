@@ -23,6 +23,14 @@ interface TableProps {
     posts: Board[];
 }
 
+interface BulletPointProps {
+    text: string;
+}
+
+const BulletPoint = ({ text }: BulletPointProps) => {
+    return <SC.StyledBulletPoint>{text}</SC.StyledBulletPoint>;
+};
+
 const CommunityListTable = ({ children, tableHeadData, posts }: TableProps) => {
     return (
         <SC.ListTable>
@@ -79,7 +87,7 @@ const CommunityList: React.FC = () => {
                         return (
                             <tr key={item.id}>
                             <td>
-                                <SC.BulletPoint text={item.category} />
+                                <BulletPoint text={item.category} />
                             </td>
                             <td>
                                 <Link to = {`/CommunityDetail/${item.id}`}>{item.title} ({item.commentCount})</Link></td>

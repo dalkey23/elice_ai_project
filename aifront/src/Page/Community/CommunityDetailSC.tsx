@@ -20,9 +20,9 @@ export const CommunityDetailMain = styled.div`
         font-weight : bold;
         color: #3d2c8d;
     }
-`
+`;
 
-const StyledBulletPoint = styled.div`
+export const StyledBulletPoint = styled.div`
     background-color: #c996cc;
     border-radius: 20px;
     width: 50px;
@@ -32,17 +32,87 @@ const StyledBulletPoint = styled.div`
     line-height: 18px;
     text-align: center;
     color: #ffffff;
-    margin: auto;
 `;
 
-interface BulletPointProps {
-    text: string;
-}
+export const TitleItem = styled.div`
+    margin: 0 auto;
+`
 
-export const BulletPoint = ({ text }: BulletPointProps) => {
-    return <StyledBulletPoint>{text}</StyledBulletPoint>;
-};
+export const CommunityDetailTitle1 = styled.div`
+    width: 80%;
+    display: flex;
+    padding: 30px;
+    margin: 0 auto;
+    & div {
+        padding: 10px 10px;
+        font-weight: bold;
+        font-size: 14px;
+        align-items: center;
+    }
+`;
 
-export const CommunityDetailTitle = styled.div``
+export const CommunityDetailTitle2 = styled.div`
+    width: 80%;
+    display: flex;
+    padding: 30px;
+    margin: 0 auto;
+    justify-content: right;
+    & div {
+        padding: 10px 10px;
+        font-weight: bold;
+        font-size: 14px;
+    }
+`;
 
-export const CommunityDetailContent = styled.div``
+export const CommunityDetailContent = styled.div`
+    width: 80%;
+    display: flex;
+    padding: 20px;
+    margin: 0 auto;
+    justfy-content: center;
+    background: rgba(201, 150, 204, 0.5);
+`;
+
+export const CommunityCommentTitle = styled.div`
+    width: 80%;
+    display: flex;
+    padding: 20px 20px 20px 0px;
+    margin: 0 auto;
+    & h3 {
+        justify-content: left;
+    };
+`;
+
+export const CommunityCommentMain = styled.div`
+    width: 80%;
+    display: flex;
+    padding: 0px 20px;
+    margin: 0 auto;
+    justfy-content: center;
+    background: rgba(201, 150, 204, 0.5);
+    vertical-align: middle;
+    & h4 {
+        width: 15%;
+        padding: 10px;
+        text-align: center;
+        display: inline;
+        vertical-align: middle;
+        border: 1px solid green;
+    };
+    & p {
+        width: 75%;
+        padding: 10px;
+        display: inline;
+        vertical-align: middle;
+        border: 1px solid green;
+    };
+    & button {
+        width: 5%;
+        padding: 10px;
+        margin: 5px;
+        text-align: center;
+        display: inline;
+        vertical-align: middle;
+        border: 1px solid green;
+    };
+`;

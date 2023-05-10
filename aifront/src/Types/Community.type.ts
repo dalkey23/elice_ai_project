@@ -5,7 +5,8 @@ export type Board = {
     views: number;
     title: string;
     content: string;
-    commentCount: number;
+    commentCount?: number;
+    commentList?: BoardComment[];
     createdAt: string;
 }
 
@@ -16,6 +17,11 @@ export type BoardModel = {
     page : number;
     numOfItems : number;
     items : Board[];
+}
+
+export type BoardComment = {
+    id: string;
+    content: string;
 }
 
 export type PostBoard = {
