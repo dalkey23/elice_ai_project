@@ -60,7 +60,6 @@ const elementsSize = 10;
 const CommunityList: React.FC = () => {
    const navigate = useNavigate();
    const [searchParams, setSearchParams] = useSearchParams();
-
    const currentPage = parseInt(searchParams.get('page') as string) || 1;
    const { communityList, totalPage } = useCommunityList(currentPage, elementsSize);
 
