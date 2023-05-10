@@ -1,5 +1,4 @@
 export type JournalDetail = {
-  diary : {
     id : number;
     userid : number;
     recommendedFood : null;
@@ -10,9 +9,8 @@ export type JournalDetail = {
     publishedDate : string;
     createdAt : string;
   }
-  }
 
   export type JournalDetailResponse = {
     success : boolean;
-    item : JournalDetail;
+    item : JournalDetail[];
   };
