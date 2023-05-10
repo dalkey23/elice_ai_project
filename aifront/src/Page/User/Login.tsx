@@ -2,12 +2,16 @@ import React, { useState } from "react";
 import * as SC from "./LoginSC";
 import { useLoginUser } from "../../Component/Hook/User.hook";
 import { useNavigate } from "react-router-dom";
+import { useRecoilState } from "recoil";
+import { LoginState } from "../../Store/Store";
 
 const Login = () => {
     const navigate = useNavigate();
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const { loginUser, isError: isJoinUserError } = useLoginUser();
+
+    const [isLoggedIn, setIsLoggedIn] = useRecoilState(LoginState);
 
     const checkedEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
         setEmail(e.target.value);
@@ -24,9 +28,13 @@ const Login = () => {
             { email, password },
             {
                 onSuccess(res) {
-                    console.log(res.data.item.jwtToken);
+                    localStorage.setItem("token",res.data.item.jwtToken);
+                    if (localStorage.getItem("token")) setIsLoggedIn(true);
+                    
+                    console.log(localStorage.getItem("recoil-persist"))
                     alert("로그인 성공");
-                    navigate("/");
+                    window.location.href='/';
+                    // navigate("/")
                 },
                 onError(err) {
                     console.log(err);
