@@ -31,6 +31,19 @@ export type PostBoard = {
 }
 
 export type BoardDetail = {
-    item: Board;
+    item?: Board;
+    success: boolean;
+}
+
+export type EditBoard = {
+    success: boolean;
+}
+
+export type DeleteBoard = {
+    item: {
+        id: number;
+        deletedAt: string;
+        isDeleted: boolean;
+    };
     success: boolean;
 }

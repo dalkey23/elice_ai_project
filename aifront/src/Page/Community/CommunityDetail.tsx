@@ -1,6 +1,6 @@
 import * as SC from "./CommunityDetailSC";
-import { useCommunityDetail } from "../../Component/Hook/Community.hook";
-import { useParams } from "react-router-dom";
+import { useCommunityDetail, useDeleteCommunity } from "../../Component/Hook/Community.hook";
+import { useNavigate, useParams } from "react-router-dom";
 
 interface BulletPointProps {
     text: string;
@@ -13,6 +13,23 @@ const BulletPoint = ({ text }: BulletPointProps) => {
 const CommunityDetail: React.FC = () => {
     const { id } = useParams();
     const { item } = useCommunityDetail(Number(id));
+    const { deleteCommunity, isError } = useDeleteCommunity();
+    const navigate = useNavigate();
+
+    const deleteHandler = async (e: React.MouseEvent) => {
+        e.preventDefault();
+
+        await deleteCommunity(Number(id), {
+            onSuccess(res) {
+                alert("글 삭제가 완료되었습니다.");
+                navigate('/CommunityList');
+            },
+            onError(err) {
+                alert("글 삭제가 완료되지 않았습니다.");
+            }
+        })
+
+    }
 
     if (!item) {
         return (
@@ -33,6 +50,11 @@ const CommunityDetail: React.FC = () => {
                 <div>{item.createdAt.slice(0, 10)} {item.createdAt.slice(11, 19)}</div>
                 <div>조회수 {item.views}</div>
             </SC.CommunityDetailTitle2>
+            <br/>
+            <SC.ButtonDiv>
+                <button onClick={ ()=> {navigate(`/EditCommunity/${item.id}`)}}>글 수정</button>
+                <button onClick={deleteHandler}>글 삭제</button>
+            </SC.ButtonDiv>
             <br/>
             <SC.CommunityDetailContent>
                 {item.content}
@@ -56,6 +78,11 @@ const CommunityDetail: React.FC = () => {
                 )
             } */}
 
+            <SC.CommunityCommentMain>
+                <h4>댓글작성자명</h4>
+                <p>댓글내용</p>
+                <button>작성</button>
+            </SC.CommunityCommentMain>
             <SC.CommunityCommentMain>
                 <h4>(댓글작성자명)</h4>
                 <p>(댓글내용)</p>

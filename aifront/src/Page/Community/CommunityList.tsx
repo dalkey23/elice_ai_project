@@ -55,10 +55,10 @@ const CommunityListTable = ({ children, tableHeadData, posts }: TableProps) => {
     );
 };
 
-const elementsSize = 10;
 
 const CommunityList: React.FC = () => {
    const navigate = useNavigate();
+   const elementsSize = 10;
    const [searchParams, setSearchParams] = useSearchParams();
    const currentPage = parseInt(searchParams.get('page') as string) || 1;
    const { communityList, totalPage } = useCommunityList(currentPage, elementsSize);
@@ -94,7 +94,6 @@ const CommunityList: React.FC = () => {
                             <td>{item.authorName}</td>
                             <td>{item.views}</td>
                             </tr>
-                            
                         );
                     })}
             </CommunityListTable>
