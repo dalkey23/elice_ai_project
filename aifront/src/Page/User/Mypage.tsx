@@ -10,7 +10,7 @@ const Mypage = ()=>{
     const navigate = useNavigate();
     const [isLoggedIn, setIsLoggedIn] = useRecoilState(LoginState);
     
-    console.log(isLoggedIn)
+
 
     if(!isLoggedIn){
         navigate("/Login")
@@ -20,7 +20,7 @@ const Mypage = ()=>{
     return (
         <SC.MypageContainer>
       
-            <button>
+            <button onClick={()=>{navigate("/Myinfo")}}>
                 나의 정보
             </button>
             <button>

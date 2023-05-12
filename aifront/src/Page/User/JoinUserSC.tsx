@@ -4,6 +4,14 @@ export const JoinContainer = styled.div`
     margin: 50px;
 `;
 
+export const InfoTitle = styled.div`
+    text-align : center;
+    color: #3d2c8d;
+    font-weight : bold;
+    font-size : 30px;
+
+`
+
 export const JoinDiv1 = styled.div`
     width: 900px;
     background: rgba(201, 150, 204, 0.5);
