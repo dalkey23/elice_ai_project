@@ -41,7 +41,7 @@ export const TitleItem = styled.div`
 export const CommunityDetailTitle1 = styled.div`
     width: 80%;
     display: flex;
-    padding: 30px;
+    padding: 20px;
     margin: 0 auto;
     & div {
         padding: 10px 10px;
@@ -54,9 +54,10 @@ export const CommunityDetailTitle1 = styled.div`
 export const CommunityDetailTitle2 = styled.div`
     width: 80%;
     display: flex;
-    padding: 30px;
+    padding: 0 0 0 30px;
     margin: 0 auto;
-    justify-content: right;
+    justify-content: flex-end;
+
     & div {
         padding: 10px 10px;
         font-weight: bold;
@@ -71,6 +72,26 @@ export const CommunityDetailContent = styled.div`
     margin: 0 auto;
     justfy-content: center;
     background: rgba(201, 150, 204, 0.5);
+`;
+
+export const ButtonDiv = styled.div`
+    width: 80%;
+    display: flex;
+    padding: 0 0 0 30px;
+    margin: 0 auto;
+    justify-content: flex-end;
+
+    & button {
+        padding: 10px;
+        width: 7%;
+        color: white;
+        background-color: #916bbf;
+        border: 1px solid white;
+        border-radius: 10px;
+        :hover  {
+            background-color: #c996cc;
+        }
+    }
 `;
 
 export const CommunityCommentTitle = styled.div`
@@ -90,18 +111,21 @@ export const CommunityCommentMain = styled.div`
     margin: 0 auto;
     justfy-content: center;
     background: rgba(201, 150, 204, 0.5);
-    vertical-align: middle;
+    //vertical-align: middle;
     & h4 {
         width: 15%;
         padding: 10px;
+        margin: 5px;
         text-align: center;
         display: inline;
         vertical-align: middle;
+        font-weight : bold;
         border: 1px solid green;
     };
     & p {
         width: 75%;
         padding: 10px;
+        margin: 5px;
         display: inline;
         vertical-align: middle;
         border: 1px solid green;

@@ -1,5 +1,5 @@
 import { useMutation, useQuery } from 'react-query'
-import { getCommunityList, postCommunity, getCommunityDetail } from '../Api/Community'
+import { getCommunityList, postCommunity, getCommunityDetail, deleteCommunity, editCommunity } from '../Api/Community'
 import { BoardModel } from '../../Types/Community.type'
 
 export const useCommunityList = (page: number, elements: number) => {
@@ -21,20 +21,36 @@ export const useCommunityList = (page: number, elements: number) => {
 };
 
 export const usePostCommunity = () => {
-  const { mutate, isError } = useMutation(postCommunity)
+  const { mutateAsync, isError } = useMutation(postCommunity)
 
   return {
-    postCommunity: mutate, isError
+    postCommunity: mutateAsync, isError
   }
 }
 
 export const useCommunityDetail = (id : number) => {
   const {data, ...rest} = useQuery(['getCommunityDetail', id], () => {
     return getCommunityDetail(id)
-  })
+  });
 
   return {
     item : data?.data.item,
     ...rest
+  }
+}
+
+export const useEditCommunity = () => {
+  // const { mutateAsync, isError } = useMutation(editCommunity);
+
+  // return {
+  //   editCommunity: mutateAsync, isError
+  // }
+}
+
+export const useDeleteCommunity = () => {
+  const { mutateAsync, isError } = useMutation(deleteCommunity);
+
+  return {
+    deleteCommunity: mutateAsync, isError
   }
 }
