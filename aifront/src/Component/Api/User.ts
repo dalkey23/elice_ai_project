@@ -1,5 +1,4 @@
-import axios from "axios";
-import { config } from "../Base/constant";
+import axios, { AxiosRequestConfig } from "axios";
 import {
     LoginInfo,
     LoginUser,
@@ -7,7 +6,10 @@ import {
     UserdataRequest,
 } from "../../Types/Userdata.type";
 
+
 const baseURL = process.env.URL;
+
+
 
 export const createUserdata = async (body: UserdataRequest) => {
     const res = await axios.post<UserdataRequest>(
@@ -27,9 +29,16 @@ export const loginUser = async (body: LoginUser) => {
 
 export const getLoginedUser = async () => {
 
+    const token = localStorage.getItem("token");
+    const config: AxiosRequestConfig = {
+    headers: { Authorization: `Bearer ${token}` },
+};
+
     const res = await axios.post<UserDetail>(
-        `http://localhost:3500/api/users/profile`,{}, config
+        `http://localhost:3500/api/users/profile`,
+        {},
+        config
     );
-    console.log(`api res : ${res}`);
+
     return res;
 };
