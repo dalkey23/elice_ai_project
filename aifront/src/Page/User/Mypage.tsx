@@ -1,6 +1,4 @@
 import * as SC from './MypageSC'
-import { useRecoilState } from "recoil";
-import { LoginState } from "../../Store/Store";
 import { useNavigate } from "react-router-dom";
 
 
@@ -8,14 +6,7 @@ import { useNavigate } from "react-router-dom";
 const Mypage = ()=>{
     
     const navigate = useNavigate();
-    const [isLoggedIn, setIsLoggedIn] = useRecoilState(LoginState);
-    
-
-
-    if(!isLoggedIn){
-        navigate("/Login")
-    }
-
+   
 
     return (
         <SC.MypageContainer>

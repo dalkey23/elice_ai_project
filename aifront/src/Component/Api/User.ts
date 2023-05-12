@@ -1,4 +1,5 @@
-import axios, { AxiosRequestConfig } from "axios";
+import axios from "axios";
+import { config } from '../Base/constant'
 import {
     LoginInfo,
     LoginUser,
@@ -24,14 +25,10 @@ export const loginUser = async (body: LoginUser) => {
     return res;
 };
 
-export const getUserdata = async (id: number) => {
-    const token = localStorage.getItem("token");
-    const config:AxiosRequestConfig = {
-        headers:{Authorization: `Bearer ${token}`}
-    }
-    console.log(token)
+export const getLoginedUser = async () => {
+
     const res = await axios.post<UserDetail>(
-        `http://localhost:3500/api/users/${id}/profile`,{}, config
+        `http://localhost:3500/api/users/profile`,{}, config
     );
     console.log(`api res : ${res}`);
     return res;

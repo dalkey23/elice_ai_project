@@ -1,3 +1,4 @@
+
 export type UserdataRequest = {
     email : string;
     password : string;
@@ -15,10 +16,6 @@ export type UserdataRequest = {
     detailAddress : string;
 }
 
-export type UserdataResponse = {
-
-}
-
 export type UserDetail = {
     item : {
         id : number;
@@ -48,31 +45,14 @@ export type UserDetail = {
     success:boolean;
 }
 
-export type UserDetail = {
+export type LoginInfo = {
     item : {
-        id : number;
-        email : string;
-        nameInfo : {
-            firstName : string;
-            lastName : string;
-        };
-        nickname : string;
-        phoneNumber : string;
-        gender : string;
-        birthInfo : {
-            year : number;
-            month : number;
-            date : number;
-        };
-        profilePhotoUrl?:string;
-        role:string;
-        status:string;
-        addressInfo:{
-            zipCode: number;
-            mainAddress : string;
-            detailAddress : string;
-        };
-        createdAt : string;
+        jwtToken : string;
     };
-    success:boolean;
+    success : boolean;
+}
+
+export type LoginUser = {
+    email : string;
+    password : string;
 }

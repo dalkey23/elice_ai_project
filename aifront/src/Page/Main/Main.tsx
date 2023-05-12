@@ -14,6 +14,9 @@ import Footer from "../../Component/Footer/Footer";
 import PostCommunity from "../Community/PostCommunity";
 import CommunityDetail from "../Community/CommunityDetail";
 import EditCommunity from "../Community/EditCommunity";
+import Myinfo from "../User/Myinfo";
+import Mypage from "../User/Mypage";
+import Login from "../User/Login";
 
 const Main : React.FC = () => {
     
@@ -32,6 +35,9 @@ const Main : React.FC = () => {
                     <Route path = '/PostCommunity' element = {<PostCommunity/>} />
                     <Route path = '/CommunityDetail/:id' element = {<CommunityDetail/>} />
                     <Route path = '/EditCommunity/:id' element = {<EditCommunity/>} />
+                    <Route path = '/Mypage' element = {<Mypage/>} />
+                    <Route path = '/Myinfo' element = {<Myinfo/>} />
+                    <Route path = '/Login' element = {<Login/>} />
                 </Routes>
             <Footer />
         </>
