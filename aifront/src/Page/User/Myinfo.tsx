@@ -1,9 +1,8 @@
-import { useGetUserdata } from "../../Component/Hook/User.hook";
+import { useGetLoginedUser } from "../../Component/Hook/User.hook";
 import * as SC from "./JoinUserSC";
 
 const Myinfo = () =>{
-    const id = 12;
-    const { data } = useGetUserdata(id)
+    const { data } = useGetLoginedUser();
     console.log(data)
     return (
         <SC.JoinContainer>
