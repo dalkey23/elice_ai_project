@@ -1,91 +1,22 @@
-import React, { useState } from "react";
-import * as SC from "./LoginSC";
-import { useLoginUser } from "../../Component/Hook/User.hook";
-import { useNavigate } from "react-router-dom";
-import { useRecoilState } from "recoil";
-import { LoginState } from "../../Store/Store";
+import * as SC from './UserSC'
+const Login = ()=>{
 
-const Login = () => {
-    const navigate = useNavigate();
-    const [email, setEmail] = useState<string>("");
-    const [password, setPassword] = useState<string>("");
-    const { loginUser, isError: isJoinUserError } = useLoginUser();
-
-    const [isLoggedIn, setIsLoggedIn] = useRecoilState(LoginState);
-
-    const checkedEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setEmail(e.target.value);
-    };
-
-    const checkedPassword = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setPassword(e.target.value);
-    };
-
-    const submitHandler = async (e: React.MouseEvent) => {
-        e.preventDefault();
-
-        await loginUser(
-            { email, password },
-            {
-                onSuccess(res) {
-                    localStorage.setItem("token",res.data.item.jwtToken);
-                    if (localStorage.getItem("token")) setIsLoggedIn(true);
-                    
-                    console.log(localStorage.getItem("recoil-persist"))
-                    alert("로그인 성공");
-                    window.location.href='/';
-                    // navigate("/")
-                },
-                onError(err) {
-                    console.log(err);
-                    alert("사용자 이메일 또는 패스워드를 다시 확인해주세요");
-                },
-            }
-        );
-    };
-
-    return (
+    return(
         <>
-            <SC.LoginContainer>
-                <SC.InfoDiv>
-                    <SC.LoginItem>
-                        <input
-                            type="text"
-                            placeholder="EMAIL"
-                            name="email"
-                            onChange={checkedEmail}
-                        />
-                    </SC.LoginItem>
-                    <SC.LoginItem>
-                        <input
-                            type="password"
-                            placeholder="PASSWORD"
-                            onChange={checkedPassword}
-                        />
-                    </SC.LoginItem>
-                </SC.InfoDiv>
-                <SC.ButtonDiv>
-                    <SC.ConfirmButton onClick={submitHandler}>
-                        로그인
-                    </SC.ConfirmButton>
-                </SC.ButtonDiv>
-                <SC.AddedDiv>
-                    <button
-                        onClick={() => {
-                            navigate("/");
-                        }}>
-                        아이디/비밀번호 찾기
-                    </button>
-                    <button
-                        onClick={() => {
-                            navigate("/UserJoin");
-                        }}>
-                        회원가입
-                    </button>
-                </SC.AddedDiv>
-            </SC.LoginContainer>
+        <SC.JoinContainer>
+            <SC.JoinItem>
+                <label>EMAIL</label>
+                <input type='text'></input>
+            </SC.JoinItem>
+            <SC.JoinItem>
+                <label>PASSWORD</label>
+                <input type='password'></input>
+            </SC.JoinItem>
+            <SC.ButtonDiv><SC.ConfirmButton>로그인</SC.ConfirmButton></SC.ButtonDiv>
+        </SC.JoinContainer>
         </>
-    );
+    )
+
 };
 
 export default Login;

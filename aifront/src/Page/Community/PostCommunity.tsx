@@ -6,7 +6,7 @@ import { usePostCommunity } from "../../Component/Hook/Community.hook";
 import RichEditor from '../../Component/Base/RichEditor';
 
 const PostCommunity: React.FC = () => {
-    const  { postCommunity }  = usePostCommunity();
+    const  { postCommunity, isError }  = usePostCommunity();
     const [content, setContent] = useState('');
     const [title, setTitle] = useState('');
     const [category, setCategory] = useState('')
@@ -14,19 +14,20 @@ const PostCommunity: React.FC = () => {
 
     const handleSubmit = async (e : React.MouseEvent) => {
         e.preventDefault();
-
-        try {
-            const res = await postCommunity({
-                category : category,
-                title : title,
-                content : content})
-            console.log(res);
-            alert('작성이 완료 되었습니다!');
-            navigate('/');
-        } catch(err) {
-            console.log(err);
-            alert('다시 작성해 주세요.');
-        }
+        await postCommunity({
+            category : category,
+            title : title,
+            content : content}, {
+                onSuccess(res) {
+                    console.log(res);
+                    alert('작성이 완료 되었습니다!');
+                    navigate('/');
+                },
+                onError(err) {
+                    console.log(err);
+                    alert('다시 작성해 주세요.');
+                }
+            })
     }
 
     return(
