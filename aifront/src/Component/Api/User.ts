@@ -1,5 +1,5 @@
 import axios from "axios";
-import { config } from '../Base/constant'
+import { config } from "../Base/Constant";
 import {
     LoginInfo,
     LoginUser,
