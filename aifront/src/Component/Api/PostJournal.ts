@@ -2,7 +2,6 @@ import axios from "axios";
 import { JournalRequest, JournalResponse } from "../../Types/JournalPost.type";
 import { JournalListResponse } from "../../Types/GetJournal.type";
 import { JournalDetailResponse } from "../../Types/GetJournalDetail.type";
-import { JournalDeleteResponse } from "../../Types/DeleteJournal.type";
 
 export const createJournal = async (body: JournalRequest) => {
     const res = await axios.post<JournalResponse>('http://kdt-ai6-team02.elicecoding.com/api/diaries', body);
