@@ -1,5 +1,5 @@
 export type JournalDelete = {
-    diary : {
+    item : {
       id : number;
       userid : number;
       title : string;

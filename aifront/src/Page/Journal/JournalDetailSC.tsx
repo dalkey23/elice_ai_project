@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const JouranlDetailMain = styled.div`
+
     text-align : center;
     padding : 2em;
 
@@ -8,8 +9,16 @@ export const JouranlDetailMain = styled.div`
         margin : 1em;
     }
 
+    & h2 {
+        margin : 0.5em;
+        font-size : 1.5em;
+    }
+
     & h3 {
         margin : 1em;
+        }
+
+    & h4 {
         font-size : 3em;
     }
 

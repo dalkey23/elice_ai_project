@@ -23,12 +23,17 @@ const JournalCheck : React.FC = () => {
     return(
         <>
         <SC.JournalList>
-            {journalList.map(j => {
+            {journalList.map(journal => {
                 return (
                 <SC.Journal>
-                    <Link to={`/JournalDetail/${j.id}`} key={j.id}>
-                        <p>id: {j.id}</p>
-                        <p>{j.title}</p>
+                    <Link to={`/JournalDetail/${journal.id}`} key={journal.id}>
+                        <div>
+                            <h1 key = "journalId">{journal.id}번째 일기</h1>
+                            <p key = "journalDate">{journal.publishedDate}</p>
+                            <h2 key = "journalEmo">{journal.emotion}</h2>
+                            <h3 key = "journalTi">{journal.title}</h3>
+                        </div>
+                            <h1 key = "journalFood">{journal.recommendedFood}</h1>
                     </Link>
                 </SC.Journal>
                 )

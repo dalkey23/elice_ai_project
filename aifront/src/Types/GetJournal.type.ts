@@ -1,5 +1,5 @@
     export type Journal = {
-      diaryEmotion:null;
+      emotion:string;
       id:number;
       publishedDate:string;
       recommendedFood:null;
