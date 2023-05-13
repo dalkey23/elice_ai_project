@@ -13,7 +13,7 @@ const baseURL = process.env.URL;
 
 export const createUserdata = async (body: UserdataRequest) => {
     const res = await axios.post<UserdataRequest>(
-        "http://localhost:3500/api/users/sign-up",
+        "http://kdt-ai6-team02.elicecoding.com/api/users/sign-up",
         body
     );
     return res;
@@ -21,7 +21,7 @@ export const createUserdata = async (body: UserdataRequest) => {
 
 export const loginUser = async (body: LoginUser) => {
     const res = await axios.post<LoginInfo>(
-        `http://localhost:3500/api/users/login`,
+        `http://kdt-ai6-team02.elicecoding.com/api/users/login`,
         body
     );
     return res;
@@ -35,7 +35,7 @@ export const getLoginedUser = async () => {
 };
 
     const res = await axios.post<UserDetail>(
-        `http://localhost:3500/api/users/profile`,
+        `http://kdt-ai6-team02.elicecoding.com/api/users/profile`,
         {},
         config
     );

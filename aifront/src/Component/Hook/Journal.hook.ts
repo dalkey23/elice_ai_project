@@ -34,7 +34,7 @@ export const useJournalDetail = (id : number) => {
     })
 
     return {
-      item : data?.data.item || [],
+      diary : data?.data.diary,
       ...rest
     }
   }
