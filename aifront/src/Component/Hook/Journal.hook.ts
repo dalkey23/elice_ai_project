@@ -2,10 +2,10 @@ import { useMutation, useQuery } from 'react-query'
 import { createJournal, getJournals, getJournalsDetail } from '../Api/PostJournal'
 
 export const useCreateJournal = () => {
-  const {mutate, ...rest} = useMutation(createJournal)
+  const {mutateAsync, ...rest} = useMutation(createJournal)
 
   return {
-    createJournal: mutate,
+    createJournal: mutateAsync,
     ...rest
   }
 }

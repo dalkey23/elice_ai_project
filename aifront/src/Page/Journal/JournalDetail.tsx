@@ -29,8 +29,8 @@ const JournalDetail : React.FC = () => {
     return (
         <SC.JouranlDetailMain>
                 <h1>{item.id}번째 일기</h1>
-                <h2>{item.publishedDate}</h2>
-                <h3>{item.emotion}</h3>
+                <h2>{item.emotion}</h2>
+                <h3>{item.publishedDate}</h3>
                 <h4>{item.title}</h4>
             <SC.JournalDetail>
                 <div>

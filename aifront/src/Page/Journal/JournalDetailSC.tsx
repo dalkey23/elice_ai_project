@@ -44,7 +44,7 @@ export const JournalDetail = styled.div`
         border-radius : 8px;
         width : 30%;
         text-align : center;
-        margin : 3rem;
+        margin : 1rem;
         padding : 15rem;
     }
 `

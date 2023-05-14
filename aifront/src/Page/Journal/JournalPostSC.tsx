@@ -24,6 +24,24 @@ export const JournalPostMain = styled.div`
 export const TitleDate = styled.div`
     display : flex;
     justify-Content : center;
+
+    & input {
+        text-align : center;
+        width : 35%;
+        border : 1px solid black;
+        border-radius : 8px;
+    }
+`
+
+export const TitleDate2 = styled.div`
+    margin-left : 33em;
+
+    & input {
+        text-align : center;
+        width : 25em;
+        border : 1px solid black;
+        border-radius : 8px;
+    }
 `
 
 export const JournalPost = styled.div`

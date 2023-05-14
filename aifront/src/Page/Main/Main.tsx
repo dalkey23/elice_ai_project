@@ -4,7 +4,6 @@ import { Routes, Route } from "react-router-dom";
 import Header from "../../Component/Header/Header";
 import Home from "../Home/Home";
 import JournalPost from "../Journal/JournalPost";
-import JournalDone from "../Journal/JournalDone";
 import JournalCheck from "../Journal/JournalCheck";
 import JournalDetail from "../Journal/JournalDetail";
 import CommunityList from "../Community/CommunityList";
@@ -26,7 +25,6 @@ const Main : React.FC = () => {
                 <Routes>
                     <Route path = '/' element = {<Home />} />
                     <Route path = '/JournalPost' element = {<JournalPost />} />
-                    <Route path = '/JournalDone' element = {<JournalDone />} />
                     <Route path = '/JournalDetail/:id' element = {<JournalDetail />} />
                     <Route path = '/JournalCheck' element = {<JournalCheck />} />
                     <Route path = '/CommunityList' element = {<CommunityList/>} />
