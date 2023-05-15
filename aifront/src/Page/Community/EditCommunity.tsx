@@ -11,11 +11,10 @@ const EditCommunity: React.FC = () => {
     // const  { editCommunity, isError }  = useEditCommunity();
     const [content, setContent] = useState('');
     const [title, setTitle] = useState('');
-    const [category, setCategory] = useState('')
-    const navigate = useNavigate();
+    const [category, setCategory] = useState('');
 
     const handleSubmit = async (e : React.MouseEvent) => {
-        e.preventDefault();
+        // e.preventDefault();
         // await editCommunity(Number(id), {
         //     category : category,
         //     title : title,
@@ -23,13 +22,14 @@ const EditCommunity: React.FC = () => {
         //         onSuccess(res) {
         //             console.log(res);
         //             alert('수정이 완료 되었습니다!');
-        //             navigate('/');
+        //             window.location.href = `/CommunityList/${id}`;
         //         },
         //         onError(err) {
         //             console.log(err);
         //             alert('수정이 되지 않았습니다. 다시 작성해 주세요.');
         //         }
-        //     })
+        //     }
+        // )
     }
 
     return(

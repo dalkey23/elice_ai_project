@@ -25,7 +25,7 @@ export const CommunityDetailMain = styled.div`
 export const StyledBulletPoint = styled.div`
     background-color: #c996cc;
     border-radius: 20px;
-    width: 50px;
+    width: 100px;
     padding: 11px;
     font-weight: bold;
     font-size: 14px;
@@ -74,7 +74,7 @@ export const CommunityDetailContent = styled.div`
     background: rgba(201, 150, 204, 0.5);
 `;
 
-export const ButtonDiv = styled.div`
+export const ButtonDiv1 = styled.div`
     width: 80%;
     display: flex;
     padding: 0 0 0 30px;
@@ -110,18 +110,75 @@ export const CommunityCommentMain = styled.div`
     padding: 0px 20px;
     margin: 0 auto;
     justfy-content: center;
+    align-items: center;
     background: rgba(201, 150, 204, 0.5);
-    //vertical-align: middle;
+    border: 1px solid navy;
+
     & h4 {
-        width: 15%;
+        width: 10%;
         padding: 10px;
         margin: 5px;
-        text-align: center;
         display: inline;
-        vertical-align: middle;
+        text-align: center;
         font-weight : bold;
-        border: 1px solid green;
+        font-size : 12px;
     };
+
+    & div {
+        position: relative;
+        width: 80%;
+        margin-top: 40px;
+        margin-bottom: 5px;
+    }
+
+    & input {
+        font-size: 15px;
+        color: #222222;
+        width: 300px;
+        border: none;
+        border; bottom: solid #aaaaaa 1px;
+        padding-bottom: 10px;
+        padding-left: 10px;
+        position: relative;
+        background: none;
+        z-index: 5;
+    }
+
+    & input::placeholder { color: #aaaaaa; }
+    & input:focus { outline: none; }
+
+    & span {
+        display: block;
+        position: absolute;
+        bottom: 0;
+        left: 0%;
+        background-color: #666;
+        width: 0;
+        height: 2px;
+        border-radius: 2px;
+        transition: 0.5s;
+    }
+
+    & label {
+        position: absolute;
+        color: #aaa;
+        left: 10px;
+        font-size: 20px;
+        bottom: 8px;
+        transition: all .2s;
+    }
+
+    & input:focus ~ label, input:valid ~ label {
+        font-size: 16px;
+        bottom: 40px;
+        color: #666;
+        font-weight: bold;
+    }
+
+    & input:focus ~ span, input:valid ~ span {
+        width: 100%;
+    }
+
     & p {
         width: 75%;
         padding: 10px;
@@ -130,13 +187,16 @@ export const CommunityCommentMain = styled.div`
         vertical-align: middle;
         border: 1px solid green;
     };
+
     & button {
-        width: 5%;
         padding: 10px;
-        margin: 5px;
-        text-align: center;
-        display: inline;
-        vertical-align: middle;
-        border: 1px solid green;
+        width: 7%;
+        color: white;
+        background-color: #916bbf;
+        border: 1px solid white;
+        border-radius: 10px;
+        :hover  {
+            background-color: #c996cc;
+        }
     };
 `;

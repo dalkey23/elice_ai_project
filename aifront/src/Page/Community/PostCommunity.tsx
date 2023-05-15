@@ -1,7 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import * as SC from "./PostCommunitySC";
-import { useCreateJournal } from "../../Component/Hook/Journal.hook";
 import { usePostCommunity } from "../../Component/Hook/Community.hook";
 import RichEditor from '../../Component/Base/RichEditor';
 
@@ -9,8 +7,7 @@ const PostCommunity: React.FC = () => {
     const  { postCommunity, isError }  = usePostCommunity();
     const [content, setContent] = useState('');
     const [title, setTitle] = useState('');
-    const [category, setCategory] = useState('')
-    const navigate = useNavigate();
+    const [category, setCategory] = useState('');
 
     const handleSubmit = async (e : React.MouseEvent) => {
         e.preventDefault();
@@ -21,7 +18,7 @@ const PostCommunity: React.FC = () => {
                 onSuccess(res) {
                     console.log(res);
                     alert('작성이 완료 되었습니다!');
-                    navigate('/');
+                    window.location.href = '/CommunityList';
                 },
                 onError(err) {
                     console.log(err);
@@ -39,8 +36,8 @@ const PostCommunity: React.FC = () => {
                         onChange={(e : React.ChangeEvent<HTMLSelectElement>) =>
                             setCategory(e.target.value)}>
                     <option value = "none">글머리 선택</option>
-                    <option value = "restaurant">맛집</option>
-                    <option value = "recipe">레시피</option>
+                    <option value = "RESTAURANT">맛집</option>
+                    <option value = "RECIPE">레시피</option>
                 </select>
                 <input
                 autoFocus
