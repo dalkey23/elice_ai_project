@@ -31,6 +31,12 @@ const JoinUser: React.FC = () => {
         });
     };
 
+    const changeHandlerNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setUserdata((curUserdata) => {
+            return { ...curUserdata, [e.target.name]: Number(e.target.value) };
+        });
+    };
+
     // const checkedEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
     //     setUserdata((curUserdata) => {
     //         return { ...curUserdata, email: e.target.value };
@@ -119,7 +125,6 @@ const JoinUser: React.FC = () => {
 
     const submitHandler = async (e: React.MouseEvent) => {
         e.preventDefault();
-
         await createUserdata(userdata, {
             onSuccess(res) {
                 console.log(res);
@@ -196,19 +201,19 @@ const JoinUser: React.FC = () => {
                         type="text"
                         name="birthYear"
                         placeholder="Year"
-                        onChange={changeHandler}
+                        onChange={changeHandlerNumber}
                     />
                     <input
                         type="text"
                         name="birthMonth"
                         placeholder="Month"
-                        onChange={changeHandler}
+                        onChange={changeHandlerNumber}
                     />
                     <input
                         type="text"
                         name="birthDate"
                         placeholder="Date"
-                        onChange={changeHandler}
+                        onChange={changeHandlerNumber}
                     />
                 </SC.JoinItem>
                 <SC.JoinItem>
@@ -243,7 +248,7 @@ const JoinUser: React.FC = () => {
                         type="text"
                         name="zipCode"
                         placeholder="04799"
-                        onChange={changeHandler}
+                        onChange={changeHandlerNumber}
                     />
                     <div>
                         <button onClick={onClickToggleModal}>

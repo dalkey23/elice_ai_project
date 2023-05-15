@@ -1,4 +1,4 @@
-import axios, { AxiosRequestConfig } from "axios";
+import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 import {
     LoginInfo,
     LoginUser,
@@ -6,10 +6,7 @@ import {
     UserdataRequest,
 } from "../../Types/Userdata.type";
 
-
 const baseURL = process.env.URL;
-
-
 
 export const createUserdata = async (body: UserdataRequest) => {
     const res = await axios.post<UserdataRequest>(
@@ -28,11 +25,10 @@ export const loginUser = async (body: LoginUser) => {
 };
 
 export const getLoginedUser = async () => {
-
     const token = localStorage.getItem("token");
     const config: AxiosRequestConfig = {
-    headers: { Authorization: `Bearer ${token}` },
-};
+        headers: { Authorization: `Bearer ${token}` },
+    };
 
     const res = await axios.post<UserDetail>(
         `http://kdt-ai6-team02.elicecoding.com/api/users/profile`,
@@ -40,5 +36,43 @@ export const getLoginedUser = async () => {
         config
     );
 
+    return res;
+};
+
+export const editUserdata = async (
+    id: Number,
+    body: UserdataRequest
+): Promise<UserDetail> => {
+    try {
+        const token = localStorage.getItem("token");
+        if (!token) {
+            throw new Error("Token not found in localStorage");
+        }
+        const config: AxiosRequestConfig = {
+            headers: { Authorization: `Bearer ${token}` },
+        };
+        const res = await axios.put<UserDetail>(
+            `http://localhost:3500/api/users/${id}`,
+            body,
+            config
+        );
+        return res?.data;
+    } catch (err) {
+        throw err;
+    }
+};
+
+export const deleteUser = async (id: number) => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+        throw new Error("Token not found in localStorage");
+    }
+    const config: AxiosRequestConfig = {
+        headers: { Authorization: `Bearer ${token}` },
+    };
+    const res = await axios.delete(
+        `http://kdt-ai6-team02.elicecoding.com/api/users/${id}`,config
+    );
+    console.log(res)
     return res;
 };

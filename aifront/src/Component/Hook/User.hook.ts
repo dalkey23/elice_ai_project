@@ -1,5 +1,6 @@
 import { useMutation, useQuery } from "react-query";
-import { createUserdata, loginUser, getLoginedUser } from "../Api/User";
+import { createUserdata, loginUser, getLoginedUser, editUserdata, deleteUser } from "../Api/User";
+import { UserdataRequest } from "../../Types/Userdata.type";
 
 export const useJoinUser = () => {
     const { mutateAsync, isError } = useMutation(createUserdata)
@@ -30,3 +31,20 @@ export const useGetLoginedUser = () => {
         isError
     }
 }
+
+// export const useEditUser = () => {
+//     const { mutateAsync: editUserdataAsync, isError } = useMutation(editUserdata);
+  
+//     return {
+//         editUserdata: editUserdataAsync,
+//       isError
+//     };
+//   };
+
+  export const useDeleteUser = () => {
+    const { mutateAsync, isError } = useMutation(deleteUser);
+  
+    return {
+        deleteUser: mutateAsync, isError
+    }
+  }

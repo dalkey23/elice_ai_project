@@ -16,6 +16,7 @@ import EditCommunity from "../Community/EditCommunity";
 import Myinfo from "../User/Myinfo";
 import Mypage from "../User/Mypage";
 import Login from "../User/Login";
+import DeletedUser from '../User/DeletedUser'
 
 const Main : React.FC = () => {
     
@@ -36,6 +37,8 @@ const Main : React.FC = () => {
                     <Route path = '/Mypage' element = {<Mypage/>} />
                     <Route path = '/Myinfo' element = {<Myinfo/>} />
                     <Route path = '/Login' element = {<Login/>} />
+
+                    <Route path = '/DeletedUser' element = {<DeletedUser/>} />
                 </Routes>
             <Footer />
         </>
