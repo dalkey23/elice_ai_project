@@ -1,8 +1,9 @@
-import React, { useState, ChangeEvent, MouseEvent } from "react";
+import React, { useState, useCallback } from "react";
 import * as SC from "./JoinUserSC";
 import { UserdataRequest } from "../../Types/Userdata.type";
 import { useNavigate } from "react-router-dom";
 import { useJoinUser } from "../../Component/Hook/User.hook";
+import Modal from "../../Component/Base/Modal";
 
 const JoinUser: React.FC = () => {
     const navigate = useNavigate();
@@ -23,120 +24,135 @@ const JoinUser: React.FC = () => {
         mainAddress: "",
         detailAddress: "",
     });
-
-    const checkedEmail = (e: ChangeEvent<HTMLInputElement>) => {
+    // 각 폼 입력시 onChange 이벤트
+    const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         setUserdata((curUserdata) => {
-            return { ...curUserdata, email: e.target.value };
+            return { ...curUserdata, [e.target.name]: e.target.value };
         });
     };
 
-    const checkedLastName = (e: ChangeEvent<HTMLInputElement>) => {
-        setUserdata((curUserdata) => {
-            return { ...curUserdata, lastName: e.target.value };
-        });
-    };
+    // const checkedEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
+    //     setUserdata((curUserdata) => {
+    //         return { ...curUserdata, email: e.target.value };
+    //     });
+    // };
 
-    const checkedFirstName = (e: ChangeEvent<HTMLInputElement>) => {
-        setUserdata((curUserdata) => {
-            return { ...curUserdata, firstName: e.target.value };
-        });
-    };
+    // const checkedLastName = (e: React.ChangeEvent<HTMLInputElement>) => {
+    //     setUserdata((curUserdata) => {
+    //         return { ...curUserdata, lastName: e.target.value };
+    //     });
+    // };
 
-    const checkedPassword = (e: ChangeEvent<HTMLInputElement>) => {
-        setUserdata((curUserdata) => {
-            return { ...curUserdata, password: e.target.value };
-        });
-    };
+    // const checkedFirstName = (e: React.ChangeEvent<HTMLInputElement>) => {
+    //     setUserdata((curUserdata) => {
+    //         return { ...curUserdata, firstName: e.target.value };
+    //     });
+    // };
 
-    const checkedConfirmPW = (e: ChangeEvent<HTMLInputElement>) => {
+    // const checkedPassword = (e: React.ChangeEvent<HTMLInputElement>) => {
+    //     setUserdata((curUserdata) => {
+    //         return { ...curUserdata, password: e.target.value };
+    //     });
+    // };
+
+    const checkedConfirmPW = (e: React.ChangeEvent<HTMLInputElement>) => {
         console.log(
             `userdata password : ${userdata.password}, target value : ${e.target.value}`
         );
     };
 
-    const checkedPhoneNumber = (e: ChangeEvent<HTMLInputElement>) => {
-        setUserdata((curUserdata) => {
-            return { ...curUserdata, phoneNumber: e.target.value };
-        });
-    };
+    // const checkedPhoneNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
+    //     setUserdata((curUserdata) => {
+    //         return { ...curUserdata, phoneNumber: e.target.value };
+    //     });
+    // };
 
-    const checkedNickname = (e: ChangeEvent<HTMLInputElement>) => {
-        setUserdata((curUserdata) => {
-            return { ...curUserdata, nickname: e.target.value };
-        });
-    };
+    // const checkedNickname = (e: React.ChangeEvent<HTMLInputElement>) => {
+    //     setUserdata((curUserdata) => {
+    //         return { ...curUserdata, nickname: e.target.value };
+    //     });
+    // };
 
-    const checkedGender = (e: ChangeEvent<HTMLInputElement>) => {
-        setUserdata((curUserdata) => {
-            return { ...curUserdata, gender: e.target.value };
-        });
-    };
+    // const checkedGender = (e: React.ChangeEvent<HTMLInputElement>) => {
+    //     setUserdata((curUserdata) => {
+    //         return { ...curUserdata, gender: e.target.value };
+    //     });
+    // };
 
-    const checkedBirthYear = (e: ChangeEvent<HTMLInputElement>) => {
-        setUserdata((curUserdata) => {
-            return { ...curUserdata, birthYear: Number(e.target.value) };
-        });
-    };
-    const checkedBirthMonth = (e: ChangeEvent<HTMLInputElement>) => {
-        setUserdata((curUserdata) => {
-            return { ...curUserdata, birthMonth: Number(e.target.value) };
-        });
-    };
-    const checkedBirthDate = (e: ChangeEvent<HTMLInputElement>) => {
-        setUserdata((curUserdata) => {
-            return { ...curUserdata, birthDate: Number(e.target.value) };
-        });
-    };
+    // const checkedBirthYear = (e: React.ChangeEvent<HTMLInputElement>) => {
+    //     setUserdata((curUserdata) => {
+    //         return { ...curUserdata, birthYear: Number(e.target.value) };
+    //     });
+    // };
+    // const checkedBirthMonth = (e: React.ChangeEvent<HTMLInputElement>) => {
+    //     setUserdata((curUserdata) => {
+    //         return { ...curUserdata, birthMonth: Number(e.target.value) };
+    //     });
+    // };
+    // const checkedBirthDate = (e: React.ChangeEvent<HTMLInputElement>) => {
+    //     setUserdata((curUserdata) => {
+    //         return { ...curUserdata, birthDate: Number(e.target.value) };
+    //     });
+    // };
 
-    const checkedZipcode = (e: ChangeEvent<HTMLInputElement>) => {
-        setUserdata((curUserdata) => {
-            return { ...curUserdata, zipCode: Number(e.target.value) };
-        });
-    };
-    const checkedMainAddress = (e: ChangeEvent<HTMLInputElement>) => {
-        setUserdata((curUserdata) => {
-            return { ...curUserdata, mainAddress: e.target.value };
-        });
-    };
-    const checkedDetailAddress = (e: ChangeEvent<HTMLInputElement>) => {
-        setUserdata((curUserdata) => {
-            return { ...curUserdata, detailAddress: e.target.value };
-        });
-    };
+    // const checkedZipcode = (e: React.ChangeEvent<HTMLInputElement>) => {
+    //     setUserdata((curUserdata) => {
+    //         return { ...curUserdata, zipCode: Number(e.target.value) };
+    //     });
+    // };
+    // const checkedMainAddress = (e: React.ChangeEvent<HTMLInputElement>) => {
+    //     setUserdata((curUserdata) => {
+    //         return { ...curUserdata, mainAddress: e.target.value };
+    //     });
+    // };
+    // const checkedDetailAddress = (e: React.ChangeEvent<HTMLInputElement>) => {
+    //     setUserdata((curUserdata) => {
+    //         return { ...curUserdata, detailAddress: e.target.value };
+    //     });
+    // };
 
-    const checkedProfilePhotoUrl = (e: ChangeEvent<HTMLInputElement>) => {
-        setUserdata((curUserdata) => {
-            return { ...curUserdata, detailAddress: e.target.value };
-        });
-    };
+    // const checkedProfilePhotoUrl = (e: React.ChangeEvent<HTMLInputElement>) => {
+    //     setUserdata((curUserdata) => {
+    //         return { ...curUserdata, detailAddress: e.target.value };
+    //     });
+    // };
 
-    const submitHandler = async (e: MouseEvent) => {
+    const submitHandler = async (e: React.MouseEvent) => {
         e.preventDefault();
 
-        try {
-            const res = await createUserdata(userdata);
-            console.log(res);
-            alert("작성이 완료 되었습니다!");
-            navigate("/CompletedJoin");
-        } catch (err) {
-            console.log(err);
-            alert("다시 작성해 주세요.");
-        }
+        await createUserdata(userdata, {
+            onSuccess(res) {
+                console.log(res);
+                alert("작성이 완료 되었습니다!");
+                navigate("/CompletedJoin");
+            },
+            onError(err) {
+                console.log(err);
+                alert("다시 작성해 주세요.");
+            },
+        });
     };
+
+    const [isModal, setIsModal] = useState<boolean>(false);
+
+    const onClickToggleModal = useCallback(() => {
+        setIsModal(!isModal);
+        console.log(isModal);
+    }, [isModal]);
 
     return (
         <SC.JoinContainer>
             <SC.JoinDiv1>
                 <SC.JoinItem>
                     <label>이메일</label>
-                    <input type="text" name="email" onChange={checkedEmail} />
+                    <input type="text" name="email" onChange={changeHandler} />
                 </SC.JoinItem>
                 <SC.JoinItem>
                     <label>비밀번호</label>
                     <input
                         type="password"
                         name="password"
-                        onChange={checkedPassword}
+                        onChange={changeHandler}
                     />
                 </SC.JoinItem>
                 <SC.JoinItem>
@@ -155,13 +171,13 @@ const JoinUser: React.FC = () => {
                         type="text"
                         name="lastName"
                         placeholder="홍"
-                        onChange={checkedLastName}
+                        onChange={changeHandler}
                     />
                     <input
                         type="text"
                         name="firstName"
                         placeholder="길동"
-                        onChange={checkedFirstName}
+                        onChange={changeHandler}
                     />
                 </SC.JoinItem>
                 <SC.JoinItem>
@@ -170,7 +186,7 @@ const JoinUser: React.FC = () => {
                         type="text"
                         name="nickname"
                         placeholder="dong"
-                        onChange={checkedNickname}
+                        onChange={changeHandler}
                     />
                 </SC.JoinItem>
 
@@ -180,19 +196,19 @@ const JoinUser: React.FC = () => {
                         type="text"
                         name="birthYear"
                         placeholder="Year"
-                        onChange={checkedBirthYear}
+                        onChange={changeHandler}
                     />
                     <input
                         type="text"
                         name="birthMonth"
                         placeholder="Month"
-                        onChange={checkedBirthMonth}
+                        onChange={changeHandler}
                     />
                     <input
                         type="text"
                         name="birthDate"
                         placeholder="Date"
-                        onChange={checkedBirthDate}
+                        onChange={changeHandler}
                     />
                 </SC.JoinItem>
                 <SC.JoinItem>
@@ -201,14 +217,14 @@ const JoinUser: React.FC = () => {
                         type="radio"
                         name="gender"
                         value="MALE"
-                        onChange={checkedGender}
+                        onChange={changeHandler}
                     />
                     <label>남자</label>
                     <input
                         type="radio"
                         name="gender"
                         value="FEMALE"
-                        onChange={checkedGender}
+                        onChange={changeHandler}
                     />
                     <label>여자</label>
                 </SC.JoinItem>
@@ -218,7 +234,7 @@ const JoinUser: React.FC = () => {
                         type="text"
                         name="phoneNumber"
                         placeholder="010-1234-1234"
-                        onChange={checkedPhoneNumber}
+                        onChange={changeHandler}
                     />
                 </SC.JoinItem>
                 <SC.JoinItem>
@@ -227,19 +243,28 @@ const JoinUser: React.FC = () => {
                         type="text"
                         name="zipCode"
                         placeholder="04799"
-                        onChange={checkedZipcode}
+                        onChange={changeHandler}
                     />
+                    <div>
+                        <button onClick={onClickToggleModal}>
+                            우편번호 검색
+                        </button>
+                        {isModal && (
+                            <Modal
+                                onClickToggleModal={onClickToggleModal}></Modal>
+                        )}
+                    </div>
                     <input
                         type="text"
                         name="mainAddress"
                         placeholder="서울시 성동구 광나루로6길"
-                        onChange={checkedMainAddress}
+                        onChange={changeHandler}
                     />
                     <input
                         type="text"
                         name="detailAddress"
                         placeholder="49"
-                        onChange={checkedDetailAddress}
+                        onChange={changeHandler}
                     />
                 </SC.JoinItem>
                 <SC.JoinItem>
@@ -247,7 +272,7 @@ const JoinUser: React.FC = () => {
                     <input
                         type="file"
                         name="profilePhotoUrl"
-                        onChange={checkedProfilePhotoUrl}
+                        onChange={changeHandler}
                     />
                 </SC.JoinItem>
             </SC.JoinDiv2>
