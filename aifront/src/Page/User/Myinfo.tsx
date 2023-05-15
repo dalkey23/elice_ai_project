@@ -1,11 +1,23 @@
 import { useNavigate } from "react-router";
 import { useGetLoginedUser } from "../../Component/Hook/User.hook";
 import * as SC from "./JoinUserSC";
+import { UserdataRequest } from "../../Types/Userdata.type";
 
 const Myinfo = () => {
     const { LoginedUser, isLogined } = useGetLoginedUser();
     const userdata = LoginedUser?.data.item;
     const navigate = useNavigate();
+    //const { editUserdata } = useEditUser();
+
+    const id = 16
+
+    const submitHandler = async (e: React.MouseEvent) => {
+        e.preventDefault();
+
+       // await editUserdata(id, userdata)
+    };
+
+ 
     
     if(!isLogined){
         navigate("/Login")
@@ -81,6 +93,11 @@ const Myinfo = () => {
                     <input type="file" name="profilePhotoUrl" />
                 </SC.JoinItem>
             </SC.JoinDiv2>
+            <SC.ButtonDiv>
+                <SC.ConfirmButton onClick={submitHandler}>
+                    수정
+                </SC.ConfirmButton>
+            </SC.ButtonDiv>
         </SC.JoinContainer>
     );
 };

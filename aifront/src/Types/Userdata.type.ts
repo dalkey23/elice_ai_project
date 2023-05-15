@@ -39,7 +39,8 @@ export type UserDetail = {
             mainAddress: string;
             detailAddress: string;
         };
-        createdAt: string;
+        createdAt?: string;
+        updatedAt?: string;
     };
     success: boolean;
 };

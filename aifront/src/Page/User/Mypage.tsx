@@ -6,8 +6,15 @@ const Mypage = () => {
     const navigate = useNavigate();
 
     const { LoginedUser, isLogined } = useGetLoginedUser();
+    const userdata = LoginedUser?.data.item;
 
+    if (!isLogined) {
+        navigate("/Login");
+    }
 
+    if (!userdata) {
+        return <></>;
+    }
 
     return (
         <SC.MypageContainer>
@@ -18,7 +25,12 @@ const Mypage = () => {
                 나의 정보
             </button>
             <button>나의 게시글</button>
-            <button>회원 탈퇴</button>
+            <button
+                onClick={() => {
+                    navigate("/DeletedUser");
+                }}>
+                회원 탈퇴
+            </button>
         </SC.MypageContainer>
     );
 };
