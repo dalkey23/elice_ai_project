@@ -1,5 +1,9 @@
 import styled from "styled-components";
 
+export const JournalPostFrame = styled.div`
+    border : 1px solid black;
+`
+
 export const JournalPostMain = styled.div`
 
     & h1 {
@@ -27,18 +31,20 @@ export const TitleDate = styled.div`
 
     & input {
         text-align : center;
-        width : 35%;
-        border : 1px solid black;
+        width : 20em;
+        font-size : 1.5em;
+        border : none;
         border-radius : 8px;
     }
 `
 
 export const TitleDate2 = styled.div`
-    margin-left : 33em;
+    display : flex;
+    justify-content : center;
 
     & input {
         text-align : center;
-        width : 25em;
+        width : 10em;
         border : 1px solid black;
         border-radius : 8px;
     }

@@ -34,19 +34,21 @@ const JournalPost : React.FC = () => {
     return(
         <SC.JournalPostMain>
             <h1>EEUM : 나와 연결된, 일기</h1>
-            <SC.TitleDate2>
-                <DatePicker
-                locale={ko}
-                dateFormat="yyyy-MM-dd"
-                maxDate={new Date()}
-                // 오늘 이전 날짜만 선택 가능
-                selected={publishedDate}
-                onChange={(date : Date) => setPublishedDate(date)} />
-            </SC.TitleDate2>
+                <SC.TitleDate2>
+                <div>
+                    <DatePicker
+                    locale={ko}
+                    dateFormat="yyyy-MM-dd"
+                    // 오늘 이전 날짜만 선택 가능
+                    maxDate={new Date()}
+                    selected={publishedDate}
+                    onChange={(date : Date) => setPublishedDate(date)} />
+                </div>
+                </SC.TitleDate2>
             <SC.TitleDate>
                 <input
                 autoFocus
-                placeholder = "일기 제목을 적어주세요"
+                placeholder = "일기 제목"
                 name = "title"
                 value = {title}
                 onChange = {(e : React.ChangeEvent<HTMLInputElement>) =>
@@ -55,7 +57,7 @@ const JournalPost : React.FC = () => {
             </SC.TitleDate>
             <SC.JournalPost>
                 <textarea
-                placeholder = "일기를 적어주세요"
+                placeholder = "당신의 이야기를 들려주세요"
                 name = "content"
                 maxLength = {100}
                 value = {content}
