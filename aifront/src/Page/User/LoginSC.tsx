@@ -38,7 +38,7 @@ export const LoginItem = styled.div`
     }
     & input::placeholder {
         font-weight : bold;
-        color : #3D2C8D;
+        color : gray;
         text-align : center;
     }
 `
