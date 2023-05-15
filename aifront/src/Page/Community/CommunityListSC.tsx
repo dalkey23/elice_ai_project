@@ -40,7 +40,7 @@ export const TableBody = styled.tbody`
 export const StyledBulletPoint = styled.div`
     background-color: #c996cc;
     border-radius: 20px;
-    width: 50px;
+    width: 100px;
     padding: 11px;
     font-weight: bold;
     font-size: 14px;

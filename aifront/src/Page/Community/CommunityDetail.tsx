@@ -22,7 +22,7 @@ const CommunityDetail: React.FC = () => {
         await deleteCommunity(Number(id), {
             onSuccess(res) {
                 alert("글 삭제가 완료되었습니다.");
-                navigate('/CommunityList');
+                window.location.href = '/CommunityList';
             },
             onError(err) {
                 alert("글 삭제가 완료되지 않았습니다.");
@@ -51,10 +51,10 @@ const CommunityDetail: React.FC = () => {
                 <div>조회수 {item.views}</div>
             </SC.CommunityDetailTitle2>
             <br/>
-            <SC.ButtonDiv>
+            <SC.ButtonDiv1>
                 <button onClick={ ()=> {navigate(`/EditCommunity/${item.id}`)}}>글 수정</button>
                 <button onClick={deleteHandler}>글 삭제</button>
-            </SC.ButtonDiv>
+            </SC.ButtonDiv1>
             <br/>
             <SC.CommunityDetailContent>
                 {item.content}
@@ -79,8 +79,13 @@ const CommunityDetail: React.FC = () => {
             } */}
 
             <SC.CommunityCommentMain>
-                <h4>댓글작성자명</h4>
-                <p>댓글내용</p>
+                <h4>내이름은서원</h4>
+                <div>
+                    <input type="text" required />
+                    <label>댓글을 작성해주세요.</label>
+                    <span></span>
+                </div>
+                {/* <p>댓글내용</p> */}
                 <button>작성</button>
             </SC.CommunityCommentMain>
             <SC.CommunityCommentMain>

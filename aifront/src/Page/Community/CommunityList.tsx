@@ -1,7 +1,5 @@
 import React, { useState, ReactNode, useEffect } from "react";
-import axios from "axios";
 import * as SC from "./CommunityListSC";
-import { Pagination } from "../../Component/Base/Pagination";
 import { Board } from "../../Types/Community.type";
 import { useNavigate, Link, useSearchParams } from "react-router-dom";
 import { useCommunityList } from "../../Component/Hook/Community.hook";

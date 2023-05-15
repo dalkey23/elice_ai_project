@@ -36,6 +36,7 @@ export type BoardDetail = {
 }
 
 export type EditBoard = {
+    item?: PostBoard;
     success: boolean;
 }
 
