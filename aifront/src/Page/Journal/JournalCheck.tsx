@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { useSearchParams, Link } from "react-router-dom";
 import { useJournalList } from '../../Component/Hook/Journal.hook'
 import * as SC from "./JournalCheckSC"
+import { range, chunk } from "../../Utils/common";
 
 const elementsSize = 8;
+const pagePerScreen = 10
 
 const JournalCheck : React.FC = () => {
     const [searchParams, setSearchParams] = useSearchParams();
@@ -12,12 +14,29 @@ const JournalCheck : React.FC = () => {
 
     const {journalList, totalPage} = useJournalList(currentPage, elementsSize)
 
+
+    const screenPages = useMemo(() => {
+        if (!totalPage) return []
+
+        return chunk(range(1, totalPage), pagePerScreen)
+    }, [totalPage])
+
+    const currentScreenPageIndex = useMemo(() => {
+        return screenPages.findIndex(pages => {
+            return pages.includes(currentPage)
+        })
+    }, [screenPages, currentPage])
+
     const handlePageUp = () => {
         setSearchParams({page: `${currentPage + 1}`})
     }
 
     const handlePageDown = () => {
         setSearchParams({page: `${currentPage - 1}`})
+    }
+
+    const handlePageMove = (newPage: number) => {
+        setSearchParams({page: `${newPage}`})
     }
 
     return(
@@ -41,6 +60,9 @@ const JournalCheck : React.FC = () => {
         </SC.JournalList>
             <SC.Button>
                 {currentPage > 1 && <button onClick={handlePageDown}>이전 페이지</button>}
+                {screenPages.length ? screenPages[currentScreenPageIndex].map(page => {
+                    return <button style={{backgroundColor: page === currentPage ? '#8ab787' : undefined}} onClick={() => {handlePageMove(page)}}>{page}</button>
+                }) : <></>}
                 {currentPage !== totalPage && <button onClick={handlePageUp}>다음 페이지</button>}
             </SC.Button>
         </>
