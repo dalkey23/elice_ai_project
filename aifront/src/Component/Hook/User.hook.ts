@@ -32,18 +32,18 @@ export const useGetLoginedUser = () => {
     }
 }
 
-// export const useEditUser = () => {
-//     const { mutateAsync: editUserdataAsync, isError } = useMutation(editUserdata);
-  
-//     return {
-//         editUserdata: editUserdataAsync,
-//       isError
-//     };
-//   };
+export const useEditUser = () => {
+    const { mutateAsync: editUserdataAsync, isError } = useMutation(editUserdata);
+
+    return {
+        editUserdata: editUserdataAsync,
+      isError
+    };
+  };
 
   export const useDeleteUser = () => {
     const { mutateAsync, isError } = useMutation(deleteUser);
-  
+
     return {
         deleteUser: mutateAsync, isError
     }

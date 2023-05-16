@@ -42,10 +42,7 @@ export const getLoginedUser = async () => {
     return res;
 };
 
-export const editUserdata = async (
-    id: Number,
-    body: UserdataRequest
-): Promise<UserDetail> => {
+export const editUserdata = async ({ id, body } : {id: Number, body: UserdataRequest}): Promise<UserDetail> => {
     try {
         const token = localStorage.getItem("token");
         if (!token) {
