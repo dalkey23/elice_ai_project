@@ -3,8 +3,32 @@ import { useSearchParams, Link, useNavigate } from "react-router-dom";
 import { useJournalList } from "../../Component/Hook/Journal.hook";
 import { useGetLoginedUser } from "../../Component/Hook/User.hook";
 import * as SC from "./JournalCheckSC";
+import styled from 'styled-components'
 
 const elementsSize = 8;
+
+const SkeletonBox = styled.div`
+border: 1px solid #e0e1e3;
+border-radius: 8px;
+margin: 1em;
+width: 35%;
+height: 400px;
+background-color: #e0e1e3;
+`
+
+const SkeletonJournalList = () => {
+
+
+    return (
+        <>
+            <SkeletonBox />
+            <SkeletonBox />
+            <SkeletonBox />
+            <SkeletonBox />
+        </>
+    )
+}
+
 
 const JournalCheck: React.FC = () => {
     //로그인 확인
@@ -19,7 +43,7 @@ const JournalCheck: React.FC = () => {
 
     const currentPage = parseInt(searchParams.get("page") as string) || 1;
 
-    const { journalList, totalPage } = useJournalList(
+    const { journalList, totalPage, isLoading, isFetched } = useJournalList(
         currentPage,
         elementsSize
     );
@@ -36,6 +60,7 @@ const JournalCheck: React.FC = () => {
     return (
         <>
             <SC.JournalList>
+                {isLoading && <SkeletonJournalList />}
                 {journalList.map((journal) => {
                     return (
                         <SC.Journal>
@@ -60,14 +85,14 @@ const JournalCheck: React.FC = () => {
                     );
                 })}
             </SC.JournalList>
-            <SC.Button>
+            {isFetched && currentPage > 1 && <SC.Button>
                 {currentPage > 1 && (
                     <button onClick={handlePageDown}>이전 페이지</button>
                 )}
                 {currentPage !== totalPage && (
                     <button onClick={handlePageUp}>다음 페이지</button>
                 )}
-            </SC.Button>
+            </SC.Button>}
         </>
     );
 };
