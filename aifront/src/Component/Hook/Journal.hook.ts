@@ -20,7 +20,7 @@ export const useJournalList = (page: number, elements: number) => {
       refetchOnReconnect: false,
       refetchOnWindowFocus: false
     })
-
+    console.log(data)
     return {
       journalList: data?.data.items || [],
       totalPage: data?.data.totalPages,

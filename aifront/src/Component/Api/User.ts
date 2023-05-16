@@ -26,6 +26,9 @@ export const loginUser = async (body: LoginUser) => {
 
 export const getLoginedUser = async () => {
     const token = localStorage.getItem("token");
+    if (!token) {
+        throw new Error("Token not found in localStorage");
+    }
     const config: AxiosRequestConfig = {
         headers: { Authorization: `Bearer ${token}` },
     };
@@ -71,8 +74,9 @@ export const deleteUser = async (id: number) => {
         headers: { Authorization: `Bearer ${token}` },
     };
     const res = await axios.delete(
-        `http://kdt-ai6-team02.elicecoding.com/api/users/${id}`,config
+        `http://kdt-ai6-team02.elicecoding.com/api/users/${id}`,
+        config
     );
-    console.log(res)
+    console.log(res);
     return res;
 };
