@@ -1,6 +1,7 @@
 import * as SC from "./CommunityDetailSC";
 import { useCommunityDetail, useDeleteCommunity } from "../../Component/Hook/Community.hook";
 import { useNavigate, useParams } from "react-router-dom";
+import { useGetLoginedUser } from "../../Component/Hook/User.hook";
 
 interface BulletPointProps {
     text: string;
@@ -15,6 +16,11 @@ const CommunityDetail: React.FC = () => {
     const { item } = useCommunityDetail(Number(id));
     const { deleteCommunity, isError } = useDeleteCommunity();
     const navigate = useNavigate();
+    const { isLogined } = useGetLoginedUser();
+
+    if (!isLogined) {
+        navigate("/Login");
+    }
 
     const deleteHandler = async (e: React.MouseEvent) => {
         e.preventDefault();
