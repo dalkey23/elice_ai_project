@@ -1,6 +1,7 @@
 import * as SC from "./CommunityDetailSC";
 import { useCommunityDetail, useDeleteCommunity } from "../../Component/Hook/Community.hook";
 import { useNavigate, useParams } from "react-router-dom";
+import { useGetLoginedUser } from "../../Component/Hook/User.hook";
 
 interface BulletPointProps {
     text: string;
@@ -15,6 +16,11 @@ const CommunityDetail: React.FC = () => {
     const { item } = useCommunityDetail(Number(id));
     const { deleteCommunity, isError } = useDeleteCommunity();
     const navigate = useNavigate();
+    const { isLogined } = useGetLoginedUser();
+
+    if (!isLogined) {
+        navigate("/Login");
+    }
 
     const deleteHandler = async (e: React.MouseEvent) => {
         e.preventDefault();
@@ -51,10 +57,10 @@ const CommunityDetail: React.FC = () => {
                 <div>조회수 {item.views}</div>
             </SC.CommunityDetailTitle2>
             <br/>
-            <SC.ButtonDiv1>
+            <SC.ButtonDiv>
                 <button onClick={ ()=> {navigate(`/EditCommunity/${item.id}`)}}>글 수정</button>
                 <button onClick={deleteHandler}>글 삭제</button>
-            </SC.ButtonDiv1>
+            </SC.ButtonDiv>
             <br/>
             <SC.CommunityDetailContent>
                 {item.content}
@@ -78,7 +84,7 @@ const CommunityDetail: React.FC = () => {
                 )
             } */}
 
-            <SC.CommunityCommentMain>
+            <SC.CommunityCommentWrite>
                 <h4>내이름은서원</h4>
                 <div>
                     <input type="text" required />
@@ -87,25 +93,26 @@ const CommunityDetail: React.FC = () => {
                 </div>
                 {/* <p>댓글내용</p> */}
                 <button>작성</button>
-            </SC.CommunityCommentMain>
-            <SC.CommunityCommentMain>
+            </SC.CommunityCommentWrite>
+            <br/>
+            <SC.CommunityCommentList>
                 <h4>(댓글작성자명)</h4>
                 <p>(댓글내용)</p>
-                <button>수정</button>
+                {/* <button>수정</button> */}
                 <button>삭제</button>
-            </SC.CommunityCommentMain>
-            <SC.CommunityCommentMain>
+            </SC.CommunityCommentList>
+            <SC.CommunityCommentList>
                 <h4>(댓글작성자명)</h4>
                 <p>(댓글내용)</p>
-                <button>수정</button>
+                {/* <button>수정</button> */}
                 <button>삭제</button>
-            </SC.CommunityCommentMain>
-            <SC.CommunityCommentMain>
+            </SC.CommunityCommentList>
+            <SC.CommunityCommentList>
                 <h4>(댓글작성자명)</h4>
                 <p>(댓글내용)</p>
-                <button>수정</button>
+                {/* <button>수정</button> */}
                 <button>삭제</button>
-            </SC.CommunityCommentMain>
+            </SC.CommunityCommentList>
         </SC.CommunityDetailMain>
     )
 };

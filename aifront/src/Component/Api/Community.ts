@@ -3,12 +3,14 @@ import { BoardDetail, BoardModel, PostBoard, DeleteBoard, EditBoard } from "../.
 
 export const getCommunityList = async (page: number, elements: number,) => {
     const res = await axios.get<BoardModel>(`http://kdt-ai6-team02.elicecoding.com/api/boards?page=${page}&elements=${elements}`);
-    console.log(res)
     return res;
 };
 
 export const postCommunity = async (body: PostBoard) => {
     const token = localStorage.getItem("token");
+    if (!token) {
+        throw new Error("Token not found in localStorage");
+    }
     const config: AxiosRequestConfig = {
         headers: { Authorization: `Bearer ${token}` },
     };
@@ -18,6 +20,9 @@ export const postCommunity = async (body: PostBoard) => {
 
 export const getCommunityDetail = async (id : number) => {
     const token = localStorage.getItem("token");
+    if (!token) {
+        throw new Error("Token not found in localStorage");
+    }
     const config: AxiosRequestConfig = {
         headers: { Authorization: `Bearer ${token}` },
     };
@@ -27,6 +32,9 @@ export const getCommunityDetail = async (id : number) => {
 
 export const editCommunity = async (id : number, body: PostBoard) => {
     const token = localStorage.getItem("token");
+    if (!token) {
+        throw new Error("Token not found in localStorage");
+    }
     const config: AxiosRequestConfig = {
         headers: { Authorization: `Bearer ${token}` },
     };
@@ -36,9 +44,24 @@ export const editCommunity = async (id : number, body: PostBoard) => {
 
 export const deleteCommunity = async (id : number) => {
     const token = localStorage.getItem("token");
-        const config: AxiosRequestConfig = {
-            headers: { Authorization: `Bearer ${token}` },
-        };
+    if (!token) {
+        throw new Error("Token not found in localStorage");
+    }
+    const config: AxiosRequestConfig = {
+        headers: { Authorization: `Bearer ${token}` },
+    };
     const res = await axios.delete<DeleteBoard>(`http://kdt-ai6-team02.elicecoding.com/api/boards/${id}`, config);
     return res;
 };
+
+// export const postCommunityComment = async (body: PostBoardComment) => {
+//     const token = localStorage.getItem("token");
+//     if (!token) {
+//         throw new Error("Token not found in localStorage");
+//     }
+//     const config: AxiosRequestConfig = {
+//         headers: { Authorization: `Bearer ${token}` },
+//     };
+//     const res = await axios.post<PostBoardComment>('http://kdt-ai6-team02.elicecoding.com/api/boards', body, config);
+//     return res;
+// };

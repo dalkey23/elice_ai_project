@@ -74,7 +74,7 @@ export const CommunityDetailContent = styled.div`
     background: rgba(201, 150, 204, 0.5);
 `;
 
-export const ButtonDiv1 = styled.div`
+export const ButtonDiv = styled.div`
     width: 80%;
     display: flex;
     padding: 0 0 0 30px;
@@ -104,15 +104,13 @@ export const CommunityCommentTitle = styled.div`
     };
 `;
 
-export const CommunityCommentMain = styled.div`
+export const CommunityCommentWrite = styled.div`
     width: 80%;
     display: flex;
     padding: 0px 20px;
     margin: 0 auto;
     justfy-content: center;
     align-items: center;
-    background: rgba(201, 150, 204, 0.5);
-    border: 1px solid navy;
 
     & h4 {
         width: 10%;
@@ -129,6 +127,7 @@ export const CommunityCommentMain = styled.div`
         width: 80%;
         margin-top: 40px;
         margin-bottom: 5px;
+        margin-right: 5px;
     }
 
     & input {
@@ -179,13 +178,45 @@ export const CommunityCommentMain = styled.div`
         width: 100%;
     }
 
+    & button {
+        padding: 10px;
+        width: 7%;
+        color: white;
+        background-color: #916bbf;
+        border: 1px solid white;
+        border-radius: 10px;
+        :hover  {
+            background-color: #c996cc;
+        }
+    };
+`
+
+export const CommunityCommentList = styled.div`
+    width: 80%;
+    display: flex;
+    padding: 0px 20px;
+    margin: 0 auto;
+    justfy-content: center;
+    align-items: center;
+    background: rgba(201, 150, 204, 0.5);
+
+    & h4 {
+        width: 10%;
+        padding: 10px;
+        margin: 5px;
+        display: inline;
+        text-align: center;
+        font-weight : bold;
+        font-size : 12px;
+    };
+
     & p {
-        width: 75%;
+        // width: 75%;
+        width: 80%;
         padding: 10px;
         margin: 5px;
         display: inline;
         vertical-align: middle;
-        border: 1px solid green;
     };
 
     & button {
@@ -193,7 +224,7 @@ export const CommunityCommentMain = styled.div`
         width: 7%;
         color: white;
         background-color: #916bbf;
-        border: 1px solid white;
+        border: 1px solid #916bbf;
         border-radius: 10px;
         :hover  {
             background-color: #c996cc;

@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import * as SC from "./PostCommunitySC";
 import { usePostCommunity } from "../../Component/Hook/Community.hook";
+import { useGetLoginedUser } from "../../Component/Hook/User.hook";
 import RichEditor from '../../Component/Base/RichEditor';
 
 const PostCommunity: React.FC = () => {
@@ -8,6 +10,12 @@ const PostCommunity: React.FC = () => {
     const [content, setContent] = useState('');
     const [title, setTitle] = useState('');
     const [category, setCategory] = useState('');
+    const navigate = useNavigate();
+    const { isLogined } = useGetLoginedUser();
+
+    if (!isLogined) {
+        navigate("/Login");
+    }
 
     const handleSubmit = async (e : React.MouseEvent) => {
         e.preventDefault();
