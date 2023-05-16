@@ -62,8 +62,7 @@ const CommunityDetail: React.FC = () => {
                 <button onClick={deleteHandler}>글 삭제</button>
             </SC.ButtonDiv>
             <br/>
-            <SC.CommunityDetailContent>
-                {item.content}
+            <SC.CommunityDetailContent dangerouslySetInnerHTML={{__html: item.content}}>
             </SC.CommunityDetailContent>
             <br/>
             <SC.CommunityCommentTitle>
