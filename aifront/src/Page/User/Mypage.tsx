@@ -5,15 +5,10 @@ import { useGetLoginedUser } from "../../Component/Hook/User.hook";
 const Mypage = () => {
     const navigate = useNavigate();
 
-    const { LoginedUser, isLogined } = useGetLoginedUser();
-    const userdata = LoginedUser?.data.item;
+    const { isLogined } = useGetLoginedUser();
 
     if (!isLogined) {
         navigate("/Login");
-    }
-
-    if (!userdata) {
-        return <></>;
     }
 
     return (

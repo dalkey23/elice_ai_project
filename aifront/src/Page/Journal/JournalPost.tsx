@@ -5,6 +5,7 @@ import { ko } from 'date-fns/esm/locale'
 import { useNavigate } from "react-router-dom";
 import * as SC from "./JournalPostSC";
 import { useCreateJournal } from "../../Component/Hook/Journal.hook";
+import { useGetLoginedUser } from "../../Component/Hook/User.hook";
 
 const JournalPost : React.FC = () => {
     const  { createJournal, isLoading, isError }  = useCreateJournal();
@@ -12,6 +13,14 @@ const JournalPost : React.FC = () => {
     const [title, setTitle] = useState('');
     const [publishedDate, setPublishedDate] = useState(new Date());
     const navigate = useNavigate();
+
+        //로그인 확인
+        const { isLogined } = useGetLoginedUser();
+    
+        if (!isLogined) {
+            navigate("/Login");
+        }
+    
 
     const handleSubmit = async (e : React.MouseEvent) => {
         e.preventDefault();
@@ -23,7 +32,7 @@ const JournalPost : React.FC = () => {
                     onSuccess(res) {
                         console.log(res);
                         alert('작성이 완료 되었습니다!');
-                        navigate('/JournalCheck');
+                        window.location.href='/JournalCheck';
                     },
                     onError(err){
                         console.log(err);
