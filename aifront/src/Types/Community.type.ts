@@ -19,11 +19,6 @@ export type BoardModel = {
     items : Board[];
 }
 
-export type BoardComment = {
-    id: string;
-    content: string;
-}
-
 export type PostBoard = {
     category: string;
     title: string;
@@ -47,4 +42,20 @@ export type DeleteBoard = {
         isDeleted: boolean;
     };
     success: boolean;
+}
+
+export type BoardComment = {
+    id: number;
+    userId: number;
+    boardId: number;
+    content: string;
+    createdAt: string;
+}
+
+export type PostBoardComment = {
+    content: string;
+}
+
+export type DeleteBoardComment = {
+    
 }
