@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useRef } from "react";
 import * as SC from "./JoinUserSC";
 import { UserdataRequest } from "../../Types/Userdata.type";
 import { useNavigate } from "react-router-dom";
@@ -24,8 +24,9 @@ const JoinUser: React.FC = () => {
         mainAddress: "",
         detailAddress: "",
     });
+    
     // 각 폼 입력시 onChange 이벤트
-    const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const changeHandlerString = (e: React.ChangeEvent<HTMLInputElement>) => {
         setUserdata((curUserdata) => {
             return { ...curUserdata, [e.target.name]: e.target.value };
         });
@@ -37,91 +38,11 @@ const JoinUser: React.FC = () => {
         });
     };
 
-    // const checkedEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
-    //     setUserdata((curUserdata) => {
-    //         return { ...curUserdata, email: e.target.value };
-    //     });
-    // };
-
-    // const checkedLastName = (e: React.ChangeEvent<HTMLInputElement>) => {
-    //     setUserdata((curUserdata) => {
-    //         return { ...curUserdata, lastName: e.target.value };
-    //     });
-    // };
-
-    // const checkedFirstName = (e: React.ChangeEvent<HTMLInputElement>) => {
-    //     setUserdata((curUserdata) => {
-    //         return { ...curUserdata, firstName: e.target.value };
-    //     });
-    // };
-
-    // const checkedPassword = (e: React.ChangeEvent<HTMLInputElement>) => {
-    //     setUserdata((curUserdata) => {
-    //         return { ...curUserdata, password: e.target.value };
-    //     });
-    // };
-
     const checkedConfirmPW = (e: React.ChangeEvent<HTMLInputElement>) => {
         console.log(
             `userdata password : ${userdata.password}, target value : ${e.target.value}`
         );
     };
-
-    // const checkedPhoneNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
-    //     setUserdata((curUserdata) => {
-    //         return { ...curUserdata, phoneNumber: e.target.value };
-    //     });
-    // };
-
-    // const checkedNickname = (e: React.ChangeEvent<HTMLInputElement>) => {
-    //     setUserdata((curUserdata) => {
-    //         return { ...curUserdata, nickname: e.target.value };
-    //     });
-    // };
-
-    // const checkedGender = (e: React.ChangeEvent<HTMLInputElement>) => {
-    //     setUserdata((curUserdata) => {
-    //         return { ...curUserdata, gender: e.target.value };
-    //     });
-    // };
-
-    // const checkedBirthYear = (e: React.ChangeEvent<HTMLInputElement>) => {
-    //     setUserdata((curUserdata) => {
-    //         return { ...curUserdata, birthYear: Number(e.target.value) };
-    //     });
-    // };
-    // const checkedBirthMonth = (e: React.ChangeEvent<HTMLInputElement>) => {
-    //     setUserdata((curUserdata) => {
-    //         return { ...curUserdata, birthMonth: Number(e.target.value) };
-    //     });
-    // };
-    // const checkedBirthDate = (e: React.ChangeEvent<HTMLInputElement>) => {
-    //     setUserdata((curUserdata) => {
-    //         return { ...curUserdata, birthDate: Number(e.target.value) };
-    //     });
-    // };
-
-    // const checkedZipcode = (e: React.ChangeEvent<HTMLInputElement>) => {
-    //     setUserdata((curUserdata) => {
-    //         return { ...curUserdata, zipCode: Number(e.target.value) };
-    //     });
-    // };
-    // const checkedMainAddress = (e: React.ChangeEvent<HTMLInputElement>) => {
-    //     setUserdata((curUserdata) => {
-    //         return { ...curUserdata, mainAddress: e.target.value };
-    //     });
-    // };
-    // const checkedDetailAddress = (e: React.ChangeEvent<HTMLInputElement>) => {
-    //     setUserdata((curUserdata) => {
-    //         return { ...curUserdata, detailAddress: e.target.value };
-    //     });
-    // };
-
-    // const checkedProfilePhotoUrl = (e: React.ChangeEvent<HTMLInputElement>) => {
-    //     setUserdata((curUserdata) => {
-    //         return { ...curUserdata, detailAddress: e.target.value };
-    //     });
-    // };
 
     const submitHandler = async (e: React.MouseEvent) => {
         e.preventDefault();
@@ -150,14 +71,18 @@ const JoinUser: React.FC = () => {
             <SC.JoinDiv1>
                 <SC.JoinItem>
                     <label>이메일</label>
-                    <input type="text" name="email" onChange={changeHandler} />
+                    <input
+                        type="text"
+                        name="email"
+                        onChange={changeHandlerString}
+                    />
                 </SC.JoinItem>
                 <SC.JoinItem>
                     <label>비밀번호</label>
                     <input
                         type="password"
                         name="password"
-                        onChange={changeHandler}
+                        onChange={changeHandlerString}
                     />
                 </SC.JoinItem>
                 <SC.JoinItem>
@@ -176,13 +101,13 @@ const JoinUser: React.FC = () => {
                         type="text"
                         name="lastName"
                         placeholder="홍"
-                        onChange={changeHandler}
+                        onChange={changeHandlerString}
                     />
                     <input
                         type="text"
                         name="firstName"
                         placeholder="길동"
-                        onChange={changeHandler}
+                        onChange={changeHandlerString}
                     />
                 </SC.JoinItem>
                 <SC.JoinItem>
@@ -191,7 +116,7 @@ const JoinUser: React.FC = () => {
                         type="text"
                         name="nickname"
                         placeholder="dong"
-                        onChange={changeHandler}
+                        onChange={changeHandlerString}
                     />
                 </SC.JoinItem>
 
@@ -222,14 +147,14 @@ const JoinUser: React.FC = () => {
                         type="radio"
                         name="gender"
                         value="MALE"
-                        onChange={changeHandler}
+                        onChange={changeHandlerString}
                     />
                     <label>남자</label>
                     <input
                         type="radio"
                         name="gender"
                         value="FEMALE"
-                        onChange={changeHandler}
+                        onChange={changeHandlerString}
                     />
                     <label>여자</label>
                 </SC.JoinItem>
@@ -239,7 +164,7 @@ const JoinUser: React.FC = () => {
                         type="text"
                         name="phoneNumber"
                         placeholder="010-1234-1234"
-                        onChange={changeHandler}
+                        onChange={changeHandlerString}
                     />
                 </SC.JoinItem>
                 <SC.JoinItem>
@@ -255,7 +180,7 @@ const JoinUser: React.FC = () => {
                             우편번호 검색
                         </button>
                         {isModal && (
-                            <Modal
+                            <Modal 
                                 onClickToggleModal={onClickToggleModal}></Modal>
                         )}
                     </div>
@@ -263,13 +188,13 @@ const JoinUser: React.FC = () => {
                         type="text"
                         name="mainAddress"
                         placeholder="서울시 성동구 광나루로6길"
-                        onChange={changeHandler}
+                        onChange={changeHandlerString}
                     />
                     <input
                         type="text"
                         name="detailAddress"
                         placeholder="49"
-                        onChange={changeHandler}
+                        onChange={changeHandlerString}
                     />
                 </SC.JoinItem>
                 <SC.JoinItem>
@@ -277,7 +202,7 @@ const JoinUser: React.FC = () => {
                     <input
                         type="file"
                         name="profilePhotoUrl"
-                        onChange={changeHandler}
+                        onChange={changeHandlerString}
                     />
                 </SC.JoinItem>
             </SC.JoinDiv2>
