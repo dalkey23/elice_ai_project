@@ -89,7 +89,7 @@ const CommunityList: React.FC = () => {
                                 <BulletPoint text={item.category} />
                             </td>
                             <td>
-                                <Link to = {`/CommunityDetail/${item.id}`} style={{ textDecoration: 'none' }}>{item.title} ({item.commentCount})</Link></td>
+                                <Link to = {`/CommunityDetail/${item.id}`} style={{ textDecoration: 'none', color: 'black' }}>{item.title} ({item.commentCount})</Link></td>
                             <td>{item.createdAt.slice(0, 10)} {item.createdAt.slice(11, 19)}</td>
                             <td>{item.authorName}</td>
                             <td>{item.views}</td>
