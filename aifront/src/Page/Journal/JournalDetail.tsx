@@ -18,7 +18,7 @@ const JournalDetail: React.FC = () => {
 
     const { id } = useParams();
     const { item } = useJournalDetail(Number(id));
-    console.log(item);
+
     if (!item) {
         return <></>;
     }
@@ -28,7 +28,6 @@ const JournalDetail: React.FC = () => {
 
         try {
             const res = await getJournalDelete(Number(id));
-            console.log(res);
             alert("일기가 삭제 되었습니다.");
             window.location.href = "/JournalCheck";
         } catch (err) {
@@ -39,16 +38,25 @@ const JournalDetail: React.FC = () => {
 
     return (
         <SC.JouranlDetailMain>
-            <h1>{item.id}번째 일기</h1>
-            <h2>{item.emotion}</h2>
             <h3>{item.publishedDate}</h3>
             <h4>{item.title}</h4>
+            <hr/>
             <SC.JournalDetail>
                 <div>
                     <h1>{item.content}</h1>
                     <h2>{item.recommendedFood}</h2>
                 </div>
             </SC.JournalDetail>
+            <SC.EmotionDiv>
+                <hr/>
+                <h1>😡 : {item.emotionScores.angryScore}%
+                &nbsp;🤭 : {item.emotionScores.excitedScore}%
+                &nbsp;😱 : {item.emotionScores.worryScore}%
+                &nbsp;😢 : {item.emotionScores.sadScore}%
+                &nbsp;😁 : {item.emotionScores.happyScore}%
+                </h1>
+                <h1>당신의 감정은? : {item.emotion}</h1>
+            </SC.EmotionDiv>
             <button onClick={handleDelete}>일기 삭제</button>
         </SC.JouranlDetailMain>
     );

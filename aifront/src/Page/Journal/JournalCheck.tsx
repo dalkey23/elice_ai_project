@@ -25,7 +25,6 @@ const JournalCheck: React.FC = () => {
         currentPage,
         elementsSize
     );
-    console.log(journalList);
 
     const handlePageUp = () => {
         setSearchParams({ page: `${currentPage + 1}` });
@@ -45,9 +44,6 @@ const JournalCheck: React.FC = () => {
                                 to={`/JournalDetail/${journal.id}`}
                                 key={journal.id}>
                                 <div>
-                                    <h1 key="journalId">
-                                        {journal.id}번째 일기
-                                    </h1>
                                     <p key="journalDate">
                                         {journal.publishedDate}
                                     </p>
@@ -62,14 +58,14 @@ const JournalCheck: React.FC = () => {
                     );
                 })}
             </SC.JournalList>
-            <SC.Button>
+            {totalPage !== undefined && <SC.Button>
                 {currentPage > 1 && (
                     <button onClick={handlePageDown}>이전 페이지</button>
                 )}
                 {currentPage !== totalPage && (
                     <button onClick={handlePageUp}>다음 페이지</button>
                 )}
-            </SC.Button>
+            </SC.Button>}
         </>
     );
 };

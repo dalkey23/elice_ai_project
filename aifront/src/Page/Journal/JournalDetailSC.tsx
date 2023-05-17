@@ -1,9 +1,18 @@
 import styled from "styled-components";
 
+export const EmotionDiv = styled.div`
+    margin : 1em;
+    font-size : 1.5em;
+`
+
 export const JouranlDetailMain = styled.div`
 
     text-align : center;
-    padding : 2em;
+    padding : 1em;
+
+    & hr {
+        width : 50%
+    }
 
     & h1 {
         margin : 1em;
@@ -20,6 +29,7 @@ export const JouranlDetailMain = styled.div`
 
     & h4 {
         font-size : 3em;
+        margin-bottom : 1em;
     }
 
     & button {
@@ -40,11 +50,9 @@ export const JournalDetail = styled.div`
     justify-content : center;
 
     & div {
-        border : 1px solid black;
-        border-radius : 8px;
         width : 30%;
         text-align : center;
         margin : 1rem;
-        padding : 15rem;
+        padding : 10rem;
     }
 `

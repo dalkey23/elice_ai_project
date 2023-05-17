@@ -1,5 +1,7 @@
 import React from "react";
 import * as SC from "./HomeSC"
+import JournalPost from '../../../public/Img/JournalPost.png'
+import JournalDetail from '../../../public/Img/JournalDetail.png'
 
 const Home : React.FC = () => {
 
@@ -13,7 +15,17 @@ const Home : React.FC = () => {
                 {/* 비로그인 상태 서비스 소개 페이지 */}
                 <>
                     <SC.Intro1></SC.Intro1>
-                    <SC.Intro2></SC.Intro2>
+                    <SC.Intro2>
+                        {/* 음식사진 나오면 사진 변경 */}
+                        <img src = 'Img/JournalPost.png' alt = 'JournalPost'/>
+                        <img src = 'Img/JournalDetail.png' alt = 'JournalDetail'/>
+                        <div>
+                            <h1>오늘 하루는 안녕하셨나요?</h1>
+                            <h1>내일이 되면, 오늘을 잊어버리게 됩니다.</h1>
+                            <h1>오늘 나의 하루를 정리하고</h1>
+                            <h1>맛있는 야식추천과 하루를 마무리하면 어떨까요?</h1>
+                        </div>
+                    </SC.Intro2>
                     <SC.Intro3><h1>나와 연결된, 다른 사람들</h1></SC.Intro3>
                     <SC.Intro4></SC.Intro4>
                 </>
