@@ -26,7 +26,7 @@ const Login = () => {
                 onSuccess(res) {
                     localStorage.setItem("token", res.data.item.jwtToken)
                     alert("로그인 성공");
-                    navigate("/");
+                    window.location.href = "/";
                 },
                 onError(err) {
                     console.log(err);
