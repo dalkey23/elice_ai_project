@@ -24,7 +24,7 @@ const JoinUser: React.FC = () => {
         mainAddress: "",
         detailAddress: "",
     });
-    
+
     // 각 폼 입력시 onChange 이벤트
     const changeHandlerString = (e: React.ChangeEvent<HTMLInputElement>) => {
         setUserdata((curUserdata) => {
@@ -68,10 +68,11 @@ const JoinUser: React.FC = () => {
 
     return (
         <SC.JoinContainer>
+            <SC.InfoTitle>EEUM</SC.InfoTitle>
             <SC.JoinDiv1>
                 <SC.JoinItem>
                     <label>이메일</label>
-                    <input
+                    <SC.DefaultInput
                         type="text"
                         name="email"
                         onChange={changeHandlerString}
@@ -79,7 +80,7 @@ const JoinUser: React.FC = () => {
                 </SC.JoinItem>
                 <SC.JoinItem>
                     <label>비밀번호</label>
-                    <input
+                    <SC.DefaultInput
                         type="password"
                         name="password"
                         onChange={changeHandlerString}
@@ -87,7 +88,7 @@ const JoinUser: React.FC = () => {
                 </SC.JoinItem>
                 <SC.JoinItem>
                     <label>비밀번호 확인</label>
-                    <input
+                    <SC.DefaultInput
                         type="password"
                         name="confirmPW"
                         onChange={checkedConfirmPW}
@@ -97,13 +98,13 @@ const JoinUser: React.FC = () => {
             <SC.JoinDiv2>
                 <SC.JoinItem>
                     <label>이름</label>
-                    <input
+                    <SC.NameInput
                         type="text"
                         name="lastName"
                         placeholder="홍"
                         onChange={changeHandlerString}
                     />
-                    <input
+                    <SC.NameInput
                         type="text"
                         name="firstName"
                         placeholder="길동"
@@ -112,7 +113,7 @@ const JoinUser: React.FC = () => {
                 </SC.JoinItem>
                 <SC.JoinItem>
                     <label>닉네임</label>
-                    <input
+                    <SC.DefaultInput
                         type="text"
                         name="nickname"
                         placeholder="dong"
@@ -122,45 +123,53 @@ const JoinUser: React.FC = () => {
 
                 <SC.JoinItem>
                     <label>생년월일</label>
-                    <input
-                        type="text"
-                        name="birthYear"
-                        placeholder="Year"
-                        onChange={changeHandlerNumber}
-                    />
-                    <input
-                        type="text"
-                        name="birthMonth"
-                        placeholder="Month"
-                        onChange={changeHandlerNumber}
-                    />
-                    <input
-                        type="text"
-                        name="birthDate"
-                        placeholder="Date"
-                        onChange={changeHandlerNumber}
-                    />
+                    <div>
+                        <SC.BirthInput
+                            type="text"
+                            name="birthYear"
+                            placeholder="Year"
+                            onChange={changeHandlerNumber}
+                        />
+                        <SC.BirthInput
+                            type="text"
+                            name="birthMonth"
+                            placeholder="Month"
+                            onChange={changeHandlerNumber}
+                        />
+                        <SC.BirthInput
+                            type="text"
+                            name="birthDate"
+                            placeholder="Date"
+                            onChange={changeHandlerNumber}
+                        />
+                    </div>
                 </SC.JoinItem>
                 <SC.JoinItem>
                     <label>성별</label>
-                    <input
-                        type="radio"
-                        name="gender"
-                        value="MALE"
-                        onChange={changeHandlerString}
-                    />
-                    <label>남자</label>
-                    <input
-                        type="radio"
-                        name="gender"
-                        value="FEMALE"
-                        onChange={changeHandlerString}
-                    />
-                    <label>여자</label>
+                    <div className="First">
+                        <div className="Second">
+                            <input
+                                type="radio"
+                                name="gender"
+                                value="MALE"
+                                onChange={changeHandlerString}
+                            />
+                            <p>남자</p>
+                        </div>
+                        <div className="Second">
+                            <input
+                                type="radio"
+                                name="gender"
+                                value="FEMALE"
+                                onChange={changeHandlerString}
+                            />
+                            <p>여자</p>
+                        </div>
+                    </div>
                 </SC.JoinItem>
                 <SC.JoinItem>
                     <label>휴대폰 번호</label>
-                    <input
+                    <SC.DefaultInput
                         type="text"
                         name="phoneNumber"
                         placeholder="010-1234-1234"
@@ -169,37 +178,39 @@ const JoinUser: React.FC = () => {
                 </SC.JoinItem>
                 <SC.JoinItem>
                     <label>주소</label>
-                    <input
-                        type="text"
-                        name="zipCode"
-                        placeholder="04799"
-                        onChange={changeHandlerNumber}
-                    />
-                    <div>
+                    <div className="Second">
+                        <SC.AddressInput
+                            type="text"
+                            name="zipCode"
+                            placeholder="04799"
+                            onChange={changeHandlerNumber}
+                        />
                         <button onClick={onClickToggleModal}>
                             우편번호 검색
                         </button>
                         {isModal && (
-                            <Modal 
+                            <Modal
                                 onClickToggleModal={onClickToggleModal}></Modal>
                         )}
                     </div>
-                    <input
-                        type="text"
-                        name="mainAddress"
-                        placeholder="서울시 성동구 광나루로6길"
-                        onChange={changeHandlerString}
-                    />
-                    <input
-                        type="text"
-                        name="detailAddress"
-                        placeholder="49"
-                        onChange={changeHandlerString}
-                    />
+                    <div className="Second">
+                        <SC.AddressInput
+                            type="text"
+                            name="mainAddress"
+                            placeholder="서울시 성동구 광나루로6길"
+                            onChange={changeHandlerString}
+                        />
+                        <SC.AddressInput
+                            type="text"
+                            name="detailAddress"
+                            placeholder="49"
+                            onChange={changeHandlerString}
+                        />
+                    </div>
                 </SC.JoinItem>
                 <SC.JoinItem>
                     <label>프로필 사진</label>
-                    <input
+                    <SC.ProfileInput
                         type="file"
                         name="profilePhotoUrl"
                         onChange={changeHandlerString}

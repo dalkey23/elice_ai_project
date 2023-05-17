@@ -74,7 +74,7 @@ export const editUserdata = async ({
     };
 
     if (id == undefined || body == undefined) {
-        throw new Error("id or userdata undefined");
+        throw new Error("id or userdata is undefined");
     }
     const res = await axios.put<UserDetail>(
         `http://localhost:3500/api/users/${id}`,

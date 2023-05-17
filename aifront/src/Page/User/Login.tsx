@@ -62,12 +62,12 @@ const Login = () => {
                     </SC.ConfirmButton>
                 </SC.ButtonDiv>
                 <SC.AddedDiv>
-                    <button
+                    {/* <button
                         onClick={() => {
                             navigate("/");
                         }}>
                         아이디/비밀번호 찾기
-                    </button>
+                    </button> */}
                     <button
                         onClick={() => {
                             navigate("/UserJoin");
