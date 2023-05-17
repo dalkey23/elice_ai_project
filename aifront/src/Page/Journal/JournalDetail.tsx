@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useJournalDetail } from "../../Component/Hook/Journal.hook";
 import { getJournalDelete } from "../../Component/Api/PostJournal";
@@ -10,9 +10,11 @@ const JournalDetail: React.FC = () => {
     const navigate = useNavigate();
     const { isLogined } = useGetLoginedUser();
 
-    if (!isLogined) {
-        navigate("/Login");
-    }
+    useEffect(()=>{
+        if (!isLogined) {
+            navigate("/Login");
+        }
+    },[isLogined])
 
     const { id } = useParams();
     const { item } = useJournalDetail(Number(id));

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSearchParams, Link, useNavigate } from "react-router-dom";
 import { useJournalList } from "../../Component/Hook/Journal.hook";
 import { useGetLoginedUser } from "../../Component/Hook/User.hook";
@@ -11,9 +11,11 @@ const JournalCheck: React.FC = () => {
     const navigate = useNavigate();
     const { isLogined } = useGetLoginedUser();
 
-    if (!isLogined) {
-        navigate("/Login");
-    }
+    useEffect(()=>{
+        if (!isLogined) {
+            navigate("/Login");
+        }
+    },[isLogined])
 
     const [searchParams, setSearchParams] = useSearchParams();
 

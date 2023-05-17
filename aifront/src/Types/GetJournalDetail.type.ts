@@ -3,6 +3,7 @@ export type JournalDetail = {
     userid : number;
     recommendedFood : null;
     emotion : string;
+    emotionScores : string;
     title : string;
     content : string;
     weather : null;

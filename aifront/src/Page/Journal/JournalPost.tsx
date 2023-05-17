@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import DatePicker from "react-datepicker";
 import 'react-datepicker/dist/react-datepicker.css'
 import { ko } from 'date-fns/esm/locale'
@@ -17,9 +17,11 @@ const JournalPost : React.FC = () => {
         //로그인 확인
         const { isLogined } = useGetLoginedUser();
     
-        if (!isLogined) {
-            navigate("/Login");
-        }
+        useEffect(()=>{
+            if (!isLogined) {
+                navigate("/Login");
+            }
+        },[isLogined])
     
 
     const handleSubmit = async (e : React.MouseEvent) => {
