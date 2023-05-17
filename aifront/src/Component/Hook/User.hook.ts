@@ -1,50 +1,62 @@
 import { useMutation, useQuery } from "react-query";
-import { createUserdata, loginUser, getLoginedUser, editUserdata, deleteUser } from "../Api/User";
+import {
+    createUserdata,
+    loginUser,
+    getLoginedUser,
+    editUserdata,
+    deleteUser,
+} from "../Api/User";
 import { UserdataRequest } from "../../Types/Userdata.type";
 
 export const useJoinUser = () => {
-    const { mutateAsync, isError } = useMutation(createUserdata)
+    const { mutateAsync, isError } = useMutation(createUserdata);
     return {
-        createUserdata : mutateAsync,
-        isError
-    }
-}
+        createUserdata: mutateAsync,
+        isError,
+    };
+};
 
 export const useLoginUser = () => {
-    const { mutateAsync, isError, data } = useMutation(loginUser)
+    const { mutateAsync, isError, data } = useMutation(loginUser);
     return {
-        loginUser : mutateAsync,
+        loginUser: mutateAsync,
         isError,
-        data
-    }
-}
+        data,
+    };
+};
 
 export const useGetLoginedUser = () => {
-
-    const { data: LoginedUser, isError } = useQuery(["getLoginedUser"], () => {
-        return getLoginedUser();
-    });
+    const { data: LoginedUser, isError } = useQuery(
+        ["getLoginedUser"],
+        () => {
+            return getLoginedUser();
+        },
+        {
+            retry: 0,
+        }
+    );
 
     return {
         LoginedUser,
         isLogined: !!LoginedUser,
-        isError
-    }
-}
+        isError,
+    };
+};
 
-// export const useEditUser = () => {
-//     const { mutateAsync: editUserdataAsync, isError } = useMutation(editUserdata);
-  
-//     return {
-//         editUserdata: editUserdataAsync,
-//       isError
-//     };
-//   };
-
-  export const useDeleteUser = () => {
+export const useDeleteUser = () => {
     const { mutateAsync, isError } = useMutation(deleteUser);
-  
+
     return {
-        deleteUser: mutateAsync, isError
-    }
-  }
+        deleteUser: mutateAsync,
+        isError,
+    };
+};
+
+export const useEditUser = () => {
+    const { mutateAsync: editUserdataAsync, isError } = useMutation(editUserdata);
+
+    return {
+        editUserdata: editUserdataAsync,
+      isError
+    };
+  };

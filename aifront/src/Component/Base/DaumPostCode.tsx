@@ -15,6 +15,7 @@ const DaumPost = () => {
                 extraAddress += `${extraAddress !== "" && ", "}${buildingName}`;
             }
             fullAddress += `${extraAddress !== "" ? ` ${extraAddress}` : ""}`;
+            console.log(fullAddress);
         }
         //fullAddress -> 전체 주소반환
     };

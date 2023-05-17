@@ -1,4 +1,4 @@
-import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
+import axios, { AxiosRequestConfig } from "axios";
 import {
     LoginInfo,
     LoginUser,
@@ -42,29 +42,6 @@ export const getLoginedUser = async () => {
     return res;
 };
 
-export const editUserdata = async (
-    id: Number,
-    body: UserdataRequest
-): Promise<UserDetail> => {
-    try {
-        const token = localStorage.getItem("token");
-        if (!token) {
-            throw new Error("Token not found in localStorage");
-        }
-        const config: AxiosRequestConfig = {
-            headers: { Authorization: `Bearer ${token}` },
-        };
-        const res = await axios.put<UserDetail>(
-            `http://localhost:3500/api/users/${id}`,
-            body,
-            config
-        );
-        return res?.data;
-    } catch (err) {
-        throw err;
-    }
-};
-
 export const deleteUser = async (id: number) => {
     const token = localStorage.getItem("token");
     if (!token) {
@@ -79,4 +56,30 @@ export const deleteUser = async (id: number) => {
     );
     console.log(res);
     return res;
+};
+
+export const editUserdata = async ({
+    id,
+    body,
+}: {
+    id: Number | undefined;
+    body: UserdataRequest | undefined;
+}): Promise<UserDetail> => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+        throw new Error("Token not found in localStorage");
+    }
+    const config: AxiosRequestConfig = {
+        headers: { Authorization: `Bearer ${token}` },
+    };
+
+    if (id == undefined || body == undefined) {
+        throw new Error("id or userdata undefined");
+    }
+    const res = await axios.put<UserDetail>(
+        `http://localhost:3500/api/users/${id}`,
+        body,
+        config
+    );
+    return res?.data;
 };

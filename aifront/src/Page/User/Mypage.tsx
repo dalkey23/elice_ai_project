@@ -1,15 +1,20 @@
 import * as SC from "./MypageSC";
 import { useNavigate } from "react-router-dom";
 import { useGetLoginedUser } from "../../Component/Hook/User.hook";
+import { useEffect } from "react";
 
 const Mypage = () => {
     const navigate = useNavigate();
 
     const { isLogined } = useGetLoginedUser();
 
-    if (!isLogined) {
-        navigate("/Login");
-    }
+    useEffect(()=>{
+        if (!isLogined) {
+            navigate("/Login");
+        }
+    },[isLogined])
+
+  
 
     return (
         <SC.MypageContainer>
