@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import * as SC from "./PostCommunitySC";
 import { usePostCommunity } from "../../Component/Hook/Community.hook";
@@ -13,9 +13,11 @@ const PostCommunity: React.FC = () => {
     const navigate = useNavigate();
     const { isLogined } = useGetLoginedUser();
 
-    if (!isLogined) {
-        navigate("/Login");
-    }
+    useEffect(()=>{
+        if (!isLogined) {
+            navigate("/Login");
+        }
+    },[isLogined])
 
     const handleSubmit = async (e : React.MouseEvent) => {
         e.preventDefault();

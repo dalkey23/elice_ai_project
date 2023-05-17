@@ -1,4 +1,5 @@
 import * as SC from "./CommunityDetailSC";
+import { useEffect } from "react";
 import { useCommunityDetail, useDeleteCommunity } from "../../Component/Hook/Community.hook";
 import { useNavigate, useParams } from "react-router-dom";
 import { useGetLoginedUser } from "../../Component/Hook/User.hook";
@@ -18,9 +19,11 @@ const CommunityDetail: React.FC = () => {
     const navigate = useNavigate();
     const { isLogined } = useGetLoginedUser();
 
-    if (!isLogined) {
-        navigate("/Login");
-    }
+    useEffect(()=>{
+        if (!isLogined) {
+            navigate("/Login");
+        }
+    },[isLogined])
 
     const deleteHandler = async (e: React.MouseEvent) => {
         e.preventDefault();
@@ -62,8 +65,7 @@ const CommunityDetail: React.FC = () => {
                 <button onClick={deleteHandler}>글 삭제</button>
             </SC.ButtonDiv>
             <br/>
-            <SC.CommunityDetailContent>
-                {item.content}
+            <SC.CommunityDetailContent dangerouslySetInnerHTML={{__html: item.content}}>
             </SC.CommunityDetailContent>
             <br/>
             <SC.CommunityCommentTitle>

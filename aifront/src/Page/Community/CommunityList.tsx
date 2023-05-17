@@ -59,7 +59,7 @@ const CommunityList: React.FC = () => {
    const elementsSize = 10;
    const [searchParams, setSearchParams] = useSearchParams();
    const currentPage = parseInt(searchParams.get('page') as string) || 1;
-   const { communityList, totalPage } = useCommunityList(currentPage, elementsSize);
+   const { communityList, totalPage, isLoading } = useCommunityList(currentPage, elementsSize);
 
    const handlePageUp = () => {
     setSearchParams({ page: `${currentPage + 1}`})
@@ -78,7 +78,9 @@ const CommunityList: React.FC = () => {
                     navigate('/PostCommunity')
                 }}>글쓰기</button>
             </SC.ButtonDiv>
+            {isLoading && <></>}
             <CommunityListTable tableHeadData={tableHeadData} posts = {communityList}>
+                {isLoading && <p>Loading</p>}
                 {communityList &&
                     communityList!.map((item) => {
                         return (
@@ -87,7 +89,7 @@ const CommunityList: React.FC = () => {
                                 <BulletPoint text={item.category} />
                             </td>
                             <td>
-                                <Link to = {`/CommunityDetail/${item.id}`}>{item.title} ({item.commentCount})</Link></td>
+                                <Link to = {`/CommunityDetail/${item.id}`} style={{ textDecoration: 'none' }}>{item.title} ({item.commentCount})</Link></td>
                             <td>{item.createdAt.slice(0, 10)} {item.createdAt.slice(11, 19)}</td>
                             <td>{item.authorName}</td>
                             <td>{item.views}</td>

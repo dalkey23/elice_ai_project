@@ -39,11 +39,11 @@ export const useCommunityDetail = (id : number) => {
 }
 
 export const useEditCommunity = () => {
-  // const { mutateAsync, isError } = useMutation(editCommunity);
+  const { mutateAsync, isError } = useMutation(editCommunity);
 
-  // return {
-  //   editCommunity: mutateAsync, isError
-  // }
+  return {
+    editCommunity: mutateAsync, isError
+  }
 }
 
 export const useDeleteCommunity = () => {

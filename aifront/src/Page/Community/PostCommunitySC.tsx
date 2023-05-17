@@ -37,7 +37,7 @@ export const Title = styled.div`
 export const PostCommunity = styled.div`
     // display : flex;
     // justify-Content : center;
-    padding : 25px 100px;
+    padding : 25px 100px;   
 `
 
 export const ButtonDiv = styled.div`
