@@ -1,6 +1,7 @@
 import * as SC from "./CommunityDetailSC";
-import { useEffect } from "react";
-import { useCommunityDetail, useDeleteCommunity } from "../../Component/Hook/Community.hook";
+import { useEffect, useState } from "react";
+import { PostBoardComment } from "../../Types/Community.type";
+import { useCommunityDetail, useDeleteCommunity, usePostCommunityComment } from "../../Component/Hook/Community.hook";
 import { useNavigate, useParams } from "react-router-dom";
 import { useGetLoginedUser } from "../../Component/Hook/User.hook";
 
@@ -15,9 +16,11 @@ const BulletPoint = ({ text }: BulletPointProps) => {
 const CommunityDetail: React.FC = () => {
     const { id } = useParams();
     const { item } = useCommunityDetail(Number(id));
-    const { deleteCommunity, isError } = useDeleteCommunity();
+    const { deleteCommunity } = useDeleteCommunity();
+    const { postCommunityComment } = usePostCommunityComment();
     const navigate = useNavigate();
-    const { isLogined } = useGetLoginedUser();
+    const { isLogined, LoginedUser } = useGetLoginedUser();
+    const [ comment, setComment ] = useState<PostBoardComment>({content:''});
 
     useEffect(()=>{
         if (!isLogined) {
@@ -38,6 +41,23 @@ const CommunityDetail: React.FC = () => {
             }
         })
 
+    }
+
+    const handleSubmit = async (e : React.MouseEvent) => {
+        e.preventDefault();
+        await postCommunityComment({
+            id: item?.id,
+            body : comment}, {
+                onSuccess(res) {
+                    console.log(res);
+                    alert('작성이 완료 되었습니다!');
+                    window.location.href = `/CommunityDetail/${item?.id}`;
+                },
+                onError(err) {
+                    console.log(err);
+                    alert('다시 작성해 주세요.');
+                }
+            })
     }
 
     if (!item) {
@@ -72,49 +92,34 @@ const CommunityDetail: React.FC = () => {
                 <h3>댓글 ({item.commentList?.length})</h3>
             </SC.CommunityCommentTitle>
 
-            {/* {item.commentList &&
-                    item.commentList.map((item) => {
-                        return (
-                            <SC.CommunityCommentMain>
-                                <h4>{item.id}</h4>
-                                <p>{item.content}</p>
-                                <button>수정</button>
-                                <button>삭제</button>
-                            </SC.CommunityCommentMain>
-                        );
-                    }
-                )
-            } */}
-
             <SC.CommunityCommentWrite>
-                <h4>내이름은서원</h4>
+                <h4>{LoginedUser?.data.item.nickname}</h4>
                 <div>
-                    <input type="text" required />
+                    <input type="text" name="content" onChange={(e)=>{
+                        setComment((curComment) => {
+                            return { ...curComment, [e.target.name]: e.target.value}
+                        })
+                    }
+                    } required />
                     <label>댓글을 작성해주세요.</label>
                     <span></span>
                 </div>
-                {/* <p>댓글내용</p> */}
-                <button>작성</button>
+                <button onClick={handleSubmit}>작성</button>
             </SC.CommunityCommentWrite>
             <br/>
-            <SC.CommunityCommentList>
-                <h4>(댓글작성자명)</h4>
-                <p>(댓글내용)</p>
-                {/* <button>수정</button> */}
-                <button>삭제</button>
-            </SC.CommunityCommentList>
-            <SC.CommunityCommentList>
-                <h4>(댓글작성자명)</h4>
-                <p>(댓글내용)</p>
-                {/* <button>수정</button> */}
-                <button>삭제</button>
-            </SC.CommunityCommentList>
-            <SC.CommunityCommentList>
-                <h4>(댓글작성자명)</h4>
-                <p>(댓글내용)</p>
-                {/* <button>수정</button> */}
-                <button>삭제</button>
-            </SC.CommunityCommentList>
+            {item.commentList &&
+                    item.commentList.map((item) => {
+                        return (
+                            <SC.CommunityCommentList>
+                                <h4>{item.userId}</h4>
+                                <p>{item.content}</p>
+                                {/* <button>수정</button> */}
+                                <button>삭제</button>
+                            </SC.CommunityCommentList>
+                        );
+                    }
+                )
+            }
         </SC.CommunityDetailMain>
     )
 };
