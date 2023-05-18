@@ -5,6 +5,7 @@ import {
     getLoginedUser,
     editUserdata,
     deleteUser,
+    getMyCommunities
 } from "../Api/User";
 import { UserdataRequest } from "../../Types/Userdata.type";
 
@@ -59,4 +60,23 @@ export const useEditUser = () => {
         editUserdata: editUserdataAsync,
       isError
     };
+  };
+
+
+  export const useGetMyCommunities = (page: number, elements: number, userId: number|undefined) => {
+    const {data, ...rest} = useQuery(['getMyCommunities', page, elements, userId], () => {
+      return getMyCommunities(page, elements, userId)
+    },{
+      staleTime: Infinity,
+      cacheTime: Infinity,
+      refetchOnMount: false,
+      refetchOnReconnect: false,
+      refetchOnWindowFocus: false
+    }
+    );
+    return {
+      communityList: data?.data.items || [],
+      totalPage: data?.data.totalPages || 0,
+      ...rest,
+    }
   };
