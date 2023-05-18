@@ -128,7 +128,7 @@ const CommunityDetail: React.FC = () => {
                     item.commentList.map((item) => {
                         return (
                             <SC.CommunityCommentList>
-                                <h4>{item.userId}</h4>
+                                <h4>{item.authorName}</h4>
                                 <p>{item.content}</p>
                                 {/* <button>수정</button> */}
                                 <button onClick={(e) =>{deleteCommentHandler(e, item.id)}}>삭제</button>

@@ -48,6 +48,7 @@ export type DeleteBoard = {
 export type BoardComment = {
     id: number;
     userId: number;
+    authorName: string;
     boardId: number;
     content: string;
     createdAt: string;
