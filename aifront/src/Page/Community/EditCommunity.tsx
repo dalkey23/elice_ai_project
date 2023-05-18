@@ -16,11 +16,16 @@ const EditCommunity: React.FC = () => {
         content: item?.content || '',
     });
     const navigate = useNavigate();
-    const { isLogined } = useGetLoginedUser();
+    const { isLogined, LoginedUser } = useGetLoginedUser();
 
     useEffect(()=>{
         if (!isLogined) {
             navigate("/Login");
+        }
+
+        if (LoginedUser?.data.item.id != item?.userId) {
+            alert("수정 권한은 작성자에게만 있습니다.")
+            navigate(`/CommunityDetail/${item?.id}`)
         }
     },[isLogined])
 

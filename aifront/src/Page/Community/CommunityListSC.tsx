@@ -22,7 +22,7 @@ export const TableBody = styled.tbody`
     tr {
         font-weight: 400;
         color: #000000;
-        cursor: pointer;
+        // cursor: pointer;
 
         td {
             padding: 24px 32px;
@@ -36,6 +36,13 @@ export const TableBody = styled.tbody`
         font-color: #000000;
     }
 `;
+
+export const LoadingDiv = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;  
+`
 
 export const StyledBulletPoint = styled.div`
     background-color: #c996cc;

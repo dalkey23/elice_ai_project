@@ -1,9 +1,10 @@
 import * as SC from "./CommunityDetailSC";
 import { useEffect, useState } from "react";
 import { PostBoardComment } from "../../Types/Community.type";
-import { useCommunityDetail, useDeleteCommunity, usePostCommunityComment } from "../../Component/Hook/Community.hook";
+import { useCommunityDetail, useDeleteCommunity, useDeleteCommunityComment, usePostCommunityComment } from "../../Component/Hook/Community.hook";
 import { useNavigate, useParams } from "react-router-dom";
 import { useGetLoginedUser } from "../../Component/Hook/User.hook";
+import { deleteCommunityComment } from "../../Component/Api/Community";
 
 interface BulletPointProps {
     text: string;
@@ -21,6 +22,7 @@ const CommunityDetail: React.FC = () => {
     const navigate = useNavigate();
     const { isLogined, LoginedUser } = useGetLoginedUser();
     const [ comment, setComment ] = useState<PostBoardComment>({content:''});
+    const { deleteCommunityComment } = useDeleteCommunityComment();
 
     useEffect(()=>{
         if (!isLogined) {
@@ -28,7 +30,7 @@ const CommunityDetail: React.FC = () => {
         }
     },[isLogined])
 
-    const deleteHandler = async (e: React.MouseEvent) => {
+    const deleteBoardHandler = async (e: React.MouseEvent) => {
         e.preventDefault();
 
         await deleteCommunity(Number(id), {
@@ -40,7 +42,6 @@ const CommunityDetail: React.FC = () => {
                 alert("글 삭제가 완료되지 않았습니다.");
             }
         })
-
     }
 
     const handleSubmit = async (e : React.MouseEvent) => {
@@ -58,6 +59,22 @@ const CommunityDetail: React.FC = () => {
                     alert('다시 작성해 주세요.');
                 }
             })
+    }
+
+    const deleteCommentHandler = async (e: React.MouseEvent, commentId: Number) => {
+        e.preventDefault();
+        await deleteCommunityComment({
+            boardId: item?.id,
+            commentId: commentId
+        }, {
+            onSuccess(res) {
+                alert("댓글 삭제가 완료되었습니다.");
+                window.location.href = '/CommunityDetail/${item?.id}';
+            },
+            onError(err) {
+                alert("댓글 삭제가 완료되지 않았습니다.");
+            }
+        })
     }
 
     if (!item) {
@@ -82,7 +99,7 @@ const CommunityDetail: React.FC = () => {
             <br/>
             <SC.ButtonDiv>
                 <button onClick={ ()=> {navigate(`/EditCommunity/${item.id}`)}}>글 수정</button>
-                <button onClick={deleteHandler}>글 삭제</button>
+                <button onClick={deleteBoardHandler}>글 삭제</button>
             </SC.ButtonDiv>
             <br/>
             <SC.CommunityDetailContent dangerouslySetInnerHTML={{__html: item.content}}>
@@ -114,7 +131,7 @@ const CommunityDetail: React.FC = () => {
                                 <h4>{item.userId}</h4>
                                 <p>{item.content}</p>
                                 {/* <button>수정</button> */}
-                                <button>삭제</button>
+                                <button onClick={(e) =>{deleteCommentHandler(e, item.id)}}>삭제</button>
                             </SC.CommunityCommentList>
                         );
                     }

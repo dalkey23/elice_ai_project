@@ -1,5 +1,5 @@
 import { useMutation, useQuery } from 'react-query'
-import { getCommunityList, postCommunity, getCommunityDetail, deleteCommunity, editCommunity, postCommunityComment } from '../Api/Community'
+import { getCommunityList, postCommunity, getCommunityDetail, deleteCommunity, editCommunity, postCommunityComment, deleteCommunityComment } from '../Api/Community'
 
 export const useCommunityList = (page: number, elements: number) => {
   const {data, ...rest} = useQuery(['getCommunityList', page, elements], () => {
@@ -59,5 +59,13 @@ export const usePostCommunityComment = () => {
 
   return {
     postCommunityComment: mutateAsync, isError
+  }
+}
+
+export const useDeleteCommunityComment = () => {
+  const { mutateAsync, isError } = useMutation(deleteCommunityComment);
+
+  return {
+    deleteCommunityComment: mutateAsync, isError
   }
 }
