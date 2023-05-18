@@ -17,8 +17,8 @@ const Login = () => {
         setPassword(e.target.value);
     };
 
-    const submitHandler = async (e: React.MouseEvent) => {
-        e.preventDefault();
+    const submitHandler = async () => {
+        //e.preventDefault();
 
         await loginUser(
             { email, password },
@@ -35,6 +35,12 @@ const Login = () => {
             }
         );
     };
+
+    const handleOnKeyPress = (e : React.KeyboardEvent)=> {
+        if (e.key === 'Enter') {
+            submitHandler();
+          }
+    }
 
     return (
         <>
@@ -53,6 +59,7 @@ const Login = () => {
                             type="password"
                             placeholder="PASSWORD"
                             onChange={checkedPassword}
+                            onKeyDown={handleOnKeyPress} 
                         />
                     </SC.LoginItem>
                 </SC.InfoDiv>
