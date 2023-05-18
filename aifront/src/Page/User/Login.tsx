@@ -17,15 +17,14 @@ const Login = () => {
         setPassword(e.target.value);
     };
 
-    const submitHandler = async (e: React.MouseEvent) => {
-        e.preventDefault();
+    const submitHandler = async () => {
+        //e.preventDefault();
 
         await loginUser(
             { email, password },
             {
                 onSuccess(res) {
                     localStorage.setItem("token", res.data.item.jwtToken)
-                    alert("로그인 성공");
                     window.location.href = "/";
                 },
                 onError(err) {
@@ -35,6 +34,12 @@ const Login = () => {
             }
         );
     };
+
+    const handleOnKeyPress = (e : React.KeyboardEvent)=> {
+        if (e.key === 'Enter') {
+            submitHandler();
+          }
+    }
 
     return (
         <>
@@ -53,6 +58,7 @@ const Login = () => {
                             type="password"
                             placeholder="PASSWORD"
                             onChange={checkedPassword}
+                            onKeyDown={handleOnKeyPress} 
                         />
                     </SC.LoginItem>
                 </SC.InfoDiv>

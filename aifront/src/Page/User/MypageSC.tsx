@@ -1,17 +1,26 @@
 import styled from "styled-components";
 
 export const MypageContainer = styled.div`
-    margin: 50px;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    & button {
-        margin: 10px;
-        width: 400px;
-        height: 50px;
-        background: none;
-        border: #916bbf 1px solid;
-        color: #916bbf;
-        font-weight: bold;
-    }
 `;
+
+export const TitleDiv = styled.div`
+    margin : 2em 2em 1em 2em;
+    border-bottom : 1px grey solid;
+    padding-bottom : 10px;
+  
+  & ul {
+    list-style-type : none;
+    
+  }
+
+  & li {
+    display : inline;
+  }
+  
+  & a {
+    text-decoration : none;
+    color : black;
+  }
+`

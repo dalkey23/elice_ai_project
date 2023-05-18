@@ -5,6 +5,7 @@ import {
     UserDetail,
     UserdataRequest,
 } from "../../Types/Userdata.type";
+import { BoardModel } from "../../Types/Community.type"
 
 const baseURL = process.env.URL;
 
@@ -38,7 +39,7 @@ export const getLoginedUser = async () => {
         {},
         config
     );
-
+    
     return res;
 };
 
@@ -54,7 +55,6 @@ export const deleteUser = async (id: number) => {
         `http://kdt-ai6-team02.elicecoding.com/api/users/${id}`,
         config
     );
-    console.log(res);
     return res;
 };
 
@@ -82,4 +82,19 @@ export const editUserdata = async ({
         config
     );
     return res?.data;
+};
+
+
+export const getMyCommunities = async (page: number, elements: number, userId: number|undefined) => {
+
+    const token = localStorage.getItem("token");
+    if (!token) {
+        throw new Error("Token not found in localStorage");
+    }
+    const config: AxiosRequestConfig = {
+        headers: { Authorization: `Bearer ${token}` },
+    };
+    
+    const res = await axios.get<BoardModel>(`http://kdt-ai6-team02.elicecoding.com/api/boards/my-boards?page=${page}&elements=${elements}&user-id=${userId}`, config);
+    return res;
 };

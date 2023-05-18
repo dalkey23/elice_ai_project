@@ -60,7 +60,7 @@ export const StyledBulletPoint = styled.div`
 `;
 
 export const CommunityListMain = styled.div`
-    padding: 100px;
+    padding: 2em;
 
     & h1 {
         text-align: center;
@@ -84,6 +84,7 @@ export const ButtonDiv = styled.div`
         background-color: #916bbf;
         border: 1px solid white;
         border-radius: 10px;
+        font-size: 0.75em;
         :hover {
             background-color: #c996cc;
         }
