@@ -1,8 +1,10 @@
-import React, { useState, ReactNode, useEffect } from "react";
+import React, { useState, ReactNode, useEffect, useMemo } from "react";
 import * as SC from "./CommunityListSC";
 import { Board } from "../../Types/Community.type";
 import { useNavigate, Link, useSearchParams } from "react-router-dom";
 import { useCommunityList } from "../../Component/Hook/Community.hook";
+import { PacmanLoader } from "react-spinners";
+import { range, chunk } from "../../Utils/common"
 
 const tableHeadData = [
   { id: 0, head: "글머리" },
@@ -29,7 +31,27 @@ const BulletPoint = ({ text }: BulletPointProps) => {
     return <SC.StyledBulletPoint>{text}</SC.StyledBulletPoint>;
 };
 
-const CommunityListTable = ({ children, tableHeadData, posts }: TableProps) => {
+
+const CommunityList: React.FC = () => {
+   const navigate = useNavigate();
+   const elementsSize = 10;
+   const [searchParams, setSearchParams] = useSearchParams();
+   const currentPage = parseInt(searchParams.get('page') as string) || 1;
+   const { communityList, totalPage, isLoading } = useCommunityList(currentPage, elementsSize);
+
+   const screenPages = useMemo(() => {
+    if (!totalPage) return []
+
+    return chunk(range(1, totalPage), elementsSize)
+   }, [totalPage])
+
+   const currentScreenPageIndex = useMemo(() => {
+    return screenPages.findIndex(pages => {
+        return pages.includes(currentPage)
+    })
+   }, [screenPages, currentPage])
+
+   const CommunityListTable = ({ children, tableHeadData, posts }: TableProps) => {
     return (
         <SC.ListTable>
             {tableHeadData && (
@@ -43,7 +65,8 @@ const CommunityListTable = ({ children, tableHeadData, posts }: TableProps) => {
             )}
             <SC.TableBody>
                 {children}
-                {posts && posts.length === 0 && (
+                {isLoading && <SC.LoadingDiv><PacmanLoader color="#c996cc" size={50} /></SC.LoadingDiv>}
+                {posts && posts.length === 0 && !isLoading && (
                     <tr>
                         <td colSpan={99}>게시글이 없습니다.</td>
                     </tr>
@@ -51,15 +74,7 @@ const CommunityListTable = ({ children, tableHeadData, posts }: TableProps) => {
             </SC.TableBody>
         </SC.ListTable>
     );
-};
-
-
-const CommunityList: React.FC = () => {
-   const navigate = useNavigate();
-   const elementsSize = 10;
-   const [searchParams, setSearchParams] = useSearchParams();
-   const currentPage = parseInt(searchParams.get('page') as string) || 1;
-   const { communityList, totalPage, isLoading } = useCommunityList(currentPage, elementsSize);
+    };
 
    const handlePageUp = () => {
     setSearchParams({ page: `${currentPage + 1}`})
@@ -69,9 +84,13 @@ const CommunityList: React.FC = () => {
     setSearchParams({ page: `${currentPage - 1}`})
    }
 
+   const handlePageMove = (newPage: number) => {
+    setSearchParams({page: `${newPage}`})
+   }
+
     return (
         <SC.CommunityListMain>
-            <h1>커뮤니티</h1>
+            <h1>나와 연결된, 다른 사람들</h1>
             <br/>
             <SC.ButtonDiv>
                 <button onClick={() => {
@@ -80,7 +99,6 @@ const CommunityList: React.FC = () => {
             </SC.ButtonDiv>
             {isLoading && <></>}
             <CommunityListTable tableHeadData={tableHeadData} posts = {communityList}>
-                {isLoading && <p>Loading</p>}
                 {communityList &&
                     communityList!.map((item) => {
                         return (
@@ -98,8 +116,11 @@ const CommunityList: React.FC = () => {
                     })}
             </CommunityListTable>
             <SC.Button>
-                {currentPage > 1 && <button onClick={handlePageDown}>이전 페이지</button>}
-                {currentPage !== totalPage && <button onClick={handlePageUp}>다음 페이지</button>}
+                {currentPage > 1 && <button style={{backgroundColor: '#916BBF', color: '#FFFFFF'}} onClick={handlePageDown}>&lt;</button>}
+                {screenPages.length ? screenPages[currentScreenPageIndex].map(page => {
+                    return <button style={{backgroundColor: page === currentPage ? '#916BBF' : undefined, color: page === currentPage ? '#FFFFFF' : undefined}} onClick={() => {handlePageMove(page)}}>{page}</button>
+                }) : <></>}
+                {currentPage !== totalPage && <button style={{backgroundColor: '#916BBF', color: '#FFFFFF'}} onClick={handlePageUp}>&gt;</button>}
             </SC.Button>
         </SC.CommunityListMain>
     );

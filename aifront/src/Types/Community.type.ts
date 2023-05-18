@@ -1,5 +1,6 @@
 export type Board = {
     id: number;
+    userId: number,
     authorName: string;
     category: string;
     views: number;
@@ -47,6 +48,7 @@ export type DeleteBoard = {
 export type BoardComment = {
     id: number;
     userId: number;
+    authorName: string;
     boardId: number;
     content: string;
     createdAt: string;
@@ -57,5 +59,10 @@ export type PostBoardComment = {
 }
 
 export type DeleteBoardComment = {
-    
+    item: {
+        id: number;
+        deletedAt: string;
+        isDeleted: boolean;
+    };
+    success: boolean;
 }

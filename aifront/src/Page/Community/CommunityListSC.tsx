@@ -22,7 +22,7 @@ export const TableBody = styled.tbody`
     tr {
         font-weight: 400;
         color: #000000;
-        cursor: pointer;
+        // cursor: pointer;
 
         td {
             padding: 24px 32px;
@@ -36,6 +36,13 @@ export const TableBody = styled.tbody`
         font-color: #000000;
     }
 `;
+
+export const LoadingDiv = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;  
+`
 
 export const StyledBulletPoint = styled.div`
     background-color: #c996cc;
@@ -88,14 +95,13 @@ export const Button = styled.div`
     padding : 2em;
 
     & button {
-        background-color : #C996CC;
         border : none;
-        padding : 1.5em;
+        padding : 10px;
         margin : 1em;
-        border-radius : 8px;
+        border-radius : 10px;
         : hover {
             color : white;
-            background-color : #916BBF;
+            background-color : #C996CC;
         }
     }
 `
