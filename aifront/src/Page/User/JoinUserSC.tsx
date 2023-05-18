@@ -58,6 +58,11 @@ export const JoinItem = styled.div`
         height: 30px;
         margin-top: 10px;
     }
+
+    .Confirm {
+        margin: 0.5em;
+        color : #ff4c4c;
+    }
 `;
 
 export const DefaultInput = styled.input`

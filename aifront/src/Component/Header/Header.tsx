@@ -24,7 +24,7 @@ const Header: React.FC = () => {
 
             {isLogined ? (
                 <div className="LogoutDiv">
-                    <NavLink to="/Mypage">마이페이지</NavLink>
+                    <NavLink to="/My/Info">마이페이지</NavLink>
                     <button onClick={logoutHandler}>로그아웃</button>
                 </div>
             ) : (
