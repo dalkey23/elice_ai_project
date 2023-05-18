@@ -7,14 +7,23 @@ from diary.application.service.diary_service import DiaryService
 from diary_emotion.application.dto.request.analyze_request import AnalyzeRequest
 from diary_emotion.application.service.diary_emotion_service import DiaryEmotionsService
 
+from food.application.recommended_food_service import RecommendedFoodService
+
 
 # diary에 대한 message를 구독하여 처리하는 클래스
 class DiaryConsumer:
-    def __init__(self, diary_service: DiaryService, diary_emotions_service: DiaryEmotionsService, sqs: BaseClient):
+    create_diary_mq_url: str
+    diary_service: DiaryService
+    diary_emotions_service: DiaryEmotionsService
+    recommended_food_service: RecommendedFoodService
+
+    def __init__(self, diary_service: DiaryService, diary_emotions_service: DiaryEmotionsService,
+                 recommended_food_service: RecommendedFoodService, sqs: BaseClient):
         self.create_diary_mq_url: str = os.getenv('CREATE_DIARY_MQ_URL')
 
-        self.diary_service: DiaryService = diary_service
-        self.diary_emotions_service: DiaryEmotionsService = diary_emotions_service
+        self.diary_service = diary_service
+        self.diary_emotions_service = diary_emotions_service
+        self.recommended_food_service = recommended_food_service
         self.sqs: BaseClient = sqs
 
     def consume_created_message(self) -> str:
@@ -39,4 +48,8 @@ class DiaryConsumer:
         read_diary_response = self.diary_service.find_by_id(diary_id)
 
         analyze_request = AnalyzeRequest(diary_id=read_diary_response.id, paragraph=read_diary_response.content)
-        self.diary_emotions_service.create_analysis(analyze_request)
+        create_diary_emotion_response = self.diary_emotions_service.analyze(analyze_request)
+
+        highest_emotion = create_diary_emotion_response.get_highest_emotion_label()
+
+        self.recommended_food_service.create_recommended_food_by_emotion(create_diary_emotion_response.diary_id, highest_emotion)

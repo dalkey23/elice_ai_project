@@ -1,5 +1,3 @@
-from typing import Optional
-
 import boto3
 from botocore.client import BaseClient
 from flask import Flask
@@ -15,6 +13,9 @@ from diary.presentation.controller.diary_controller import DiaryController
 from diary_emotion.application.model.emotion_analyzer import EmotionAnalyzer
 from diary_emotion.application.service.diary_emotion_service import DiaryEmotionsService
 from diary_emotion.domain.diary_emotion_dao import DiaryEmotionDao
+from food.application.recommended_food_service import RecommendedFoodService
+from food.domain.dao.food_dao import FoodDao
+from food.domain.dao.recommended_food_dao import RecommendedFoodDao
 
 app = Flask(__name__)
 
@@ -45,6 +46,13 @@ logging.getLogger('sqlalchemy.engine').setLevel(logging.INFO)
 # App 설정
 db: SQLAlchemy = SQLAlchemy(app)
 
+# food
+food_dao: FoodDao = FoodDao(db)
+
+# RecommendedFood
+recommended_food_dao: RecommendedFoodDao = RecommendedFoodDao(db)
+recommended_food_service: RecommendedFoodService = RecommendedFoodService(food_dao, recommended_food_dao)
+
 # diary_emotion
 emotion_analyzer = EmotionAnalyzer()
 diary_emotion_dao = DiaryEmotionDao(db)
@@ -53,7 +61,7 @@ diary_emotion_service = DiaryEmotionsService(diary_emotion_dao, emotion_analyzer
 # diary
 diary_dao: DiaryDao = DiaryDao(db)
 diary_service: DiaryService = DiaryService(diary_dao)
-diary_consumer: DiaryConsumer = DiaryConsumer(diary_service, diary_emotion_service, sqs)
+diary_consumer: DiaryConsumer = DiaryConsumer(diary_service, diary_emotion_service, recommended_food_service, sqs)
 diary_controller: DiaryController = DiaryController(diary_service, diary_consumer)
 
 # app route 설정

@@ -1,4 +1,5 @@
 from diary_emotion.application.dto.request.analyze_request import AnalyzeRequest
+from diary_emotion.application.dto.response.create_diary_emotion_response import CreateDiaryEmotionResponse
 from diary_emotion.application.model.emotion_analyzer import EmotionAnalyzer
 from diary_emotion.domain.diary_emotion_dao import DiaryEmotionDao
 from diary_emotion.domain.diary_emotion_entity import DiaryEmotion
@@ -15,14 +16,14 @@ class DiaryEmotionsService:
         self.emotion_analyzer: EmotionAnalyzer = emotion_analyzer
 
     # 일기 감정 분석 요청을 받아서 분석 결과를 모두 db에 저장하는 메소드
-    def create_analysis(self, analyze_request: AnalyzeRequest):
+    def analyze(self, analyze_request: AnalyzeRequest) -> CreateDiaryEmotionResponse:
         summarized_result: dict[str, float] = self.emotion_analyzer.get_summarized_result(analyze_request.paragraph)
 
         diary_emotion = self._extract_entity_from_analysis_result(analyze_request.diary_id, summarized_result)
 
-        self.diary_emotion_dao.create(diary_emotion)
+        created_diary_emotion = self.diary_emotion_dao.create(diary_emotion)
 
-        return summarized_result
+        return CreateDiaryEmotionResponse.from_entity(created_diary_emotion)
 
     # 감정 분석 결과로부터 DiaryEmotion 엔티티를 생성하는 메소드
     def _extract_entity_from_analysis_result(self, diary_id: int, summarized_result: dict[str, float]) -> DiaryEmotion:
