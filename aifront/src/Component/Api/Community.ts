@@ -1,5 +1,5 @@
 import axios, {AxiosRequestConfig} from "axios";
-import { BoardDetail, BoardModel, PostBoard, DeleteBoard, EditBoard, PostBoardComment, BoardComment } from "../../Types/Community.type";
+import { BoardDetail, BoardModel, PostBoard, DeleteBoard, EditBoard, PostBoardComment, BoardComment, DeleteBoardComment } from "../../Types/Community.type";
 
 export const getCommunityList = async (page: number, elements: number,) => {
     const res = await axios.get<BoardModel>(`http://kdt-ai6-team02.elicecoding.com/api/boards?page=${page}&elements=${elements}`);
@@ -83,14 +83,20 @@ export const postCommunityComment = async ({
     return res;
 };
 
-export const deleteCommunityComment = async (id : number) => {
-    // const token = localStorage.getItem("token");
-    // if (!token) {
-    //     throw new Error("Token not found in localStorage");
-    // }
-    // const config: AxiosRequestConfig = {
-    //     headers: { Authorization: `Bearer ${token}` },
-    // };
-    // const res = await axios.delete<DeleteBoard>(`http://localhost:3500/api/boards/${id}`, config);
-    // return res;
+export const deleteCommunityComment = async ({
+    boardId,
+    commentId,
+    }:{
+        boardId: Number | undefined;
+        commentId: Number | undefined;
+    }) => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+        throw new Error("Token not found in localStorage");
+    }
+    const config: AxiosRequestConfig = {
+        headers: { Authorization: `Bearer ${token}` },
+    };
+    const res = await axios.delete<DeleteBoardComment>(`http://localhost:3500/api/boards/${boardId}/comments/${commentId}`, config);
+    return res;
 };
