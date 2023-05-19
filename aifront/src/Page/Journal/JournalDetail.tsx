@@ -36,7 +36,7 @@ const JournalDetail: React.FC = () => {
             <SC.JournalDetail>
                 <div>
                     <h1>{item.content}</h1>
-                    <h2>{item.recommendedFoodList.imageUrl}</h2>
+                    <img src = {item?.recommendedFood?.imageUrl} alt = 'Food'/>
                 </div>
             </SC.JournalDetail>
             <SC.EmotionDiv>
@@ -50,6 +50,7 @@ const JournalDetail: React.FC = () => {
                 </h1>
                 <h1>당신의 감정은? : {item.emotion}</h1>
             </SC.EmotionDiv>
+            
             <button onClick={handleDelete}>일기 삭제</button>
         </SC.JouranlDetailMain>
     );
