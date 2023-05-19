@@ -16,13 +16,13 @@ const JournalPost : React.FC = () => {
 
         //로그인 확인
         const { isLogined } = useGetLoginedUser();
-    
+
         useEffect(()=>{
             if (!isLogined) {
                 navigate("/Login");
             }
         },[isLogined])
-    
+
 
     const handleSubmit = async (e : React.MouseEvent) => {
         e.preventDefault();
@@ -77,7 +77,7 @@ const JournalPost : React.FC = () => {
                 } />
             </SC.JournalPost>
             <SC.ButtonDiv>
-                <button onClick = {handleSubmit}>일기 작성</button>
+                <button onClick = {handleSubmit} disabled={isLoading}>{isLoading ? '전송중..' : '일기 작성'}</button>
             </SC.ButtonDiv>
         </SC.JournalPostMain>
     )
