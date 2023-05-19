@@ -16,7 +16,7 @@ const Header: React.FC = () => {
     return (
         <SC.Header>
             <NavLink to="/">
-                <img src="img/eeumLogo.jpg" alt="logo" />
+                <img src="img/logo.png" alt="logo" />
             </NavLink>
             <NavLink to="/JournalPost">일기쓰기</NavLink>
             <NavLink to="/JournalCheck">일기조회</NavLink>
@@ -24,7 +24,7 @@ const Header: React.FC = () => {
 
             {isLogined ? (
                 <div className="LogoutDiv">
-                    <NavLink to="/Mypage">마이페이지</NavLink>
+                    <NavLink to="/My/Info">마이페이지</NavLink>
                     <button onClick={logoutHandler}>로그아웃</button>
                 </div>
             ) : (

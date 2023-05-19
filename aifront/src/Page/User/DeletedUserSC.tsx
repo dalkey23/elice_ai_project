@@ -1,16 +1,16 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-    margin : 50px;  
-`
+    margin: 50px;
+`;
+
 
 export const InfoTitle = styled.div`
-    text-align : center;
+    text-align: center;
     color: #3d2c8d;
-    font-weight : bold;
-    font-size : 30px;
-
-`
+    font-weight: bold;
+    font-size: 30px;
+`;
 
 export const ButtonDiv = styled.div`
     padding: auto;
@@ -19,14 +19,14 @@ export const ButtonDiv = styled.div`
 `;
 
 export const ConfirmButton = styled.button`
-    width: 96px;
-    height: 33px;
-
-    background: #3d2c8d;
+    margin: 2em;
+    padding: 1em;
+    width: 7%;
+    color: white;
+    background-color: #916bbf;
+    border: 1px solid white;
     border-radius: 10px;
-
-    text-align: center;
-    color: #ffffff;
-
-    margin: 10px;
+    font-size: 0.75em;
+    :hover {
+        background-color: #c996cc;
 `;

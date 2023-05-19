@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useRef } from "react";
 import * as SC from "./JoinUserSC";
 import { UserdataRequest } from "../../Types/Userdata.type";
-import { useNavigate } from "react-router-dom";
+import { useAsyncError, useNavigate } from "react-router-dom";
 import { useJoinUser } from "../../Component/Hook/User.hook";
 import Modal from "../../Component/Base/Modal";
 
@@ -24,6 +24,7 @@ const JoinUser: React.FC = () => {
         mainAddress: "",
         detailAddress: "",
     });
+    const [isConfirm, setIsConfirm] = useState<boolean>(false);
 
     // 각 폼 입력시 onChange 이벤트
     const changeHandlerString = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -39,9 +40,9 @@ const JoinUser: React.FC = () => {
     };
 
     const checkedConfirmPW = (e: React.ChangeEvent<HTMLInputElement>) => {
-        console.log(
-            `userdata password : ${userdata.password}, target value : ${e.target.value}`
-        );
+        if(e.target.value === userdata.password ){
+            setIsConfirm(true)
+        }
     };
 
     const submitHandler = async (e: React.MouseEvent) => {
@@ -93,6 +94,7 @@ const JoinUser: React.FC = () => {
                         name="confirmPW"
                         onChange={checkedConfirmPW}
                     />
+                    {!isConfirm&& userdata.password.length > 0 && <p className="Confirm">비밀번호가 일치하지 않습니다.</p>}
                 </SC.JoinItem>
             </SC.JoinDiv1>
             <SC.JoinDiv2>

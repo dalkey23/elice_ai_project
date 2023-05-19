@@ -1,11 +1,11 @@
 import styled from "styled-components";
 
 export const JoinContainer = styled.div`
-    margin: 50px;
+    margin: 1em;
 `;
 
 export const InfoTitle = styled.div`
-    margin : 2em;
+    margin : 0.5em 0 0.5em 0;
     text-align: center;
     color: #3d2c8d;
     font-weight: bold;
@@ -57,6 +57,11 @@ export const JoinItem = styled.div`
         border: none;
         height: 30px;
         margin-top: 10px;
+    }
+
+    .Confirm {
+        margin: 0.5em;
+        color : #ff4c4c;
     }
 `;
 

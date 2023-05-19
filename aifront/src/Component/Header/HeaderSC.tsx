@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const Header = styled.header`
-    padding: 1em;
     font-size: 20px;
     background-color: #ffffff;
     color: white;
@@ -31,6 +30,7 @@ export const Header = styled.header`
         border : none;
         background-color: #ffffff;
         font-size: 20px;
+        cursor:pointer
     }
     .LogoutDiv {
         display: flex;

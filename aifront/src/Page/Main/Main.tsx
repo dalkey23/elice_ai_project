@@ -17,6 +17,7 @@ import Myinfo from "../User/Myinfo";
 import Mypage from "../User/Mypage";
 import Login from "../User/Login";
 import DeletedUser from '../User/DeletedUser'
+import MyCommunities from "../User/MyCommunities";
 
 const Main : React.FC = () => {
     
@@ -31,14 +32,16 @@ const Main : React.FC = () => {
                     <Route path = '/CommunityList' element = {<CommunityList/>} />
                     <Route path = '/UserJoin' element = {<JoinUser/>} />
                     <Route path = '/CompletedJoin' element = {<CompletedJoin/>} />
+                    <Route path = '/Login' element = {<Login/>} />
                     <Route path = '/PostCommunity' element = {<PostCommunity/>} />
                     <Route path = '/CommunityDetail/:id' element = {<CommunityDetail/>} />
                     <Route path = '/EditCommunity/:id' element = {<EditCommunity/>} />
-                    <Route path = '/Mypage' element = {<Mypage/>} />
-                    <Route path = '/Myinfo' element = {<Myinfo/>} />
-                    <Route path = '/Login' element = {<Login/>} />
 
-                    <Route path = '/DeletedUser' element = {<DeletedUser/>} />
+                    <Route path = '/My/*' element = {<Mypage/>} >
+                        <Route path = 'Info' element = {<Myinfo/>} />
+                        <Route path = 'Communities' element = {<MyCommunities/>} />
+                        <Route path = 'DeletedUser' element = {<DeletedUser/>} />
+                    </Route>
                 </Routes>
             <Footer />
         </>
