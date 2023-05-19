@@ -1,7 +1,5 @@
 import React from "react";
 import * as SC from "./HomeSC"
-import JournalPost from '../../../public/Img/JournalPost.png'
-import JournalDetail from '../../../public/Img/JournalDetail.png'
 
 const Home : React.FC = () => {
 
