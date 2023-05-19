@@ -108,15 +108,18 @@ const CommunityDetail: React.FC = () => {
                 <div>조회수 {item.views}</div>
             </SC.CommunityDetailTitle2>
             <br />
-            <SC.ButtonDiv>
-                <button
-                    onClick={() => {
-                        navigate(`/EditCommunity/${item.id}`);
-                    }}>
-                    글 수정
-                </button>
-                <button onClick={deleteBoardHandler}>글 삭제</button>
-            </SC.ButtonDiv>
+            {LoginedUser?.data.item.id === item.userId && (
+                <SC.ButtonDiv>
+                    <button
+                        onClick={() => {
+                            navigate(`/EditCommunity/${item.id}`);
+                        }}>
+                        글 수정
+                    </button>
+                    <button onClick={deleteBoardHandler}>글 삭제</button>
+                </SC.ButtonDiv>
+            )}
+
             <br />
             <SC.CommunityDetailContent
                 dangerouslySetInnerHTML={{
@@ -156,6 +159,14 @@ const CommunityDetail: React.FC = () => {
                             <h4>{item.authorName}</h4>
                             <p>{item.content}</p>
                             {/* <button>수정</button> */}
+                            {/* {item.userId === LoginedUser?.data.item.id && (
+                                <button
+                                    onClick={(e) => {
+                                        deleteCommentHandler(e, item.id);
+                                    }}>
+                                    삭제
+                                </button>
+                            )} */}
                             <button
                                 onClick={(e) => {
                                     deleteCommentHandler(e, item.id);

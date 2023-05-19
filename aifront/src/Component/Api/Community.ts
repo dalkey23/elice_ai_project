@@ -97,8 +97,7 @@ export const deleteCommunityComment = async ({
     const config: AxiosRequestConfig = {
         headers: { Authorization: `Bearer ${token}` },
     };
-    const res = await axios.delete<DeleteBoardComment>(`http://localhost:3500/api/boards/${boardId}/comments/${commentId}`, config);
+    const res = await axios.delete<DeleteBoardComment>(`http://kdt-ai6-team02.elicecoding.com/api/boards/${boardId}/comments/${commentId}`, config);
 
-    console.log(`http://localhost:3500/api/boards/${boardId}/comments/${commentId}`)
     return res;
 };
