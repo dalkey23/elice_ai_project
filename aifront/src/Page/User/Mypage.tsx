@@ -1,21 +1,13 @@
 import * as SC from "./MypageSC";
-import { useNavigate, NavLink, Routes, Route } from "react-router-dom";
-import { useGetLoginedUser } from "../../Component/Hook/User.hook";
-import { useEffect } from "react";
+import {NavLink, Routes, Route } from "react-router-dom";
+import { useRedirectLoginPage } from "../../Component/Hook/User.hook";
 import DeletedUser from "./DeletedUser";
 import Myinfo from "./Myinfo";
 import MyCommunities from "./MyCommunities";
 
 const Mypage = () => {
-    const navigate = useNavigate();
-
-    const { isLogined } = useGetLoginedUser();
-
-    useEffect(() => {
-        if (!isLogined) {
-            navigate("/Login");
-        }
-    }, [isLogined]);
+    
+    useRedirectLoginPage();
 
     const currentPage = {
         fontWeight: "bold",

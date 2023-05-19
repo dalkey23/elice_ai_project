@@ -35,7 +35,7 @@ const MyCommunities: React.FC = () => {
     const navigate = useNavigate();
     const elementsSize = 10;
     const [searchParams, setSearchParams] = useSearchParams();
-    const { LoginedUser, isLogined } = useGetLoginedUser();
+    const { LoginedUser } = useGetLoginedUser();
     const userId = LoginedUser?.data.item.id
     const currentPage = parseInt(searchParams.get("page") as string) || 1;
     const { communityList, totalPage, isLoading } = useGetMyCommunities(
@@ -44,7 +44,6 @@ const MyCommunities: React.FC = () => {
         userId
     );
 
-    console.log(communityList)
 
     const screenPages = useMemo(() => {
         if (!totalPage) return [];

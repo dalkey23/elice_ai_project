@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useMutation, useQuery } from "react-query";
 import {
     createUserdata,
@@ -7,7 +9,7 @@ import {
     deleteUser,
     getMyCommunities
 } from "../Api/User";
-import { UserdataRequest } from "../../Types/Userdata.type";
+
 
 export const useJoinUser = () => {
     const { mutateAsync, isError } = useMutation(createUserdata);
@@ -27,7 +29,7 @@ export const useLoginUser = () => {
 };
 
 export const useGetLoginedUser = () => {
-    const { data: LoginedUser, isError } = useQuery(
+    const { data: LoginedUser, isError, ...rest } = useQuery(
         ["getLoginedUser"],
         () => {
             return getLoginedUser();
@@ -41,6 +43,7 @@ export const useGetLoginedUser = () => {
         LoginedUser,
         isLogined: !!LoginedUser,
         isError,
+        ...rest,
     };
 };
 
@@ -80,3 +83,16 @@ export const useEditUser = () => {
       ...rest,
     }
   };
+
+
+  export const useRedirectLoginPage = () => {
+
+    const navigate = useNavigate();
+    const { isLogined, isFetched } = useGetLoginedUser();
+
+    useEffect(() => {
+        if (isFetched && !isLogined) {
+            navigate("/Login");
+        }
+    }, [isLogined, isFetched]);
+  }

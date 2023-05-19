@@ -9,7 +9,7 @@ const DeletedUser = () => {
     const navigate = useNavigate();
     const { deleteUser } = useDeleteUser();
 
-    const { LoginedUser, isLogined } = useGetLoginedUser();
+    const { LoginedUser } = useGetLoginedUser();
     const userdata = LoginedUser?.data.item;
 
     const submitHandler = async (e: React.MouseEvent) => {
@@ -28,9 +28,6 @@ const DeletedUser = () => {
         }
     };
 
-    if (!isLogined) {
-        navigate("/Login");
-    }
 
     if (!userdata) {
         return <></>;
