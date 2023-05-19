@@ -25,6 +25,9 @@ const JournalCheck: React.FC = () => {
         setSearchParams({ page: `${currentPage - 1}` });
     };
 
+    console.log(journalList)
+
+
     return (
         <>
             <SC.JournalList>
@@ -41,12 +44,7 @@ const JournalCheck: React.FC = () => {
                                     <h2 key="journalEmo">{journal.emotion}</h2>
                                     <h3 key="journalTi">{journal.title}</h3>
                                 </div>
-                                <h1 key="journalFood">
-                                    <img
-                                        src={
-                                            journal.recommendedFood.imageUrl
-                                        }></img>
-                                </h1>
+                                <img src={journal?.recommendedFood?.imageUrl} alt = 'Food'></img>
                             </Link>
                         </SC.Journal>
                     );
