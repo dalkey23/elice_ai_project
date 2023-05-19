@@ -27,6 +27,7 @@ const JournalCheck: React.FC = () => {
 
     console.log(journalList)
 
+
     return (
         <>
             <SC.JournalList>
