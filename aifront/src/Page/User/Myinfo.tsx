@@ -6,9 +6,9 @@ import { UserdataRequest } from "../../Types/Userdata.type";
 import Modal from "../../Component/Base/Modal";
 
 const Myinfo = () => {
-    const { LoginedUser, isLogined } = useGetLoginedUser();
+    const { LoginedUser} = useGetLoginedUser();
     const userdata = LoginedUser?.data.item;
-    const navigate = useNavigate();
+
     const { editUserdata } = useEditUser();
     const [isModal, setIsModal] = useState<boolean>(false);
 
@@ -64,11 +64,7 @@ const Myinfo = () => {
         });
     };
 
-    useEffect(() => {
-        if (!isLogined) {
-            navigate("/Login");
-        }
-    }, [isLogined]);
+
 
     if (!userdata) {
         return <></>;

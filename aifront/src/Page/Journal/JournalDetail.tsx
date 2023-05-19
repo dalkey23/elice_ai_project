@@ -1,20 +1,12 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useJournalDetail } from "../../Component/Hook/Journal.hook";
 import { getJournalDelete } from "../../Component/Api/PostJournal";
-import { useGetLoginedUser } from "../../Component/Hook/User.hook";
+import { useRedirectLoginPage } from "../../Component/Hook/User.hook";
 import * as SC from "./JournalDetailSC";
 
 const JournalDetail: React.FC = () => {
-    //로그인 확인
-    const navigate = useNavigate();
-    const { isLogined } = useGetLoginedUser();
-
-    useEffect(()=>{
-        if (!isLogined) {
-            navigate("/Login");
-        }
-    },[isLogined])
+    useRedirectLoginPage();
 
     const { id } = useParams();
     const { item } = useJournalDetail(Number(id));
@@ -36,13 +28,11 @@ const JournalDetail: React.FC = () => {
         }
     };
 
-    console.log(item);
-
     return (
         <SC.JouranlDetailMain>
             <h3>{item.publishedDate}</h3>
             <h4>{item.title}</h4>
-            <hr/>
+            <hr />
             <SC.JournalDetail>
                 <div>
                     <h1>{item.content}</h1>
@@ -50,12 +40,13 @@ const JournalDetail: React.FC = () => {
                 </div>
             </SC.JournalDetail>
             <SC.EmotionDiv>
-                <hr/>
-                <h1>😡 : {item.emotionScores.angryScore}%
-                &nbsp;🤭 : {item.emotionScores.excitedScore}%
-                &nbsp;😱 : {item.emotionScores.worryScore}%
-                &nbsp;😢 : {item.emotionScores.sadScore}%
-                &nbsp;😁 : {item.emotionScores.happyScore}%
+                <hr />
+                <h1>
+                    😡 : {item.emotionScores.angryScore}% &nbsp;🤭 :{" "}
+                    {item.emotionScores.excitedScore}% &nbsp;😱 :{" "}
+                    {item.emotionScores.worryScore}% &nbsp;😢 :{" "}
+                    {item.emotionScores.sadScore}% &nbsp;😁 :{" "}
+                    {item.emotionScores.happyScore}%
                 </h1>
                 <h1>당신의 감정은? : {item.emotion}</h1>
             </SC.EmotionDiv>
