@@ -38,12 +38,12 @@ const Myinfo = () => {
 
     const submitHandler = async (e: React.MouseEvent) => {
         e.preventDefault();
-        console.log(newUserdata);
         await editUserdata(
             { id, body: newUserdata },
             {
                 onSuccess(res) {
                     alert("정보 수정 완료!");
+                    window.location.href = "/"
                 },
                 onError(err) {
                     alert("정보 수정 실패....");
