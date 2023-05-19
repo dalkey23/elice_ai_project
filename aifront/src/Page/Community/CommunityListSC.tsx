@@ -84,6 +84,7 @@ export const ButtonDiv = styled.div`
         background-color: #916bbf;
         border: 1px solid white;
         border-radius: 10px;
+        cursor: pointer;
         :hover {
             background-color: #c996cc;
         }
@@ -100,6 +101,7 @@ export const Button = styled.div`
         padding: 10px;
         margin: 1em;
         border-radius: 10px;
+        cursor: pointer;
         :hover  {
             color: white;
             background-color: #c996cc;
