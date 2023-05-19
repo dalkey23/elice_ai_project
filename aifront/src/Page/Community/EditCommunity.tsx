@@ -29,10 +29,7 @@ const EditCommunity: React.FC = () => {
 
     const handleSubmit = async (e: React.MouseEvent) => {
         e.preventDefault();
-        if (LoginedUser?.data.item.id != item?.userId) {
-            alert("수정 권한은 작성자에게만 있습니다.");
-            navigate(`/CommunityDetail/${item?.id}`);
-        }
+
         await editCommunity(
             {
                 id: Number(id),
@@ -40,12 +37,10 @@ const EditCommunity: React.FC = () => {
             },
             {
                 onSuccess(res) {
-                    console.log(res);
                     alert("수정이 완료 되었습니다!");
                     window.location.href = `/CommunityDetail/${id}`;
                 },
                 onError(err) {
-                    console.log(err);
                     alert("수정이 되지 않았습니다. 다시 작성해 주세요.");
                 },
             }
@@ -91,9 +86,11 @@ const EditCommunity: React.FC = () => {
                     }}
                 />
             </SC.PostCommunity>
-            <SC.ButtonDiv>
-                <button onClick={handleSubmit}>커뮤니티 글 수정</button>
-            </SC.ButtonDiv>
+            {LoginedUser?.data.item.id === item?.userId &&
+                <SC.ButtonDiv>
+                    <button onClick={handleSubmit}>커뮤니티 글 수정</button>
+                </SC.ButtonDiv>
+            }
         </SC.PostCommunityMain>
     );
 };
