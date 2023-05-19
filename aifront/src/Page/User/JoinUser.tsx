@@ -187,13 +187,13 @@ const JoinUser: React.FC = () => {
                             placeholder="04799"
                             onChange={changeHandlerNumber}
                         />
-                        <button onClick={onClickToggleModal}>
+                        {/* <button onClick={onClickToggleModal}>
                             우편번호 검색
                         </button>
                         {isModal && (
                             <Modal
                                 onClickToggleModal={onClickToggleModal}></Modal>
-                        )}
+                        )} */}
                     </div>
                     <div className="Second">
                         <SC.AddressInput
@@ -210,14 +210,14 @@ const JoinUser: React.FC = () => {
                         />
                     </div>
                 </SC.JoinItem>
-                <SC.JoinItem>
+                {/* <SC.JoinItem>
                     <label>프로필 사진</label>
                     <SC.ProfileInput
                         type="file"
                         name="profilePhotoUrl"
                         onChange={changeHandlerString}
                     />
-                </SC.JoinItem>
+                </SC.JoinItem> */}
             </SC.JoinDiv2>
             <SC.ButtonDiv>
                 <SC.CancelButton

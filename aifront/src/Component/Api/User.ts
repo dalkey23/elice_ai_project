@@ -5,7 +5,7 @@ import {
     UserDetail,
     UserdataRequest,
 } from "../../Types/Userdata.type";
-import { BoardModel } from "../../Types/Community.type"
+import { BoardModel } from "../../Types/Community.type";
 
 const baseURL = process.env.URL;
 
@@ -39,7 +39,7 @@ export const getLoginedUser = async () => {
         {},
         config
     );
-    
+
     return res;
 };
 
@@ -77,16 +77,18 @@ export const editUserdata = async ({
         throw new Error("id or userdata is undefined");
     }
     const res = await axios.put<UserDetail>(
-        `http://localhost:3500/api/users/${id}`,
+        `http://kdt-ai6-team02.elicecoding.com/api/users/${id}`,
         body,
         config
     );
     return res?.data;
 };
 
-
-export const getMyCommunities = async (page: number, elements: number, userId: number|undefined) => {
-
+export const getMyCommunities = async (
+    page: number,
+    elements: number,
+    userId: number | undefined
+) => {
     const token = localStorage.getItem("token");
     if (!token) {
         throw new Error("Token not found in localStorage");
@@ -94,7 +96,10 @@ export const getMyCommunities = async (page: number, elements: number, userId: n
     const config: AxiosRequestConfig = {
         headers: { Authorization: `Bearer ${token}` },
     };
-    
-    const res = await axios.get<BoardModel>(`http://kdt-ai6-team02.elicecoding.com/api/boards/my-boards?page=${page}&elements=${elements}&user-id=${userId}`, config);
+
+    const res = await axios.get<BoardModel>(
+        `http://kdt-ai6-team02.elicecoding.com/api/boards/my-boards?page=${page}&elements=${elements}&user-id=${userId}`,
+        config
+    );
     return res;
 };
