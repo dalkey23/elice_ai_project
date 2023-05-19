@@ -15,7 +15,7 @@ import { PostBoard } from "../../Types/Community.type";
 const EditCommunity: React.FC = () => {
     const { id } = useParams();
     const { item } = useCommunityDetail(Number(id));
-    const { editCommunity, isError } = useEditCommunity();
+    const { editCommunity, isError, isLoading } = useEditCommunity();
     const [editContent, setEditContent] = useState<PostBoard>({
         category: item?.category || "",
         title: item?.title || "",
@@ -86,11 +86,12 @@ const EditCommunity: React.FC = () => {
                     }}
                 />
             </SC.PostCommunity>
-            {LoginedUser?.data.item.id === item?.userId &&
-                <SC.ButtonDiv>
-                    <button onClick={handleSubmit}>커뮤니티 글 수정</button>
-                </SC.ButtonDiv>
-            }
+
+            <SC.ButtonDiv>
+                <button onClick={handleSubmit} disabled={isLoading}>
+                    {isLoading ? "수정중.." : "커뮤니티 글 수정"}
+                </button>
+            </SC.ButtonDiv>
         </SC.PostCommunityMain>
     );
 };
