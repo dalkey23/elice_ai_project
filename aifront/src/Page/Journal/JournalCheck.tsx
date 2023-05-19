@@ -25,9 +25,6 @@ const JournalCheck: React.FC = () => {
         setSearchParams({ page: `${currentPage - 1}` });
     };
 
-    console.log(journalList)
-
-
     return (
         <>
             <SC.JournalList>
