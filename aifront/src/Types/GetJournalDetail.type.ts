@@ -1,7 +1,10 @@
 export type JournalDetail = {
     id : number;
     userid : number;
-    recommendedFood : null;
+    recommendedFoodList : {
+      name : string;
+      imageUrl : string;
+    };
     emotion : string;
     title : string;
     content : string;

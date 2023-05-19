@@ -77,7 +77,7 @@ const JournalPost : React.FC = () => {
                 } />
             </SC.JournalPost>
             <SC.ButtonDiv>
-                <button onClick = {handleSubmit}>일기 작성</button>
+                <button onClick = {handleSubmit} disabled={isLoading}>{isLoading ? '일기 전송 중' : '일기 작성'}</button>
             </SC.ButtonDiv>
         </SC.JournalPostMain>
     )

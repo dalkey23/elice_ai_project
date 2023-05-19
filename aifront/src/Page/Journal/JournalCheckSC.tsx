@@ -7,11 +7,17 @@ export const JournalList = styled.div`
 `
 
 export const Journal = styled.div`
+    display : flex;
+    justify-content : center;
     border : 1px solid black;
     border-radius : 8px;
     margin : 1em;
     width : 35%;
     height : 400px;
+
+    & img {
+        width : 200px;
+    }
 
     & a {
         text-decoration : none;
@@ -19,7 +25,7 @@ export const Journal = styled.div`
         & div {
             padding : 1em;
             text-align : center;
-            border-bottom : 1px solid black;
+
             & h1 {
                 margin : 1em;
             }

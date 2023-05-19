@@ -10,7 +10,7 @@ const JournalCheck: React.FC = () => {
     //로그인 확인
     const navigate = useNavigate();
     const { isLogined } = useGetLoginedUser();
-
+    
     useEffect(()=>{
         if (!isLogined) {
             navigate("/Login");
@@ -51,7 +51,7 @@ const JournalCheck: React.FC = () => {
                                     <h3 key="journalTi">{journal.title}</h3>
                                 </div>
                                 <h1 key="journalFood">
-                                    {journal.recommendedFood}
+                                    <img src = {journal.recommendedFood.imageUrl}></img>
                                 </h1>
                             </Link>
                         </SC.Journal>

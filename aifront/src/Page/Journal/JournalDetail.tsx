@@ -36,6 +36,8 @@ const JournalDetail: React.FC = () => {
         }
     };
 
+    console.log(item);
+
     return (
         <SC.JouranlDetailMain>
             <h3>{item.publishedDate}</h3>
@@ -44,7 +46,7 @@ const JournalDetail: React.FC = () => {
             <SC.JournalDetail>
                 <div>
                     <h1>{item.content}</h1>
-                    <h2>{item.recommendedFood}</h2>
+                    <h2>{item.recommendedFoodList.imageUrl}</h2>
                 </div>
             </SC.JournalDetail>
             <SC.EmotionDiv>
