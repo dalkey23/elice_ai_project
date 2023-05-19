@@ -79,8 +79,6 @@ const JournalPost : React.FC = () => {
             <SC.ButtonDiv>
                 <button onClick = {handleSubmit}>일기 작성</button>
             </SC.ButtonDiv>
-            {isLoading && <p>로딩중...</p>}
-            {isError && <p>에러발생!!</p>}
         </SC.JournalPostMain>
     )
 }
