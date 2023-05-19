@@ -25,7 +25,16 @@ const Home : React.FC = () => {
                         </div>
                     </SC.Intro2>
                     <SC.Intro3><h1>나와 연결된, 다른 사람들</h1></SC.Intro3>
-                    <SC.Intro4></SC.Intro4>
+                    <SC.Intro4>
+                    <img src = 'Img/Community1.png' alt = 'Community1'/>
+                        <img src = 'Img/Community2.png' alt = 'Community2'/>
+                        <div>
+                            <h1>맛있는 레시피가 궁금할 때,</h1>
+                            <h1>혹은 나만 아는 맛집을 공유하고 싶을 때,</h1>
+                            <h1>게시판을 통해</h1>
+                            <h1>도움을 받아보세요!</h1>
+                        </div>
+                    </SC.Intro4>
                 </>
             </SC.Home>
         </>

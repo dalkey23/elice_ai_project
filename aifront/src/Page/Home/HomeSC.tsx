@@ -49,8 +49,21 @@ export const Intro3 = styled.div`
 `
 
 export const Intro4 = styled.div`
-    padding : 20rem 0;
+    padding : 5rem 0;
     background-Color : #C996CC;
     color : white;
     text-align : center;
+
+    & img {
+        margin : 1em;
+        width : 40%
+    }
+
+    & div {
+        margin : 1em;
+        font-size : 2em;
+        & h1 {
+            margin : 0.3em;
+        }
+    }
 `
