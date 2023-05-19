@@ -26,9 +26,6 @@ export const Journal = styled.div`
             padding : 1em;
             text-align : center;
 
-            & h1 {
-                margin : 1em;
-            }
             & h2 {
                 margin : 1em;
             }
