@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const EmotionDiv = styled.div`
     margin : 1em;
     font-size : 1.5em;
+
 `
 
 export const JouranlDetailMain = styled.div`
@@ -48,6 +49,11 @@ export const JouranlDetailMain = styled.div`
 export const JournalDetail = styled.div`
     display : flex;
     justify-content : center;
+
+    & img {
+        width : 200px;
+        margin : 1em;
+    }
 
     & div {
         width : 30%;

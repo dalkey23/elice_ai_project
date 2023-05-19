@@ -1,7 +1,7 @@
 export type JournalDetail = {
     id : number;
     userid : number;
-    recommendedFoodList : {
+    recommendedFood : {
       name : string;
       imageUrl : string;
     };
