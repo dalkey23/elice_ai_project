@@ -159,20 +159,14 @@ const CommunityDetail: React.FC = () => {
                             <h4>{item.authorName}</h4>
                             <p>{item.content}</p>
                             {/* <button>수정</button> */}
-                            {/* {item.userId === LoginedUser?.data.item.id && (
+                            {item.userId === LoginedUser?.data.item.id && (
                                 <button
                                     onClick={(e) => {
                                         deleteCommentHandler(e, item.id);
                                     }}>
                                     삭제
                                 </button>
-                            )} */}
-                            <button
-                                onClick={(e) => {
-                                    deleteCommentHandler(e, item.id);
-                                }}>
-                                삭제
-                            </button>
+                            )}
                         </SC.CommunityCommentList>
                     );
                 })}
