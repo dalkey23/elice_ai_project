@@ -1,21 +1,14 @@
-import React, { useEffect } from "react";
-import { useSearchParams, Link, useNavigate } from "react-router-dom";
+import React from "react";
+import { useSearchParams, Link } from "react-router-dom";
 import { useJournalList } from "../../Component/Hook/Journal.hook";
-import { useGetLoginedUser } from "../../Component/Hook/User.hook";
+import { useRedirectLoginPage } from "../../Component/Hook/User.hook";
 import * as SC from "./JournalCheckSC";
 
 const elementsSize = 8;
 
 const JournalCheck: React.FC = () => {
     //로그인 확인
-    const navigate = useNavigate();
-    const { isLogined } = useGetLoginedUser();
-
-    useEffect(()=>{
-        if (!isLogined) {
-            navigate("/Login");
-        }
-    },[isLogined])
+    useRedirectLoginPage()
 
     const [searchParams, setSearchParams] = useSearchParams();
 

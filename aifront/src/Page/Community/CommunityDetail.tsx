@@ -1,9 +1,9 @@
 import * as SC from "./CommunityDetailSC";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { PostBoardComment } from "../../Types/Community.type";
 import { useCommunityDetail, useDeleteCommunity, useDeleteCommunityComment, usePostCommunityComment } from "../../Component/Hook/Community.hook";
 import { useNavigate, useParams } from "react-router-dom";
-import { useGetLoginedUser } from "../../Component/Hook/User.hook";
+import { useGetLoginedUser, useRedirectLoginPage } from "../../Component/Hook/User.hook";
 
 interface BulletPointProps {
     text: string;
@@ -14,20 +14,17 @@ const BulletPoint = ({ text }: BulletPointProps) => {
 };
 
 const CommunityDetail: React.FC = () => {
+    useRedirectLoginPage()
+
     const { id } = useParams();
-    const { item } = useCommunityDetail(Number(id));
+    const { item, refetch: refetchCommunityDetail } = useCommunityDetail(Number(id));
     const { deleteCommunity } = useDeleteCommunity();
     const { postCommunityComment } = usePostCommunityComment();
     const navigate = useNavigate();
-    const { isLogined, LoginedUser } = useGetLoginedUser();
+    const { LoginedUser } = useGetLoginedUser();
     const [ comment, setComment ] = useState<PostBoardComment>({content:''});
     const { deleteCommunityComment } = useDeleteCommunityComment();
 
-    useEffect(()=>{
-        if (!isLogined) {
-            navigate("/Login");
-        }
-    },[isLogined])
 
     const deleteBoardHandler = async (e: React.MouseEvent) => {
         e.preventDefault();
@@ -50,7 +47,8 @@ const CommunityDetail: React.FC = () => {
             body : comment}, {
                 onSuccess(res) {
                     alert('작성이 완료 되었습니다!');
-                    window.location.href = `/CommunityDetail/${item?.id}`;
+                    refetchCommunityDetail()
+                    setComment({content:''})
                 },
                 onError(err) {
                     alert('다시 작성해 주세요.');
@@ -66,7 +64,8 @@ const CommunityDetail: React.FC = () => {
         }, {
             onSuccess(res) {
                 alert("댓글 삭제가 완료되었습니다.");
-                window.location.href = `/CommunityDetail/${item?.id}`;
+                refetchCommunityDetail()
+                setComment({content:''})
             },
             onError(err) {
                 alert("댓글 삭제 권한이 없습니다.");
@@ -94,10 +93,10 @@ const CommunityDetail: React.FC = () => {
                 <div>조회수 {item.views}</div>
             </SC.CommunityDetailTitle2>
             <br/>
-            <SC.ButtonDiv>
+            {LoginedUser?.data.item.id === item.userId && <SC.ButtonDiv>
                 <button onClick={ ()=> {navigate(`/EditCommunity/${item.id}`)}}>글 수정</button>
                 <button onClick={deleteBoardHandler}>글 삭제</button>
-            </SC.ButtonDiv>
+            </SC.ButtonDiv>}
             <br/>
             <SC.CommunityDetailContent dangerouslySetInnerHTML={{__html: item.content}}>
             </SC.CommunityDetailContent>
@@ -109,7 +108,7 @@ const CommunityDetail: React.FC = () => {
             <SC.CommunityCommentWrite>
                 <h4>{LoginedUser?.data.item.nickname}</h4>
                 <div>
-                    <input type="text" name="content" onChange={(e)=>{
+                    <input type="text" name="content" value={comment.content} onChange={(e)=>{
                         setComment((curComment) => {
                             return { ...curComment, [e.target.name]: e.target.value}
                         })
