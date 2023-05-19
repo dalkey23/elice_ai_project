@@ -1,5 +1,5 @@
 import React from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 
 import Header from "../../Component/Header/Header";
 import Home from "../Home/Home";
@@ -19,8 +19,12 @@ import Login from "../User/Login";
 import DeletedUser from '../User/DeletedUser'
 import MyCommunities from "../User/MyCommunities";
 
+import { useGetLoginedUser } from "../../Component/Hook/User.hook";
+
 const Main : React.FC = () => {
-    
+
+    const {isLogined, isFetched} = useGetLoginedUser()
+
     return(
         <>
             <Header />
@@ -37,7 +41,7 @@ const Main : React.FC = () => {
                     <Route path = '/CommunityDetail/:id' element = {<CommunityDetail/>} />
                     <Route path = '/EditCommunity/:id' element = {<EditCommunity/>} />
 
-                    <Route path = '/My/*' element = {<Mypage/>} >
+                    <Route path = '/My/*' element = {isLogined && isFetched ? <Mypage/> : isFetched ? <Navigate replace to="/Login" /> : <></>} >
                         <Route path = 'Info' element = {<Myinfo/>} />
                         <Route path = 'Communities' element = {<MyCommunities/>} />
                         <Route path = 'DeletedUser' element = {<DeletedUser/>} />
