@@ -6,8 +6,8 @@ export const Home = styled.div`
 
 export const Intro1 = styled.div`
     background-image : url('Img/Main.jpg');
-    background-reapeat : no-repeat;
-    background-size : 120%;
+    background-repeat : no-repeat;
+    background-size : 125%;
     background-position : center;
     padding : 25em 0;
     text-align : center;
@@ -37,8 +37,8 @@ export const Intro2 = styled.div`
 export const Intro3 = styled.div`
     padding : 25rem 0;
     background-image : url('Img/Community.jpg');
-    background-size : 85%;
-    background-reapeat : no-repeat;
+    background-size : 100%;
+    background-repeat : no-repeat;
     background-position : center;
     color : white;
     text-align : center;
