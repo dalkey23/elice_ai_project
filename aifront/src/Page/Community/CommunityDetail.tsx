@@ -4,7 +4,6 @@ import { PostBoardComment } from "../../Types/Community.type";
 import { useCommunityDetail, useDeleteCommunity, useDeleteCommunityComment, usePostCommunityComment } from "../../Component/Hook/Community.hook";
 import { useNavigate, useParams } from "react-router-dom";
 import { useGetLoginedUser } from "../../Component/Hook/User.hook";
-import { deleteCommunityComment } from "../../Component/Api/Community";
 
 interface BulletPointProps {
     text: string;
@@ -39,7 +38,7 @@ const CommunityDetail: React.FC = () => {
                 window.location.href = '/CommunityList';
             },
             onError(err) {
-                alert("글 삭제가 완료되지 않았습니다.");
+                alert("글 삭제 권한이 없습니다.");
             }
         })
     }
@@ -50,12 +49,10 @@ const CommunityDetail: React.FC = () => {
             id: item?.id,
             body : comment}, {
                 onSuccess(res) {
-                    console.log(res);
                     alert('작성이 완료 되었습니다!');
                     window.location.href = `/CommunityDetail/${item?.id}`;
                 },
                 onError(err) {
-                    console.log(err);
                     alert('다시 작성해 주세요.');
                 }
             })
@@ -69,10 +66,10 @@ const CommunityDetail: React.FC = () => {
         }, {
             onSuccess(res) {
                 alert("댓글 삭제가 완료되었습니다.");
-                window.location.href = '/CommunityDetail/${item?.id}';
+                window.location.href = `/CommunityDetail/${item?.id}`;
             },
             onError(err) {
-                alert("댓글 삭제가 완료되지 않았습니다.");
+                alert("댓글 삭제 권한이 없습니다.");
             }
         })
     }

@@ -151,11 +151,11 @@ const Myinfo = () => {
                     <label>성별</label>
                     <div className="First">
                         <div className="Second">
-                            <input type="radio" name="gender" value="MALE" />
+                            <input type="radio" name="gender" value="MALE" checked={userdata?.gender === 'MALE'} />
                             <p>남자</p>
                         </div>
                         <div className="Second">
-                            <input type="radio" name="gender" value="FEMALE" />
+                            <input type="radio" name="gender" value="FEMALE"  checked={userdata?.gender === 'FEMALE'}/>
                             <p>여자</p>
                         </div>
                     </div>
@@ -177,13 +177,13 @@ const Myinfo = () => {
                             name="zipCode"
                             defaultValue={userdata?.addressInfo.zipCode}
                         />
-                        <button onClick={onClickToggleModal}>
+                        {/* <button onClick={onClickToggleModal}>
                             우편번호 검색
                         </button>
                         {isModal && (
                             <Modal
                                 onClickToggleModal={onClickToggleModal}></Modal>
-                        )}
+                        )} */}
                     </div>
                     <div className="Second">
                         <SC.AddressInput
@@ -200,14 +200,14 @@ const Myinfo = () => {
                         />
                     </div>
                 </SC.JoinItem>
-                <SC.JoinItem>
+                {/* <SC.JoinItem>
                     <label>프로필 사진</label>
                     <SC.ProfileInput
                         type="file"
                         name="profilePhotoUrl"
                         onChange={changeHandlerString}
                     />
-                </SC.JoinItem>
+                </SC.JoinItem> */}
             </SC.JoinDiv2>
             <SC.ButtonDiv>
                 <SC.ConfirmButton onClick={submitHandler}>
