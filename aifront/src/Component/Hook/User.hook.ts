@@ -1,3 +1,5 @@
+import { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom';
 import { useMutation, useQuery } from "react-query";
 import {
     createUserdata,
@@ -27,7 +29,7 @@ export const useLoginUser = () => {
 };
 
 export const useGetLoginedUser = () => {
-    const { data: LoginedUser, isError } = useQuery(
+    const { data: LoginedUser, isError, ...rest } = useQuery(
         ["getLoginedUser"],
         () => {
             return getLoginedUser();
@@ -41,6 +43,7 @@ export const useGetLoginedUser = () => {
         LoginedUser,
         isLogined: !!LoginedUser,
         isError,
+        ...rest
     };
 };
 
@@ -63,20 +66,33 @@ export const useEditUser = () => {
   };
 
 
-  export const useGetMyCommunities = (page: number, elements: number, userId: number|undefined) => {
-    const {data, ...rest} = useQuery(['getMyCommunities', page, elements, userId], () => {
-      return getMyCommunities(page, elements, userId)
-    },{
-      staleTime: Infinity,
-      cacheTime: Infinity,
-      refetchOnMount: false,
-      refetchOnReconnect: false,
-      refetchOnWindowFocus: false
-    }
-    );
-    return {
-      communityList: data?.data.items || [],
-      totalPage: data?.data.totalPages || 0,
-      ...rest,
-    }
-  };
+export const useGetMyCommunities = (page: number, elements: number, userId: number|undefined) => {
+const {data, ...rest} = useQuery(['getMyCommunities', page, elements, userId], () => {
+    return getMyCommunities(page, elements, userId)
+},{
+    staleTime: Infinity,
+    cacheTime: Infinity,
+    refetchOnMount: false,
+    refetchOnReconnect: false,
+    refetchOnWindowFocus: false
+}
+);
+return {
+    communityList: data?.data.items || [],
+    totalPage: data?.data.totalPages || 0,
+    ...rest,
+}
+};
+
+export const useRedirectLoginPage = () => {
+    const { isLogined, isFetched } = useGetLoginedUser();
+    const navigate = useNavigate();
+
+
+
+    useEffect(() => {
+        if (isFetched && !isLogined) {
+            navigate("/Login");
+        }
+    }, [isLogined, isFetched]);
+}
