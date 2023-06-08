@@ -17,16 +17,15 @@ const Login = () => {
         setPassword(e.target.value);
     };
 
-    const submitHandler = async (e: React.MouseEvent) => {
-        e.preventDefault();
+    const submitHandler = async () => {
+        //e.preventDefault();
 
         await loginUser(
             { email, password },
             {
                 onSuccess(res) {
-                    console.log(res.data.item.jwtToken);
-                    alert("로그인 성공");
-                    navigate("/");
+                    localStorage.setItem("token", res.data.item.jwtToken)
+                    window.location.href = "/";
                 },
                 onError(err) {
                     console.log(err);
@@ -35,6 +34,12 @@ const Login = () => {
             }
         );
     };
+
+    const handleOnKeyPress = (e : React.KeyboardEvent)=> {
+        if (e.key === 'Enter') {
+            submitHandler();
+          }
+    }
 
     return (
         <>
@@ -53,6 +58,7 @@ const Login = () => {
                             type="password"
                             placeholder="PASSWORD"
                             onChange={checkedPassword}
+                            onKeyDown={handleOnKeyPress} 
                         />
                     </SC.LoginItem>
                 </SC.InfoDiv>
@@ -62,12 +68,12 @@ const Login = () => {
                     </SC.ConfirmButton>
                 </SC.ButtonDiv>
                 <SC.AddedDiv>
-                    <button
+                    {/* <button
                         onClick={() => {
                             navigate("/");
                         }}>
                         아이디/비밀번호 찾기
-                    </button>
+                    </button> */}
                     <button
                         onClick={() => {
                             navigate("/UserJoin");

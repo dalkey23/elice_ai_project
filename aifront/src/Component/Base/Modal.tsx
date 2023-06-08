@@ -1,22 +1,28 @@
 import React, { PropsWithChildren } from "react";
-import * as SC from './ModalSC'
+import DaumPost from "./DaumPostCode";
+import * as SC from "./ModalSC";
 
-interface ModalDefaultType {
-    onClickToggleModal : ()=> void;
+interface Props {
+    onClickToggleModal: () => void;
 }
 
-function Modal({onClickToggleModal, children}: PropsWithChildren<ModalDefaultType>){
+function Modal({ onClickToggleModal, children }: PropsWithChildren<Props>) {
     return (
         <SC.ModalContainer>
-            <SC.DialogBox>{children}</SC.DialogBox>
-            <SC.Backdrop onClick={(e: React.MouseEvent)=>{
-                e.preventDefault()
-                if(onClickToggleModal){
-                    onClickToggleModal();
-                }
-            }}/>
+            <SC.DialogBox>
+                {children}
+                <DaumPost />
+            </SC.DialogBox>
+            <SC.Backdrop
+                onClick={(e: React.MouseEvent) => {
+                    e.preventDefault();
+                    if (onClickToggleModal) {
+                        onClickToggleModal();
+                    }
+                }}
+            />
         </SC.ModalContainer>
-    )
+    );
 }
 
 export default Modal;

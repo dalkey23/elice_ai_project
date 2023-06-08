@@ -1,7 +1,7 @@
 export type JournalRequest = {
   title : string;
   content : string;
-  publishedDate: string;
+  publishedDate: Date;
 };
 
 export type JournalResponse = {

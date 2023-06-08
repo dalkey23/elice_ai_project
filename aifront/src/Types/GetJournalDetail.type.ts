@@ -1,15 +1,23 @@
 export type JournalDetail = {
     id : number;
     userid : number;
-    recommendedFood : null;
-    diaryEmotion : null;
+    recommendedFood : {
+      name : string;
+      imageUrl : string;
+    };
+    emotion : string;
     title : string;
     content : string;
     weather : null;
     publishedDate : string;
     createdAt : string;
-    // diary 타입 issue 등록 예정
-    diary : any;
+    emotionScores : {
+      worryScore : number;
+      angryScore : number;
+      happyScore : number;
+      excitedScore : number;
+      sadScore : number;
+    };
   }
 
   export type JournalDetailResponse = {

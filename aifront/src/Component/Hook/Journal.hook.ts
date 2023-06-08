@@ -2,10 +2,10 @@ import { useMutation, useQuery } from 'react-query'
 import { createJournal, getJournals, getJournalsDetail } from '../Api/PostJournal'
 
 export const useCreateJournal = () => {
-  const {mutate, ...rest} = useMutation(createJournal)
+  const {mutateAsync, ...rest} = useMutation(createJournal)
 
   return {
-    createJournal: mutate,
+    createJournal: mutateAsync,
     ...rest
   }
 }
@@ -20,7 +20,6 @@ export const useJournalList = (page: number, elements: number) => {
       refetchOnReconnect: false,
       refetchOnWindowFocus: false
     })
-
     return {
       journalList: data?.data.items || [],
       totalPage: data?.data.totalPages,
@@ -34,7 +33,7 @@ export const useJournalDetail = (id : number) => {
     })
 
     return {
-      item : data?.data.item.diary || [],
+      item : data?.data.item,
       ...rest
     }
   }

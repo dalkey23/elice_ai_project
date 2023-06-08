@@ -1,10 +1,10 @@
 import React, { useState, ReactNode, useEffect, useMemo } from "react";
-import * as SC from "./CommunityListSC";
+import * as SC from "./MyCommunitiesSC";
 import { Board } from "../../Types/Community.type";
 import { useNavigate, Link, useSearchParams } from "react-router-dom";
-import { useCommunityList } from "../../Component/Hook/Community.hook";
 import { PacmanLoader } from "react-spinners";
 import { range, chunk } from "../../Utils/common";
+import { useGetMyCommunities, useGetLoginedUser } from "../../Component/Hook/User.hook";
 
 const tableHeadData = [
     { id: 0, head: "글머리" },
@@ -31,15 +31,19 @@ const BulletPoint = ({ text }: BulletPointProps) => {
     return <SC.StyledBulletPoint>{text}</SC.StyledBulletPoint>;
 };
 
-const CommunityList: React.FC = () => {
+const MyCommunities: React.FC = () => {
     const navigate = useNavigate();
     const elementsSize = 10;
     const [searchParams, setSearchParams] = useSearchParams();
+    const { LoginedUser } = useGetLoginedUser();
+    const userId = LoginedUser?.data.item.id
     const currentPage = parseInt(searchParams.get("page") as string) || 1;
-    const { communityList, totalPage, isLoading } = useCommunityList(
+    const { communityList, totalPage, isLoading } = useGetMyCommunities(
         currentPage,
-        elementsSize
+        elementsSize,
+        userId
     );
+
 
     const screenPages = useMemo(() => {
         if (!totalPage) return [];
@@ -96,9 +100,7 @@ const CommunityList: React.FC = () => {
 
     return (
         <SC.CommunityListMain>
-            <h1>나와 연결된, 다른 사람들</h1>
-            <br />
-
+            <h1>EEUM</h1>
             {isLoading && (
                 <SC.LoadingDiv>
                     <PacmanLoader color="#c996cc" size={75} />
@@ -197,4 +199,4 @@ const CommunityList: React.FC = () => {
     );
 };
 
-export default CommunityList;
+export default MyCommunities;

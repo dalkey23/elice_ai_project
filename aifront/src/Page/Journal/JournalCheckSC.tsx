@@ -7,10 +7,34 @@ export const JournalList = styled.div`
 `
 
 export const Journal = styled.div`
+    display : flex;
+    justify-content : center;
     border : 1px solid black;
+    border-radius : 8px;
     margin : 1em;
     width : 35%;
-    height : 300px;
+    height : 400px;
+
+    & img {
+        width : 200px;
+    }
+
+    & a {
+        text-decoration : none;
+        color : black;
+        & div {
+            padding : 1em;
+            text-align : center;
+
+            & h2 {
+                margin : 1em;
+            }
+            & h3 {
+                font-size : 2em;
+                margin : 0.5em;
+            }
+        }
+    }
 `
 
 export const Button = styled.div`

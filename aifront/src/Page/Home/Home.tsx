@@ -14,11 +14,27 @@ const Home : React.FC = () => {
                 <>
                     <SC.Intro1></SC.Intro1>
                     <SC.Intro2>
-                        <h1>나와 연결된, 야식 한끼</h1>
-                        <h2>오늘 하루 일기를 써보세요. AI가 당신의 감정을 읽고 오늘의 야식을 추천해 드립니다.</h2>
+                        {/* 음식사진 나오면 사진 변경 */}
+                        <img src = 'Img/JournalPost.png' alt = 'JournalPost'/>
+                        <img src = 'Img/JournalDetail.png' alt = 'JournalDetail'/>
+                        <div>
+                            <h1>오늘 하루는 안녕하셨나요?</h1>
+                            <h1>내일이 되면, 오늘을 잊어버리게 됩니다.</h1>
+                            <h1>오늘 나의 하루를 정리하고</h1>
+                            <h1>맛있는 야식추천과 하루를 마무리하면 어떨까요?</h1>
+                        </div>
                     </SC.Intro2>
                     <SC.Intro3><h1>나와 연결된, 다른 사람들</h1></SC.Intro3>
-                    <SC.Intro4>소개 페이지 4</SC.Intro4>
+                    <SC.Intro4>
+                    <img src = 'Img/Community1.png' alt = 'Community1'/>
+                        <img src = 'Img/Community2.png' alt = 'Community2'/>
+                        <div>
+                            <h1>맛있는 레시피가 궁금할 때,</h1>
+                            <h1>혹은 나만 아는 맛집을 공유하고 싶을 때,</h1>
+                            <h1>게시판을 통해</h1>
+                            <h1>도움을 받아보세요!</h1>
+                        </div>
+                    </SC.Intro4>
                 </>
             </SC.Home>
         </>

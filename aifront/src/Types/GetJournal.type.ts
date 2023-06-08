@@ -1,9 +1,12 @@
     export type Journal = {
-      diaryEmotion:null;
       id:number;
-      publishedDate:string;
-      recommendedFood:null;
       title:string;
+      emotion:string;
+      publishedDate:string;
+      recommendedFood: {
+        name : string;
+        imageUrl : string;
+      }
     }
   
     export type JournalListResponse = {

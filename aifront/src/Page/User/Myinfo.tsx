@@ -1,65 +1,15 @@
-import React, { useState, useCallback, useRef } from "react";
+import { useEffect, useState, useCallback } from "react";
+import { useNavigate } from "react-router";
+import { useGetLoginedUser, useEditUser } from "../../Component/Hook/User.hook";
 import * as SC from "./JoinUserSC";
 import { UserdataRequest } from "../../Types/Userdata.type";
-import { useAsyncError, useNavigate } from "react-router-dom";
-import { useJoinUser } from "../../Component/Hook/User.hook";
 import Modal from "../../Component/Base/Modal";
 
-const JoinUser: React.FC = () => {
-    const navigate = useNavigate();
-    const { createUserdata } = useJoinUser();
-    const [userdata, setUserdata] = useState<UserdataRequest>({
-        email: "",
-        password: "",
-        firstName: "",
-        lastName: "",
-        nickname: "",
-        phoneNumber: "",
-        gender: "",
-        birthYear: 0,
-        birthMonth: 0,
-        birthDate: 0,
-        profilePhotoUrl: "",
-        zipCode: 0,
-        mainAddress: "",
-        detailAddress: "",
-    });
-    const [isConfirm, setIsConfirm] = useState<boolean>(false);
+const Myinfo = () => {
+    const { LoginedUser} = useGetLoginedUser();
+    const userdata = LoginedUser?.data.item;
 
-    // 각 폼 입력시 onChange 이벤트
-    const changeHandlerString = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setUserdata((curUserdata) => {
-            return { ...curUserdata, [e.target.name]: e.target.value };
-        });
-    };
-
-    const changeHandlerNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setUserdata((curUserdata) => {
-            return { ...curUserdata, [e.target.name]: Number(e.target.value) };
-        });
-    };
-
-    const checkedConfirmPW = (e: React.ChangeEvent<HTMLInputElement>) => {
-        if(e.target.value === userdata.password ){
-            setIsConfirm(true)
-        }
-    };
-
-    const submitHandler = async (e: React.MouseEvent) => {
-        e.preventDefault();
-        await createUserdata(userdata, {
-            onSuccess(res) {
-                console.log(res);
-                alert("작성이 완료 되었습니다!");
-                navigate("/CompletedJoin");
-            },
-            onError(err) {
-                console.log(err);
-                alert("다시 작성해 주세요.");
-            },
-        });
-    };
-
+    const { editUserdata } = useEditUser();
     const [isModal, setIsModal] = useState<boolean>(false);
 
     const onClickToggleModal = useCallback(() => {
@@ -67,16 +17,69 @@ const JoinUser: React.FC = () => {
         console.log(isModal);
     }, [isModal]);
 
+    const [newUserdata, setNewUserdata] = useState<UserdataRequest>({
+        email: userdata?.email || "",
+        password: "",
+        firstName: userdata?.nameInfo.firstName || "",
+        lastName: userdata?.nameInfo.lastName || "",
+        nickname: userdata?.nickname || "",
+        phoneNumber: userdata?.phoneNumber || "",
+        gender: userdata?.gender || "",
+        birthYear: userdata?.birthInfo.year || 0,
+        birthMonth: userdata?.birthInfo.month || 0,
+        birthDate: userdata?.birthInfo.date || 0,
+        profilePhotoUrl: userdata?.profilePhotoUrl || "",
+        zipCode: userdata?.addressInfo.zipCode || 0,
+        mainAddress: userdata?.addressInfo.mainAddress || "",
+        detailAddress: userdata?.addressInfo.detailAddress || "",
+    });
+
+    const id = userdata?.id;
+
+    const submitHandler = async (e: React.MouseEvent) => {
+        e.preventDefault();
+        await editUserdata(
+            { id, body: newUserdata },
+            {
+                onSuccess(res) {
+                    alert("정보 수정 완료!");
+                    window.location.href = "/"
+                },
+                onError(err) {
+                    alert("정보 수정 실패....");
+                },
+            }
+        );
+    };
+
+    const changeHandlerString = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setNewUserdata((curUserdata) => {
+            return { ...curUserdata, [e.target.name]: e.target.value };
+        });
+    };
+
+    const changeHandlerNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setNewUserdata((curUserdata) => {
+            return { ...curUserdata, [e.target.name]: Number(e.target.value) };
+        });
+    };
+
+
+
+    if (!userdata) {
+        return <></>;
+    }
+
     return (
         <SC.JoinContainer>
-            <SC.InfoTitle>EEUM</SC.InfoTitle>
+            <SC.InfoTitle>나의 정보</SC.InfoTitle>
             <SC.JoinDiv1>
                 <SC.JoinItem>
                     <label>이메일</label>
                     <SC.DefaultInput
                         type="text"
                         name="email"
-                        onChange={changeHandlerString}
+                        value={userdata?.email}
                     />
                 </SC.JoinItem>
                 <SC.JoinItem>
@@ -89,12 +92,7 @@ const JoinUser: React.FC = () => {
                 </SC.JoinItem>
                 <SC.JoinItem>
                     <label>비밀번호 확인</label>
-                    <SC.DefaultInput
-                        type="password"
-                        name="confirmPW"
-                        onChange={checkedConfirmPW}
-                    />
-                    {!isConfirm&& userdata.password.length > 0 && <p className="Confirm">비밀번호가 일치하지 않습니다.</p>}
+                    <SC.DefaultInput type="password" name="confirmPW" />
                 </SC.JoinItem>
             </SC.JoinDiv1>
             <SC.JoinDiv2>
@@ -103,13 +101,13 @@ const JoinUser: React.FC = () => {
                     <SC.NameInput
                         type="text"
                         name="lastName"
-                        placeholder="홍"
+                        defaultValue={userdata?.nameInfo.lastName}
                         onChange={changeHandlerString}
                     />
                     <SC.NameInput
                         type="text"
                         name="firstName"
-                        placeholder="길동"
+                        defaultValue={userdata?.nameInfo.firstName}
                         onChange={changeHandlerString}
                     />
                 </SC.JoinItem>
@@ -119,52 +117,41 @@ const JoinUser: React.FC = () => {
                         type="text"
                         name="nickname"
                         placeholder="dong"
+                        defaultValue={userdata?.nickname}
                         onChange={changeHandlerString}
                     />
                 </SC.JoinItem>
 
                 <SC.JoinItem>
                     <label>생년월일</label>
-                    <div>
-                        <SC.BirthInput
-                            type="text"
-                            name="birthYear"
-                            placeholder="Year"
-                            onChange={changeHandlerNumber}
-                        />
-                        <SC.BirthInput
-                            type="text"
-                            name="birthMonth"
-                            placeholder="Month"
-                            onChange={changeHandlerNumber}
-                        />
-                        <SC.BirthInput
-                            type="text"
-                            name="birthDate"
-                            placeholder="Date"
-                            onChange={changeHandlerNumber}
-                        />
-                    </div>
+                    <SC.BirthInput
+                        type="number"
+                        name="birthYear"
+                        defaultValue={userdata?.birthInfo.year}
+                        onChange={changeHandlerNumber}
+                    />
+                    <SC.BirthInput
+                        type="number"
+                        name="birthMonth"
+                        defaultValue={userdata?.birthInfo.month}
+                        onChange={changeHandlerNumber}
+                    />
+                    <SC.BirthInput
+                        type="number"
+                        name="birthDate"
+                        defaultValue={userdata?.birthInfo.date}
+                        onChange={changeHandlerNumber}
+                    />
                 </SC.JoinItem>
                 <SC.JoinItem>
                     <label>성별</label>
                     <div className="First">
                         <div className="Second">
-                            <input
-                                type="radio"
-                                name="gender"
-                                value="MALE"
-                                onChange={changeHandlerString}
-                            />
+                            <input type="radio" name="gender" value="MALE" checked={userdata?.gender === 'MALE'} />
                             <p>남자</p>
                         </div>
                         <div className="Second">
-                            <input
-                                type="radio"
-                                name="gender"
-                                value="FEMALE"
-                                onChange={changeHandlerString}
-                            />
+                            <input type="radio" name="gender" value="FEMALE"  checked={userdata?.gender === 'FEMALE'}/>
                             <p>여자</p>
                         </div>
                     </div>
@@ -174,7 +161,7 @@ const JoinUser: React.FC = () => {
                     <SC.DefaultInput
                         type="text"
                         name="phoneNumber"
-                        placeholder="010-1234-1234"
+                        defaultValue={userdata?.phoneNumber}
                         onChange={changeHandlerString}
                     />
                 </SC.JoinItem>
@@ -184,8 +171,7 @@ const JoinUser: React.FC = () => {
                         <SC.AddressInput
                             type="text"
                             name="zipCode"
-                            placeholder="04799"
-                            onChange={changeHandlerNumber}
+                            defaultValue={userdata?.addressInfo.zipCode}
                         />
                         {/* <button onClick={onClickToggleModal}>
                             우편번호 검색
@@ -199,13 +185,13 @@ const JoinUser: React.FC = () => {
                         <SC.AddressInput
                             type="text"
                             name="mainAddress"
-                            placeholder="서울시 성동구 광나루로6길"
+                            defaultValue={userdata?.addressInfo.mainAddress}
                             onChange={changeHandlerString}
                         />
                         <SC.AddressInput
                             type="text"
                             name="detailAddress"
-                            placeholder="49"
+                            defaultValue={userdata?.addressInfo.detailAddress}
                             onChange={changeHandlerString}
                         />
                     </div>
@@ -220,19 +206,12 @@ const JoinUser: React.FC = () => {
                 </SC.JoinItem> */}
             </SC.JoinDiv2>
             <SC.ButtonDiv>
-                <SC.CancelButton
-                    type="button"
-                    onClick={() => {
-                        navigate("/");
-                    }}>
-                    취소
-                </SC.CancelButton>
                 <SC.ConfirmButton onClick={submitHandler}>
-                    확인
+                    수정
                 </SC.ConfirmButton>
             </SC.ButtonDiv>
         </SC.JoinContainer>
     );
 };
 
-export default JoinUser;
+export default Myinfo;
